@@ -1,0 +1,51 @@
+#!/bin/bash
+
+## This file is part of Whonix.
+## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+if [ -f /usr/lib/pre.bsh ]; then
+   source /usr/lib/pre.bsh
+fi
+
+set -e
+
+true "
+####################################################################
+## INFO: Begin $DPKG_MAINTSCRIPT_NAME $DPKG_MAINTSCRIPT_PACKAGE...
+####################################################################
+"
+
+case "$1" in
+   configure)
+      true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
+
+      if [ -x /etc/profile.d/20_power_savings_disable_in_vms.sh ]; then
+         /etc/profile.d/20_power_savings_disable_in_vms.sh
+      fi
+      if [ -x /etc/X11/Xsession.d/20power_savings_disable_in_vms ]; then
+         /etc/X11/Xsession.d/20power_savings_disable_in_vms
+      fi
+
+      true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
+
+      ;;
+
+   *)
+      ;;
+esac
+
+true "INFO: debhelper beginning here."
+
+#DEBHELPER#
+
+true "INFO: Done with debhelper."
+
+true "
+####################################################################
+## INFO: $DPKG_MAINTSCRIPT_NAME script $DPKG_MAINTSCRIPT_PACKAGE no error detected.
+####################################################################
+"
+
+## Explicitly "exit 0", so eventually trapped errors can be ignored.
+exit 0
