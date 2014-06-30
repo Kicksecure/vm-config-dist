@@ -6,7 +6,7 @@ be saved and no real power that could be saved. From usability perspective it
 also is counter intuitive when looking at the VM window and only seeing a
 black screen. Therefore it makes sense to disable power savings in VMs.
 
-When not run inside VMs, this packages does nothing.
+When not run inside VMs, this package does nothing.
 
 (This package description has been [automatically](https://github.com/Whonix/whonix-developer-meta-files/blob/master/debug-steps/packaging-helper-script) extracted and mirrored from `debian/control`.)
 
