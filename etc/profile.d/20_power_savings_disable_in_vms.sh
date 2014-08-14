@@ -24,6 +24,8 @@ if [ ! "$setterm_command_exit_code" = "0" ]; then
    true "$0: setterm not installed. Stop."
    return 0
    exit 0
+else
+   true "$0: setterm found. Continue."
 fi
 
 result="$(sudo virt-what)"
@@ -32,6 +34,8 @@ if [ "$result" = "" ]; then
    true "Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
    return 0
    exit 0
+else
+   true "$0: VM $result found. Continue."
 fi
 
 setterm -blank 0
