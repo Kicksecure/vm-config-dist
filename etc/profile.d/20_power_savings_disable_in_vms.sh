@@ -13,6 +13,7 @@ elif [ -x "/usr/sbin/virt-what" ]; then
    true
 else
    return 0
+   exit 0
 fi
 
 setterm_command_exit_code="0"
@@ -20,6 +21,7 @@ command -v setterm >/dev/null || { setterm_command_exit_code="$?" ; true; };
 
 if [ ! "$setterm_command_exit_code" = "0" ]; then
    return 0
+   exit 0
 fi
 
 result="$(sudo virt-what)"
@@ -28,6 +30,7 @@ if [ "$result" = "" ]; then
    ## Not running in a Virtual Machine (or none detected),
    ## therefore not disabling monitor power saving.
    return 0
+   exit 0
 fi
 
 setterm -blank 0
