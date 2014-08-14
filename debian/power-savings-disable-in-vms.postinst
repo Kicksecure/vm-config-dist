@@ -20,7 +20,7 @@ case "$1" in
    configure)
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
 
-      if [ "$SUDO_USER" = "" ]; then
+      if [ ! "$SUDO_USER" = "" ]; then
          if [ -x "/etc/profile.d/20_power_savings_disable_in_vms.sh" ]; then
             sudo -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
          fi
