@@ -24,7 +24,13 @@ if [ "$result" = "" ]; then
 fi
 
 (
-   sleep 60
+   if [ "$(id -u)" = "0" ]; then
+      true "$0: Can not run as root. Exiting."
+      exit 0
+   fi
+   sleep 60 &
+   wait "$!"
    xset s off
    xset -dpms
+   exit 0
 ) &
