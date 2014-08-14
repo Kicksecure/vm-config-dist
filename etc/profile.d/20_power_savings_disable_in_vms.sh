@@ -40,3 +40,6 @@ fi
 
 setterm -blank 0
 setterm -powerdown 0
+
+return 0
+exit 0
