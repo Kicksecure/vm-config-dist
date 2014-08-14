@@ -21,11 +21,11 @@ case "$1" in
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
 
       if [ "$SUDO_USER" = "" ]; then
-         if [ -x /etc/profile.d/20_power_savings_disable_in_vms.sh ]; then
-            sudo -u "$SUDO_USER" /etc/profile.d/20_power_savings_disable_in_vms.sh
+         if [ -x "/etc/profile.d/20_power_savings_disable_in_vms.sh" ]; then
+            sudo -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh"
          fi
-         if [ -x /etc/X11/Xsession.d/20power_savings_disable_in_vms ]; then
-            sudo -u "$SUDO_USER" /etc/X11/Xsession.d/20power_savings_disable_in_vms
+         if [ -x "/etc/X11/Xsession.d/20power_savings_disable_in_vms" ]; then
+            sudo -u "$SUDO_USER" "/etc/X11/Xsession.d/20power_savings_disable_in_vms"
          fi
      fi
 
