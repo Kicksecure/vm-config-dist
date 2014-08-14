@@ -15,6 +15,13 @@ else
    return 0
 fi
 
+setterm_command_exit_code="0"
+command -v setterm >/dev/null || { setterm_command_exit_code="$?" ; true; };
+
+if [ ! "$setterm_command_exit_code" = "0" ]; then
+   return 0
+fi
+
 result="$(sudo virt-what)"
 
 if [ "$result" = "" ]; then
