@@ -27,7 +27,7 @@ case "$1" in
          if [ -x "/etc/X11/Xsession.d/20power_savings_disable_in_vms" ]; then
             sudo -u "$SUDO_USER" "/etc/X11/Xsession.d/20power_savings_disable_in_vms" >/dev/null 2>&1 || true
          fi
-     fi
+      fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
 
