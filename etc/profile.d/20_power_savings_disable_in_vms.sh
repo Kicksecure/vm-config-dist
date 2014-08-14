@@ -39,7 +39,9 @@ else
 fi
 
 setterm -blank 0
+true "$0: exit code: $?"
 setterm -powerdown 0
+true "$0: exit code: $?"
 
 return 0
 exit 0

@@ -46,7 +46,9 @@ fi
    sleep 60 &
    wait "$!"
    xset s off
+   true "$0: exit code: $?"
    xset -dpms
+   true "$0: exit code: $?"
    exit 0
 ) &
 
