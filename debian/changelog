@@ -1,3 +1,9 @@
+power-savings-disable-in-vms (3:0.4-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Mon, 13 Oct 2014 12:33:24 +0000
+
 power-savings-disable-in-vms (3:0.3-1) unstable; urgency=low
 
   * New upstream version.
