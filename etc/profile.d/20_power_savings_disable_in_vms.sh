@@ -4,8 +4,8 @@
 ## Copyright (C) 2012 - 2014 Patrick Schleizer <adrelanos@riseup.net>
 ## See the file COPYING for copying conditions.
 
-## Using "return" in combination with "exit" so this script can be both,
-## sourced as well as executed.
+## Using `return` in combination with `exit` so this script can be both,
+## being `source`d as well as executed.
 
 virt_what_command_exit_code="0"
 command -v virt-what >/dev/null || { virt_what_command_exit_code="$?" ; true; };
