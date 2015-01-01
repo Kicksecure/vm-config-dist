@@ -38,10 +38,17 @@ else
    true "$0: VM $result found. Continue."
 fi
 
-setterm -blank 0
-true "$0: exit code: $?"
-setterm -powerdown 0
-true "$0: exit code: $?"
+if [ -d "/usr/lib/qubes" ]; then
+   setterm -blank 0 2>/dev/null
+   true "$0: exit code: $?"
+   setterm -powerdown 0 2>/dev/null
+   true "$0: exit code: $?"
+else
+   setterm -blank 0
+   true "$0: exit code: $?"
+   setterm -powerdown 0
+   true "$0: exit code: $?"
+fi
 
 return 0
 exit 0
