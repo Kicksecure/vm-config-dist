@@ -2,7 +2,7 @@ power-savings-disable-in-vms (3:0.6-1) unstable; urgency=low
 
   * New upstream version.
 
- -- Patrick Schleizer <user@host.localdomain>  Thu, 01 Jan 2015 15:56:05 +0000
+ -- Patrick Schleizer <adrelanos@riseup.net>  Thu, 01 Jan 2015 15:56:05 +0000
 
 power-savings-disable-in-vms (3:0.5-1) unstable; urgency=low
 
