@@ -17,6 +17,22 @@ else
    exit 0
 fi
 
+result="$(sudo virt-what)"
+
+if [ "$result" = "" ]; then
+   true "$0: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
+   return 0
+   exit 0
+else
+   true "$0: VM $result found. Continue."
+fi
+
+if [ -z "$KDEDIRS" ]; then
+   export KDEDIRS=/usr/share/kde-power-savings-disable-in-vms/
+else
+   export KDEDIRS=/usr/share/kde-power-savings-disable-in-vms/:$KDEDIRS
+fi
+
 xset_command_exit_code="0"
 command -v xset >/dev/null || { xset_command_exit_code="$?" ; true; };
 
@@ -26,16 +42,6 @@ if [ ! "$xset_command_exit_code" = "0" ]; then
    exit 0
 else
    true "$0: xset found. Continue."
-fi
-
-result="$(sudo virt-what)"
-
-if [ "$result" = "" ]; then
-   true "$0: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
-   return 0
-   exit 0
-else
-   true "$0: VM $result found. Continue."
 fi
 
 (
