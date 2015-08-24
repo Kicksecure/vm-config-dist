@@ -1,3 +1,27 @@
+commit 46569ac2889fb6d793dd52973ad3f63683efb41d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Aug 19 21:48:27 2015 +0200
+
+    Disabled power management item in kde systemsettings.
+
+commit 73c37a29c936a2d4d51e068789ae79d0471081f8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 18 20:59:53 2015 +0000
+
+    disabled kde battery monitor systray in VMs - https://phabricator.whonix.org/T296
+
+commit eec0a4283651d61f8f179ca7b05ddb16fe3e8ea5
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 18 19:54:10 2015 +0000
+
+    disabled powerdevil service to prevent occasionally message "no valid power management backend plugins are available" - https://phabricator.whonix.org/T297
+
+commit 2dbdf1300040b69e4b85974bb91c778ba3e36f36
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jun 17 19:25:12 2015 +0000
+
+    bumped changelog version
+
 commit 7424a2c5c31c2e9dd6d1232e7ef3cd5ffb9e6dae
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Wed Jun 17 19:22:08 2015 +0000
