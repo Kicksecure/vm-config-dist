@@ -9,7 +9,7 @@ output_cmd="true"
 
 script_name="power-savings-disable-in-vms"
 
-true $script_name: Using "return" in combination with "exit" so this script can be both, being "source"d as well as executed.
+true "$script_name: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
 
 if ! shopt -q login_shell ; then
    $output_cmd "$script_name: Not running in a login shell, not doing anything."
