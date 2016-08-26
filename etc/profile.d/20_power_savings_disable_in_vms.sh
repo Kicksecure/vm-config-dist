@@ -29,7 +29,7 @@ if ! command -v setterm >/dev/null ; then
    exit 0
 fi
 
-result="$(sudo virt-what)"
+result="$(sudo --non-interactive /usr/sbin/virt-what)"
 
 if [ "$result" = "" ]; then
    $output_cmd "$script_name:Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
