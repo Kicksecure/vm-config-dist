@@ -32,7 +32,7 @@ fi
 result="$(sudo --non-interactive /usr/sbin/virt-what)"
 
 if [ "$result" = "" ]; then
-   $output_cmd "$script_name:Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
+   $output_cmd "$script_name: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
    return 0
    exit 0
 fi
