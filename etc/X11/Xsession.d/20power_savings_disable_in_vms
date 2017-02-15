@@ -20,10 +20,10 @@ else
    true "$0: VM $result found. Continue."
 fi
 
-if [ -z "$KDEDIRS" ]; then
-   export KDEDIRS=/usr/share/kde-power-savings-disable-in-vms/
+if [ -z "$XDG_CONFIG_DIRS" ]; then
+   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/
 else
-   export KDEDIRS=/usr/share/kde-power-savings-disable-in-vms/:$KDEDIRS
+   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
 fi
 
 xset_command_exit_code="0"
