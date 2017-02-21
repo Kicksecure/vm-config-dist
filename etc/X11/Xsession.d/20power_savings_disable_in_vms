@@ -21,10 +21,9 @@ else
 fi
 
 if [ -z "$XDG_CONFIG_DIRS" ]; then
-   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/
-else
-   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
+   XDG_CONFIG_DIRS=/etc/xdg
 fi
+export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
 
 xset_command_exit_code="0"
 command -v xset >/dev/null || { xset_command_exit_code="$?" ; true; };
