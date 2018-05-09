@@ -1,3 +1,17 @@
+commit c2e5816ed86adaf2586e7a5108a376836896b4d1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Apr 6 09:19:08 2018 +0200
+
+    sh compatibility
+    
+    fixes https://github.com/Whonix/power-savings-disable-in-vms/issues/1
+
+commit 70aae7b102350e6bda54af815083573637469571
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Feb 1 15:12:39 2018 +0000
+
+    bumped changelog version
+
 commit 381947cf695cca030a6c09b6041784ae67302533
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Jan 29 15:50:33 2018 +0000
