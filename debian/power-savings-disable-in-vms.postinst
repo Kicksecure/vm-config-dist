@@ -20,6 +20,10 @@ power_savings_disable_in_vms() {
       return 0
    fi
 
+   if ischroot --default-false ; then
+      return 0
+   fi
+
    if [ -x "/etc/profile.d/20_power_savings_disable_in_vms.sh" ]; then
       sudo --non-interactive -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
    fi
