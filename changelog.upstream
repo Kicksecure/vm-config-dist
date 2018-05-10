@@ -1,3 +1,27 @@
+commit a8454e788cbe414c290f8edc62e9989abd1d1967
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 10 10:52:44 2018 +0000
+
+    fix, don't run inside chroot
+
+commit 812bda0cab8a3bce21b1976323a3047bfe916eeb
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 10 10:49:48 2018 +0000
+
+    refactoring
+
+commit e39e6efc8a60d3ea11b3fc4bd2e18118bd04cb13
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu May 10 10:48:49 2018 +0000
+
+    refactoring
+
+commit 093ae0438c295d678e567da31b9cbe79bf1a09f5
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 9 12:21:43 2018 +0000
+
+    bumped changelog version
+
 commit c2e5816ed86adaf2586e7a5108a376836896b4d1
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Apr 6 09:19:08 2018 +0200
