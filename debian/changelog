@@ -1,3 +1,9 @@
+power-savings-disable-in-vms (3:2.5-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Mon, 27 Aug 2018 16:44:25 +0000
+
 power-savings-disable-in-vms (3:2.4-1) unstable; urgency=medium
 
   * New upstream version (local package).
