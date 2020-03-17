@@ -9,7 +9,7 @@ black screen. Therefore it makes sense to disable power savings in VMs.
 Disables screen locker when running in VMs because that is not useful either.
 
 When not run inside VMs, this package does nothing.
-## How to install `power-savings-disable-in-vms` using apt-get ##
+## How to install `vm-config-dist` using apt-get ##
 
 1\. Download [Whonix's Signing Key]().
 
@@ -37,15 +37,15 @@ echo "deb https://deb.whonix.org buster main contrib non-free" | sudo tee /etc/a
 sudo apt-get update
 ```
 
-5\. Install `power-savings-disable-in-vms`.
+5\. Install `vm-config-dist`.
 
 ```
-sudo apt-get install power-savings-disable-in-vms
+sudo apt-get install vm-config-dist
 ```
 
 ## How to Build deb Package ##
 
-Replace `apparmor-profile-torbrowser` with the actual name of this package with `power-savings-disable-in-vms` and see [instructions](https://www.whonix.org/wiki/Dev/Build_Documentation/apparmor-profile-torbrowser).
+Replace `apparmor-profile-torbrowser` with the actual name of this package with `vm-config-dist` and see [instructions](https://www.whonix.org/wiki/Dev/Build_Documentation/apparmor-profile-torbrowser).
 
 ## Contact ##
 
@@ -54,4 +54,4 @@ Replace `apparmor-profile-torbrowser` with the actual name of this package with 
 
 ## Donate ##
 
-`power-savings-disable-in-vms` requires [donations](https://www.whonix.org/wiki/Donate) to stay alive!
+`vm-config-dist` requires [donations](https://www.whonix.org/wiki/Donate) to stay alive!

@@ -1,17 +1,17 @@
 ## Copyright (C) 2012 - 2018 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
 ## See the file COPYING for copying conditions.
 
-Source: power-savings-disable-in-vms
+Source: vm-config-dist
 Section: misc
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@riseup.net>
 Build-Depends: debhelper (>= 12), genmkfile
-Homepage: https://github.com/Whonix/power-savings-disable-in-vms
-Vcs-Browser: https://github.com/Whonix/power-savings-disable-in-vms
-Vcs-Git: https://github.com/Whonix/power-savings-disable-in-vms.git
+Homepage: https://github.com/Whonix/vm-config-dist
+Vcs-Browser: https://github.com/Whonix/vm-config-dist
+Vcs-Git: https://github.com/Whonix/vm-config-dist.git
 Standards-Version: 4.3.0
 
-Package: power-savings-disable-in-vms
+Package: vm-config-dist
 Architecture: all
 Depends: virt-what, sudo, ${misc:Depends}
 Description: Disables screen locker and power savings when run inside a virtual machine
