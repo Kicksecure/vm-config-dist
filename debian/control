@@ -14,6 +14,7 @@ Standards-Version: 4.3.0
 Package: vm-config-dist
 Architecture: all
 Depends: virt-what, sudo, ${misc:Depends}
+Replaces: power-savings-disable-in-vms
 Description: Disables screen locker and power savings when run inside a virtual machine
  It is not useful to open a screensaver or to power down the desktop for
  operating systems that are run inside VMs. There is no real display that could
