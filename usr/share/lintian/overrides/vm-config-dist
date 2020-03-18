@@ -1,0 +1,5 @@
+## Copyright (C) 2019 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+## The whole point of the package.
+vm-config-dist: package-contains-file-in-etc-skel etc/skel/*
