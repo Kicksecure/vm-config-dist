@@ -1,3 +1,37 @@
+commit c4c861a79f487f16c93a8777058a22fc0258e41b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Mar 17 13:36:45 2020 -0400
+
+    Replaces: power-savings-disable-in-vms
+
+commit dec48e25c18c84472c476f2edccaa43d68ba951e
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Mar 17 13:30:44 2020 -0400
+
+    set default desktop resolution to 1920x1080 for VMs
+    
+    Thanks to @onions-knight for the suggestion and config file!
+    
+    https://forums.whonix.org/t/consider-making-screen-resolution-1920x1080-by-default-for-all-vms/9143
+
+commit c82f9460270898e78192227fee06e2c889c06fef
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Mar 17 13:25:02 2020 -0400
+
+    renamed:    debian/power-savings-disable-in-vms.postinst -> debian/vm-config-dist.postinst
+
+commit bc206926ecb8502be4ac58c5b71e5204dd53b6f2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Mar 17 13:23:22 2020 -0400
+
+    rename package to vm-config-dist
+
+commit dadaa5fa5a5c0b48a0ae723cdce9c7e5aed8f2f3
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Aug 1 11:58:16 2019 +0000
+
+    bumped changelog version
+
 commit 55e8fc64abd87615015445ae0c5bb4e8c2157907
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Aug 1 11:13:40 2019 +0000
