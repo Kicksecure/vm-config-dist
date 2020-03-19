@@ -14,7 +14,7 @@
         <property name="Y" type="int" value="0"/>
       </property>
     </property>
-    <property name="Virtual1" type="string" value="Virtual1">
+    <property name="Virtual-1" type="string" value="Virtual-1">
       <property name="Active" type="bool" value="true"/>
       <property name="Resolution" type="string" value="1920x1080"/>
       <property name="RefreshRate" type="double" value="60"/>
