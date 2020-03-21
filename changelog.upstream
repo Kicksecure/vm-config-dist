@@ -1,3 +1,39 @@
+commit a01da20de4b75378e860edf99b80b30520b39de6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Mar 19 13:05:26 2020 -0400
+
+    re-add VirtualBox screen resolution settings
+
+commit d7140d1b3924e35374a3f0b4027b7853a1a41649
+Merge: 3bc54d2 d0c3061
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Mar 19 13:02:18 2020 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d0c3061dc5e137a2fe575a143e9c9d664915e0a7
+Merge: 3bc54d2 3470156
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Mar 19 17:01:00 2020 +0000
+
+    Merge pull request #1 from onions-knight/patch-1
+    
+    Update displays.xml
+
+commit 347015664fb401572eeb4fde3b9eb3037b6f45bc
+Author: onions-knight <38859709+onions-knight@users.noreply.github.com>
+Date:   Thu Mar 19 14:53:17 2020 +0000
+
+    Update displays.xml
+    
+    Fixed Virtual-1 name (Virtual-1 and not Virtual1). See https://forums.whonix.org/t/consider-making-screen-resolution-1920x1080-by-default-for-all-vms/9143/13
+
+commit 3bc54d244f35656e59fe460745a250107003fe1f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Mar 18 12:16:26 2020 -0400
+
+    bumped changelog version
+
 commit dfaafdd5949af884dacbf58f54592ea30bfe2e82
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Wed Mar 18 11:56:15 2020 -0400
