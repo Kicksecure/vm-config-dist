@@ -39,4 +39,5 @@
       </property>
     </property>
   </property>
+  <property name="Notify" type="bool" value="true"/>
 </channel>
