@@ -1,3 +1,15 @@
+commit 3ed4b54a4a514c079c9d49357b77b10ea8cb610f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 08:57:05 2020 -0400
+
+      <property name="Notify" type="bool" value="true"/>
+
+commit 770c345eb95f70f7a9cbcfbdd14a3dd30bf7cd51
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 07:32:29 2020 -0400
+
+    bumped changelog version
+
 commit 7a313069f4483b94689c9cc1fcf33dd67bf60683
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Mar 22 07:31:33 2020 -0400
