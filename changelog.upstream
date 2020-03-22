@@ -1,3 +1,17 @@
+commit ebf2e750154d8b47657c6149d4c0699d2fa60944
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 06:12:22 2020 -0400
+
+    VirtualBox XFCE screen setting RefreshRate 60.000000
+    
+    .000000 might be required
+
+commit ccbd4739b1e001bc8893c5cb1dd4d392d3a04b73
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat Mar 21 06:49:44 2020 -0400
+
+    bumped changelog version
+
 commit a01da20de4b75378e860edf99b80b30520b39de6
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Mar 19 13:05:26 2020 -0400
