@@ -1,3 +1,21 @@
+commit 7a313069f4483b94689c9cc1fcf33dd67bf60683
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 07:31:33 2020 -0400
+
+    move up to fix VirtualBox screen resolution
+
+commit a7ae0926952ddf1ac8cf4b00f57d860adaa7e7b8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 07:27:58 2020 -0400
+
+    .000000 actually not helpful in VirtualBox
+
+commit 5a749417a970c0323437db97fed7d74d5b29cd4d
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Mar 22 06:14:59 2020 -0400
+
+    bumped changelog version
+
 commit ebf2e750154d8b47657c6149d4c0699d2fa60944
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Mar 22 06:12:22 2020 -0400
