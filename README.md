@@ -43,9 +43,15 @@ sudo apt-get update
 sudo apt-get install vm-config-dist
 ```
 
-## How to Build deb Package ##
+## How to Build deb Package from Source Code ##
 
-Replace `apparmor-profile-torbrowser` with the actual name of this package with `vm-config-dist` and see [instructions](https://www.whonix.org/wiki/Dev/Build_Documentation/apparmor-profile-torbrowser).
+Can be build using standard Debian package build tools such as:
+
+```
+dpkg-buildpackage -b
+```
+
+See [instructions](https://www.whonix.org/wiki/Dev/Build_Documentation/vm-config-dist). (Replace `package-name` with the actual name of this package.)
 
 ## Contact ##
 
