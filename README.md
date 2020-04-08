@@ -8,6 +8,15 @@ black screen. Therefore it makes sense to disable power savings in VMs.
 
 Disables screen locker when running in VMs because that is not useful either.
 
+Makes setting up a shared folder for virtual machines a bit easier
+
+* Creates a folder `/mnt/shared` with `chmod 777`, adds a group
+"vboxsf", adds user "user" to group "vboxsf". Facilitates auto-mounting of
+shared folders.
+
+* Helps using shared folders with VirtualBox and KVM a bit
+easier (as in requiring fewer manual steps from the user).
+
 When not run inside VMs, this package does nothing.
 ## How to install `vm-config-dist` using apt-get ##
 
