@@ -36,6 +36,11 @@ case "$1" in
    configure)
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
 
+      ## shared-folder-help
+      ## Required for KVM.
+      mkdir --parents /mnt/shared
+      chmod 777 /mnt/shared
+
       power_savings_disable_in_vms
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."

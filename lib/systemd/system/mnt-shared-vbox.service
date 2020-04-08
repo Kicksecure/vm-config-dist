@@ -1,0 +1,22 @@
+## Copyright (C) 2012 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
+## See the file COPYING for copying condtions.
+
+[Unit]
+Description=creates group vboxsf and adds user "user" to it
+Documentation=https://github.com/Whonix/shared-folder-help
+ConditionVirtualization=oracle
+
+[Service]
+Type=oneshot
+
+## vbox guest additions should create the group and add user,
+## but we'll do it here to avoid any dependencies.
+ExecStart=/bin/bash -c '/usr/sbin/addgroup vboxsf || true'
+
+## TODO: make sure user "user" exists.
+ExecStart=/bin/bash -c '/usr/sbin/addgroup user vboxsf || true'
+
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+## Copyright (C) 2012 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
+## See file COPYING for copying conditons.
+
+[Unit]
+Description=Mounts KVM shared folder during start
+Documentation=https://github.com/Whonix/shared-folder-help
+ConditionPathExists=/mnt/shared
+ConditionVirtualization=|qemu
+ConditionVirtualization=|kvm
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/bin/mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

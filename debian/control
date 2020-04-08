@@ -13,8 +13,8 @@ Standards-Version: 4.3.0
 
 Package: vm-config-dist
 Architecture: all
-Depends: virt-what, sudo, ${misc:Depends}
-Replaces: power-savings-disable-in-vms
+Depends: virt-what, sudo, adduser, ${misc:Depends}
+Replaces: power-savings-disable-in-vms, shared-folder-help
 Description: Disables screen locker and power savings when run inside a virtual machine
  It is not useful to open a screensaver or to power down the desktop for
  operating systems that are run inside VMs. There is no real display that could
@@ -23,5 +23,14 @@ Description: Disables screen locker and power savings when run inside a virtual 
  black screen. Therefore it makes sense to disable power savings in VMs.
  .
  Disables screen locker when running in VMs because that is not useful either.
+ .
+ Makes setting up a shared folder for virtual machines a bit easier
+ .
+  * Creates a folder `/mnt/shared` with `chmod 777`, adds a group
+ "vboxsf", adds user "user" to group "vboxsf". Facilitates auto-mounting of
+ shared folders.
+ .
+  * Helps using shared folders with VirtualBox and KVM a bit
+ easier (as in requiring fewer manual steps from the user).
  .
  When not run inside VMs, this package does nothing.
