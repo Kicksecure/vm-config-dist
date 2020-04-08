@@ -1,3 +1,21 @@
+commit b4ffc75fa5bd409c4cc1d969d1388d47bc228c95
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Apr 8 17:10:26 2020 +0000
+
+    readme
+
+commit 26dc9db3145e9b48c517382f137e5bb84c3ea898
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Apr 8 16:36:44 2020 +0000
+
+    import from shared-folder-help
+
+commit 84677b779ca91176e13613ea90783b206a900772
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Apr 2 08:07:35 2020 -0400
+
+    bumped changelog version
+
 commit 3527256b483052527b35d766b73f2357c1acdf98
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Thu Apr 2 07:23:00 2020 -0400
