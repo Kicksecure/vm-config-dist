@@ -1,0 +1,54 @@
+#!/bin/bash
+
+## Copyright (C) 2020 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
+## See the file COPYING for copying conditions.
+
+## Example output of virt-what in a VirtualBox VM:
+## sudo virt-what
+##
+## virtualbox
+## kvm
+
+## virt-what is harder to parse because it can output two lines.
+
+if command -v systemd-detect-virt >/dev/null ; then
+   result="$(systemd-detect-virt)"
+else
+   echo "$0 ERROR: systemd-detect-virt not found. Stop."
+   return 0
+   exit 0
+fi
+
+## result example:
+## oracle
+
+if [ "$result" = "oracle" ]; then
+   software_rendering_use=true
+fi
+
+## Not researched yet if required for KVM.
+## https://forums.whonix.org/t/monero-and-whonix-sitting-in-a-tree/5949/29
+# if [ "$result" = "kvm" ]; then
+#    software_rendering_use=true
+# fi
+
+if [ ! "$software_rendering_use" = "true" ]; then
+   return 0
+   exit 0
+fi
+
+if [ "$QMLSCENE_DEVICE" = "" ]; then
+   ## workaround for monero bug:
+   ## Automatic fallback to softwarecontext renderer
+   ## https://github.com/monero-project/monero-gui/issues/2878
+   ##
+   ## Not great to set this unconditionally in VirtualBox but there is no known
+   ## tool which can find out from inside the VM if VirtualBox 3D acceleration
+   ## is enabled from inside the VM, see:
+   ## Test command from inside VM to detect if VirtualBox 3D acceleration is enabled or disabled?
+   ## https://forums.virtualbox.org/viewtopic.php?f=3&t=97983
+   export QMLSCENE_DEVICE=softwarecontext
+fi
+
+return 0
+exit 0
