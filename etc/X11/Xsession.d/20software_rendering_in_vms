@@ -26,11 +26,9 @@ if [ "$result" = "oracle" ]; then
    software_rendering_use=true
 fi
 
-## Not researched yet if required for KVM.
-## https://forums.whonix.org/t/monero-and-whonix-sitting-in-a-tree/5949/29
-# if [ "$result" = "kvm" ]; then
-#    software_rendering_use=true
-# fi
+if [ "$result" = "kvm" ]; then
+   software_rendering_use=true
+fi
 
 if [ ! "$software_rendering_use" = "true" ]; then
    return 0
