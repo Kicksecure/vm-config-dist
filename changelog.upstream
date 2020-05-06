@@ -1,3 +1,18 @@
+commit 7f517289275ffa6bfc6ca460907b42754eb7e32f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun May 3 14:46:09 2020 -0400
+
+    enable `export QMLSCENE_DEVICE=softwarecontext`
+    also for KVM
+    
+    https://forums.whonix.org/t/monero-and-whonix-sitting-in-a-tree/5949/32
+
+commit f44d4487d142967e2969014fb3f55d36218be852
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sat May 2 17:54:14 2020 -0400
+
+    bumped changelog version
+
 commit b5b8b9bf55b8701492e5d739741d5fffc1b3f51d
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sat May 2 11:12:43 2020 -0400
