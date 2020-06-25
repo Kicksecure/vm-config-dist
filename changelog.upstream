@@ -1,3 +1,17 @@
+commit e15b2963a5123e9910d34d9dbacd827829eb6226
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jun 21 13:30:36 2020 -0400
+
+    autologin in VMs
+    
+    import etc/lightdm/lightdm.conf.d/30_autologin.conf from whonix-xfce-desktop-settings
+
+commit 4ee30aa2d5f6fc734ddfa7ffcfcd743f80f9d2d4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed May 6 08:29:16 2020 -0400
+
+    bumped changelog version
+
 commit 7f517289275ffa6bfc6ca460907b42754eb7e32f
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun May 3 14:46:09 2020 -0400
