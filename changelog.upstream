@@ -1,3 +1,23 @@
+commit fa16811298e990106924a4fd73db3e988df0640b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 26 09:58:33 2020 -0400
+
+    comment
+
+commit 0f73d604ef17972a5c49122832ba608a30ae3834
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Jul 26 09:53:41 2020 -0400
+
+    add `/usr/bin/vbox-guest-installer`
+    
+    https://forums.whonix.org/t/challenges-upgrading-virtualbox-to-6-1-12-on-debian-buster-installation-from-upstream-virtualbox-org-apt-repository/9984
+
+commit 28b4d5554eecc53f7f7893cc643d4dc5e164bcf0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Jun 25 10:57:24 2020 -0400
+
+    bumped changelog version
+
 commit e15b2963a5123e9910d34d9dbacd827829eb6226
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Jun 21 13:30:36 2020 -0400
