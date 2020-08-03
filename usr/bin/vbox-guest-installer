@@ -96,8 +96,6 @@ else
    output_more_information
 fi
 
-
-
 popd >/dev/null
 
 exit 0
