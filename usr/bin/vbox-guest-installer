@@ -3,11 +3,18 @@
 set -x
 set -e
 
+output_more_information() {
+   $output_command ""
+   $output_command "$0 ERROR: For more information, see:"
+   $output_command "https://www.whonix.org/wiki/ga"
+}
+
 virtualbox_guest_additions_packages_still_installed() {
    $output_command "$0 ERROR: VirtualBox guest additions Debian package still installed." >&2
    $output_command "$0 ERROR: Will not install VirtualBox guest additions from virtualbox-guest-additions-iso." >&2
    $output_command "$0 ERROR: To remove, run:" >&2
    $output_command "sudo apt purge virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms" >&2
+   output_more_information
    exit 0
 }
 
@@ -37,6 +44,7 @@ if ! dpkg-query --show "virtualbox-guest-additions-iso" &>/dev/null ; then
    $output_command "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
    $output_command "sudo apt update" >&2
    $output_command "sudo apt install virtualbox-guest-additions-iso" >&2
+   output_more_information
    exit 0
 fi
 
@@ -64,9 +72,10 @@ pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/nu
 
 if ./install.sh force force ; then
    $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from virtualbox-guest-additions-iso."
+   output_more_information
 else
-   $output_command "$0 ERROR: vm-config-dist failed to install VirtualBox guest additions from virtualbox-guest-additions-iso. See:" >&2
-   $output_command "https://www.whonix.org/wiki/ga" >&2
+   $output_command "$0 ERROR: vm-config-dist failed to install VirtualBox guest additions from virtualbox-guest-additions-iso."
+   output_more_information
 fi
 
 popd >/dev/null
