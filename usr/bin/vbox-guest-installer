@@ -25,6 +25,7 @@ if ! dpkg-query --show "virtualbox-guest-additions-iso" &>/dev/null ; then
    echo "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
    echo "sudo apt update" >&2
    echo "sudo apt install virtualbox-guest-additions-iso" >&2
+   exit 0
 fi
 
 rm -rf /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
