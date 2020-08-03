@@ -43,10 +43,9 @@ case "$1" in
 
       power_savings_disable_in_vms
 
-      ## TODO
-#       if [ "$(systemd-detect-virt)" = "oracle" ]; then
-#          /usr/bin/vbox-guest-installer || true
-#       fi
+      if [ "$(systemd-detect-virt)" = "oracle" ]; then
+         vbox-guest-installer || true
+      fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
 
