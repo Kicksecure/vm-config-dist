@@ -5,7 +5,7 @@ set -o pipefail
 
 output_more_information() {
    $output_command ""
-   $output_command "$0 ERROR: For more information, see:"
+   $output_command "$0 INFO: For more information, see:"
    $output_command "https://www.whonix.org/wiki/ga"
 }
 
@@ -92,6 +92,8 @@ else
    $output_command "$0 WARNING: vm-config-dist might have failed to install VirtualBox guest additions from package virtualbox-guest-additions-iso."
    output_more_information
 fi
+
+full screen, clipboard sharing, mouse capture, shared folder
 
 popd >/dev/null
 
