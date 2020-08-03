@@ -38,6 +38,8 @@ fi
 
 trap error_handler ERR
 
+echo "$0: INFO: This is VirtualBox guest additions from package virtualbox-guest-additions-iso installation helper by Whonix developers."
+
 if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
    $output_command "sudo $0"
