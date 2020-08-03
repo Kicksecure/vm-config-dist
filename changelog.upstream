@@ -1,3 +1,15 @@
+commit b1ee9e6ae756a13f563fb07aaed6348ee0f5d5ff
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 17:18:53 2020 -0400
+
+    run VirtualBox guest additions from package virtualbox-guest-additions-iso installation helper by Whonix developers by default in VirtualBox
+
+commit 546f7eeeed34bddd6eb5a7c6a14f7c2817013443
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:44:20 2020 -0400
+
+    bumped changelog version
+
 commit 892758cf7d1dfc45a692af7647e4d176ee07b84c
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Aug 3 16:38:45 2020 -0400
