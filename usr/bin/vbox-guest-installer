@@ -5,6 +5,9 @@ set -o pipefail
 
 output_more_information() {
    $output_command ""
+   $output_command "$0 INFO: This is not about security."
+   $output_command "$0 INFO: This is about usability only."
+   $output_command "$0 INFO: If you do not need or have no issues with full screen, clipboard sharing, mouse capture or shared folder this can be safely ignored."
    $output_command "$0 INFO: For more information, see:"
    $output_command "https://www.whonix.org/wiki/ga"
 }
@@ -93,7 +96,7 @@ else
    output_more_information
 fi
 
-full screen, clipboard sharing, mouse capture, shared folder
+
 
 popd >/dev/null
 
