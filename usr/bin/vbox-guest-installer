@@ -4,16 +4,22 @@ set -x
 set -e
 
 virtualbox_guest_additions_packages_still_installed() {
-   echo "$0 ERROR: VirtualBox guest additions Debian package still installed." >&2
-   echo "$0 ERROR: Will not install VirtualBox guest additions from virtualbox-guest-additions-iso." >&2
-   echo "$0 ERROR: To remove, run:" >&2
-   echo "sudo apt purge virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms" >&2
+   $output_command "$0 ERROR: VirtualBox guest additions Debian package still installed." >&2
+   $output_command "$0 ERROR: Will not install VirtualBox guest additions from virtualbox-guest-additions-iso." >&2
+   $output_command "$0 ERROR: To remove, run:" >&2
+   $output_command "sudo apt purge virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms" >&2
    exit 0
 }
 
+if test -o xtrace ; then
+   output_command=true
+else
+   output_command=echo
+fi
+
 if [ "$(id -u)" != "0" ]; then
-   echo "ERROR: Must run as root. Run:"
-   echo "sudo $0"
+   $output_command "ERROR: Must run as root. Run:"
+   $output_command "sudo $0"
    exit 112
 fi
 
@@ -28,9 +34,9 @@ if dpkg-query --show "virtualbox-guest-dkms" &>/dev/null ; then
 fi
 
 if ! dpkg-query --show "virtualbox-guest-additions-iso" &>/dev/null ; then
-   echo "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
-   echo "sudo apt update" >&2
-   echo "sudo apt install virtualbox-guest-additions-iso" >&2
+   $output_command "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
+   $output_command "sudo apt update" >&2
+   $output_command "sudo apt install virtualbox-guest-additions-iso" >&2
    exit 0
 fi
 
@@ -57,10 +63,10 @@ popd >/dev/null
 pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/null
 
 if ./install.sh ; then
-   echo "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from virtualbox-guest-additions-iso."
+   $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from virtualbox-guest-additions-iso."
 else
-   echo "$0 ERROR: vm-config-dist failed to install VirtualBox guest additions from virtualbox-guest-additions-iso. See:" >&2
-   echo "https://www.whonix.org/wiki/ga" >&2
+   $output_command "$0 ERROR: vm-config-dist failed to install VirtualBox guest additions from virtualbox-guest-additions-iso. See:" >&2
+   $output_command "https://www.whonix.org/wiki/ga" >&2
 fi
 
 popd >/dev/null
