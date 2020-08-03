@@ -3,6 +3,24 @@
 set -x
 set -e
 
+virtualbox_guest_additions_packages_still_installed() {
+   echo "$0 ERROR: VirtualBox guest additions Debian package still installed." >&2
+   echo "$0 ERROR: Will not install VirtualBox guest additions from virtualbox-guest-additions-iso." >&2
+   echo "$0 ERROR: To remove, run:" >&2
+   echo "sudo apt purge virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms" >&2
+   exit 0
+}
+
+if dpkg-query --show "virtualbox-guest-x11" &>/dev/null ; then
+   virtualbox_guest_additions_packages_still_installed
+fi
+if dpkg-query --show "virtualbox-guest-utils" &>/dev/null ; then
+   virtualbox_guest_additions_packages_still_installed
+fi
+if dpkg-query --show "virtualbox-guest-dkms" &>/dev/null ; then
+   virtualbox_guest_additions_packages_still_installed
+fi
+
 if ! dpkg-query --show "virtualbox-guest-additions-iso" &>/dev/null ; then
    echo "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
    echo "sudo apt update" >&2
