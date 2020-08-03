@@ -32,7 +32,7 @@ popd >/dev/null
 pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/null
 
 if ./install.sh ; then
-   echo "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions." >&2
+   echo "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions."
 else
    echo "$0 ERROR: vm-config-dist failed to install VirtualBox guest additions. See:" >&2
    echo "https://www.whonix.org/wiki/ga" >&2
