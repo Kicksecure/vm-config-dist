@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -x
-set -e
+set -o pipefail
 
 output_more_information() {
    $output_command ""
@@ -18,11 +18,20 @@ virtualbox_guest_additions_packages_still_installed() {
    exit 0
 }
 
+error_handler() {
+   $output_command "$0 ERROR: BASH_COMMAND: '$BASH_COMMAND' failed with exit code '$?'." >&2
+   $output_command "$0 ERROR: Please report this bug in Whonix forums." >&2
+   output_more_information
+   exit 0
+}
+
 if test -o xtrace ; then
    output_command=true
 else
    output_command=echo
 fi
+
+trap error_handler ERR
 
 if [ "$(id -u)" != "0" ]; then
    $output_command "ERROR: Must run as root. Run:"
