@@ -39,7 +39,7 @@ fi
 trap error_handler ERR
 
 if [ "$(id -u)" != "0" ]; then
-   $output_command "ERROR: Must run as root. Run:"
+   $output_command "$0 ERROR: Must run as root. Run:"
    $output_command "sudo $0"
    exit 112
 fi
