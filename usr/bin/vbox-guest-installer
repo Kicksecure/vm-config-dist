@@ -86,10 +86,10 @@ installer_exit_code=0
 echo "$0: INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
 
 if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
-   $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from virtualbox-guest-additions-iso."
+   $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from package virtualbox-guest-additions-iso."
    output_more_information
 else
-   $output_command "$0 WARNING: vm-config-dist might have failed to install VirtualBox guest additions from virtualbox-guest-additions-iso."
+   $output_command "$0 WARNING: vm-config-dist might have failed to install VirtualBox guest additions from package virtualbox-guest-additions-iso."
    output_more_information
 fi
 
