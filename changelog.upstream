@@ -1,3 +1,135 @@
+commit 892758cf7d1dfc45a692af7647e4d176ee07b84c
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:38:45 2020 -0400
+
+    output
+
+commit 0109c9d92f4ab8f2b0927aa60cc9e7364d5c05c1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:32:06 2020 -0400
+
+    output
+
+commit 45cdb556e2b7498d28e9818c02eb8d82a5bf51d2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:28:41 2020 -0400
+
+    output
+
+commit 1ffe131e218b99358ff045965ffee2a25a754e91
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:28:09 2020 -0400
+
+    lower debugging
+
+commit 0ceb1731c43013972b29fc34b1c29a40d17e6f1f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:27:54 2020 -0400
+
+    copyright
+
+commit ea1f08b9063b9888d9ca6d026da9bd62c164702a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:27:46 2020 -0400
+
+    copyright
+
+commit 622584754ce2c26166205711a1d5ae7f3260f2bc
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:27:12 2020 -0400
+
+    minor
+
+commit 6830ff7a0b319b3c09095de60b780c3c73ce8ddf
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 16:11:51 2020 -0400
+
+    output
+
+commit e4ed3bccc79406fa7b5f2b0b290c863403bdaca7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:49:34 2020 -0400
+
+    output
+
+commit 8a1f1561923b4bb4f437bab65b8a52d226b3d201
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:48:03 2020 -0400
+
+    output
+
+commit 47b5da3a7e864cd97b288b534b1d31cd20aaa9e4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:39:06 2020 -0400
+
+    output
+
+commit 135956c768b1fccbd9955d789dd551ed160fcfb7
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:37:17 2020 -0400
+
+    output
+
+commit 633d0a0eb8bcacf8922968c0c9eb3d5c340d9f04
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:31:52 2020 -0400
+
+    error handler
+
+commit d3d008bbb081dff0e6d6054800d48a3d1ed1c180
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:19:15 2020 -0400
+
+    output
+
+commit f24e14c870465a37ee326b04152fef78d5b3f525
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:10:37 2020 -0400
+
+    vbox-guest-installer: non-interactive
+
+commit 7062bb8c790594989d563ed30cebc2683ea6e61f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:06:16 2020 -0400
+
+    output
+
+commit 2a554dc3fdee412f292c2520da2ea926fc30ec39
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:04:19 2020 -0400
+
+    vbox-guest-installer: add root check
+
+commit fd52b111933b679350eeee4128e84964f822ed4b
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:01:58 2020 -0400
+
+    output
+
+commit 25cfbf08f33fc017ff1102f0e3675794379d34ee
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 15:00:30 2020 -0400
+
+    fix
+
+commit 6f0707232dcb46db3c63132f38f06a7635e469ad
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 14:59:46 2020 -0400
+
+    vbox-guest-installer: abort if virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms still installed
+
+commit 963b0f18dca0b77f5c762d3b56740d3b89083918
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 14:55:09 2020 -0400
+
+    output
+
+commit 37f8e3be1411732600b0fdf3cf46072f26874165
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Jul 29 08:33:50 2020 -0400
+
+    bumped changelog version
+
 commit fa16811298e990106924a4fd73db3e988df0640b
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Jul 26 09:58:33 2020 -0400
