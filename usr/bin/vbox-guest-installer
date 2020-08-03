@@ -97,6 +97,8 @@ if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
    output_more_information
 else
    $output_command "$0 WARNING: vm-config-dist might have failed to install VirtualBox guest additions from package virtualbox-guest-additions-iso."
+   $output_command "$0 INFO: You could have a look at the installation log file. Run:"
+   $output_command "cat /var/log/vboxadd-install.log"
    output_more_information
 fi
 
