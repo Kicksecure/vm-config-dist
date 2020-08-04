@@ -43,7 +43,9 @@ case "$1" in
 
       power_savings_disable_in_vms
 
-      if [ "$(systemd-detect-virt)" = "oracle" ]; then
+      true "WHONIX_BUILD_VIRTUALBOX: $WHONIX_BUILD_VIRTUALBOX"
+
+      if [ "$WHONIX_BUILD_VIRTUALBOX" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
          vbox-guest-installer || true
       fi
 
