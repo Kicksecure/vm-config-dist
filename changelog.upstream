@@ -1,3 +1,15 @@
+commit 1e774924d463983cc283dd5a4483b24feab27bb8
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 4 07:57:40 2020 -0400
+
+    run vbox-guest-installer if WHONIX_BUILD_VIRTUALBOX=true during build process
+
+commit c93e14e1a718ff1929f4bcabd9f2749d526989c3
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Aug 3 17:20:23 2020 -0400
+
+    bumped changelog version
+
 commit b1ee9e6ae756a13f563fb07aaed6348ee0f5d5ff
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Aug 3 17:18:53 2020 -0400
