@@ -1,3 +1,23 @@
+commit 48889e5f4c402ab5cb41d855592f2bd0ca6d1ef0
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 14 10:36:46 2020 -0400
+
+    comment
+
+commit 252440154b991f64db3f3c588853792b3d056cca
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 14 10:35:27 2020 -0400
+
+    run vbox-guest-installer when virtualbox-guest-additions-iso is updated
+    
+    by using dpkg trigger
+
+commit e57558c590114f96e6e1eb89c87754bc3f67a644
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Tue Aug 4 08:07:51 2020 -0400
+
+    bumped changelog version
+
 commit 1e774924d463983cc283dd5a4483b24feab27bb8
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Tue Aug 4 07:57:40 2020 -0400
