@@ -71,6 +71,7 @@ mkdir -p /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
 
 pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
 
+echo "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package virtualbox-guest-additions-iso) to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
 7z x -o/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso /usr/share/virtualbox/VBoxGuestAdditions.iso >/dev/null
 
 chmod +x VBoxLinuxAdditions.run
