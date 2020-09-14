@@ -84,7 +84,7 @@ echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted
 
 ## Add new line because './VBoxLinuxAdditions.run --check' did not.
 echo ""
-echo "$0 INFO: Extracting now..."
+echo "$0 INFO: Extracting file '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run' to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself' now..."
 ./VBoxLinuxAdditions.run --noexec --keep --target /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
 popd >/dev/null
