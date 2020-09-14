@@ -75,11 +75,13 @@ pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
 
 chmod +x VBoxLinuxAdditions.run
 
+echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run --check' now..."
 ./VBoxLinuxAdditions.run --check >/dev/null
 
 ## Could run VBoxLinuxAdditions.run directly but extracting it allows easier debugging in case of failure.
 #./VBoxLinuxAdditions.run
 
+echo "$0 INFO: Extracting now..."
 ./VBoxLinuxAdditions.run --noexec --keep --target /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
 popd >/dev/null
@@ -88,6 +90,7 @@ pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/nu
 
 installer_exit_code=0
 
+echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh force force' now..."
 ./install.sh force force || { installer_exit_code=$? ; true; };
 
 echo "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
