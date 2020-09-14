@@ -32,6 +32,13 @@ power_savings_disable_in_vms() {
    fi
 }
 
+vbox_guest_installer() {
+   true "WHONIX_BUILD_VIRTUALBOX: $WHONIX_BUILD_VIRTUALBOX"
+   if [ "$WHONIX_BUILD_VIRTUALBOX" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
+      vbox-guest-installer || true
+   fi
+}
+
 case "$1" in
    configure)
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
@@ -43,14 +50,14 @@ case "$1" in
 
       power_savings_disable_in_vms
 
-      true "WHONIX_BUILD_VIRTUALBOX: $WHONIX_BUILD_VIRTUALBOX"
-
-      if [ "$WHONIX_BUILD_VIRTUALBOX" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
-         vbox-guest-installer || true
-      fi
+      vbox_guest_installer
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
 
+      ;;
+
+    triggered)
+      vbox_guest_installer
       ;;
 
    *)
