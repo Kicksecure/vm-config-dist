@@ -81,6 +81,8 @@ echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted
 ## Could run VBoxLinuxAdditions.run directly but extracting it allows easier debugging in case of failure.
 #./VBoxLinuxAdditions.run
 
+## Add new line because './VBoxLinuxAdditions.run --check' did not.
+echo ""
 echo "$0 INFO: Extracting now..."
 ./VBoxLinuxAdditions.run --noexec --keep --target /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
