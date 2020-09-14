@@ -38,7 +38,7 @@ fi
 
 trap error_handler ERR
 
-echo "$0: INFO: This is VirtualBox guest additions from package virtualbox-guest-additions-iso installation helper by Whonix developers."
+echo "$0 INFO: This is VirtualBox guest additions from package virtualbox-guest-additions-iso installation helper by Whonix developers."
 
 if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
@@ -90,7 +90,7 @@ installer_exit_code=0
 
 ./install.sh force force || { installer_exit_code=$? ; true; };
 
-echo "$0: INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
+echo "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
 
 if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
    $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from package virtualbox-guest-additions-iso."
