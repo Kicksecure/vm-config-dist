@@ -40,7 +40,7 @@ if [ ! "$software_rendering_use" = "true" ]; then
 fi
 
 if [ "$QMLSCENE_DEVICE" = "" ]; then
-   ## workaround for monero bug:
+   ## workaround for Monero bug:
    ## Automatic fallback to softwarecontext renderer
    ## https://github.com/monero-project/monero-gui/issues/2878
    ##
