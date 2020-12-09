@@ -30,6 +30,10 @@ if [ "$result" = "kvm" ]; then
    software_rendering_use=true
 fi
 
+if [ "$result" = "xen" ]; then
+   software_rendering_use=true
+fi
+
 if [ ! "$software_rendering_use" = "true" ]; then
    return 0
    exit 0
