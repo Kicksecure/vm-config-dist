@@ -1,4 +1,7 @@
-# Disables screen locker and power savings when run inside a virtual machine #
+# usability enhancements inside virtual machines #
+
+Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
+Monero bug "Automatic fallback to softwarecontext renderer". [1]
 
 It is not useful to open a screensaver or to power down the desktop for
 operating systems that are run inside VMs. There is no real display that could
@@ -8,7 +11,7 @@ black screen. Therefore it makes sense to disable power savings in VMs.
 
 Disables screen locker when running in VMs because that is not useful either.
 
-Makes setting up a shared folder for virtual machines a bit easier
+Makes setting up a shared folder for virtual machines a bit easier.
 
 * Creates a folder `/mnt/shared` with `chmod 777`, adds a group
 "vboxsf", adds user "user" to group "vboxsf". Facilitates auto-mounting of
@@ -18,9 +21,11 @@ shared folders.
 easier (as in requiring fewer manual steps from the user).
 
 When not run inside VMs, this package does nothing.
+
+[1] https://github.com/monero-project/monero-gui/issues/2878
 ## How to install `vm-config-dist` using apt-get ##
 
-1\. Download [Whonix's Signing Key]().
+1\. Download Whonix's Signing Key.
 
 ```
 wget https://www.whonix.org/patrick.asc
