@@ -1,3 +1,38 @@
+commit f2f9e5dc7905d2193fd4219d7769beec4c9c9d91
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Thu Dec 10 05:22:44 2020 -0500
+
+    readme
+
+commit 4283e499f8296846967533adfd31f434abd4fe1a
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Dec 9 04:01:37 2020 -0500
+
+    comment
+
+commit cca40e59f2422269eea490eabeac5e6b2ba91f20
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Dec 9 04:00:43 2020 -0500
+
+    enable workaround for Monero bug also in Qubes (Xen)
+    "Automatic fallback to softwarecontext renderer"
+    
+    https://github.com/monero-project/monero-gui/issues/2878
+    
+    `export QMLSCENE_DEVICE=softwarecontext`
+
+commit 78176d6eac24bb3a46f9ae699393ff8246fb4b16
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Wed Dec 9 03:54:54 2020 -0500
+
+    description
+
+commit eb558c7ebdf66ec276e6e3d4fe5113aad6eb8de4
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Sep 14 11:02:43 2020 -0400
+
+    bumped changelog version
+
 commit 36136c1bdefe188a7cefa91bf75620f34ef76fd1
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Mon Sep 14 11:02:29 2020 -0400
