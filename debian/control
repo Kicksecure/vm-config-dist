@@ -16,6 +16,9 @@ Architecture: all
 Depends: virt-what, sudo, adduser, p7zip-full, ${misc:Depends}
 Replaces: power-savings-disable-in-vms, shared-folder-help
 Description: usability enhancements inside virtual machines
+ Enables auto login for user `user` in `lightdm`.
+ `/etc/lightdm/lightdm.conf.d/30_autologin.conf`
+ .
  Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
  Monero bug "Automatic fallback to softwarecontext renderer". [1]
  .
@@ -24,6 +27,13 @@ Description: usability enhancements inside virtual machines
  be saved and no real power that could be saved. From usability perspective it
  also is counter intuitive when looking at the VM window and only seeing a
  black screen. Therefore it makes sense to disable power savings in VMs.
+ `/etc/X11/Xsession.d/20kde_screen_locker_disable_in_vms`
+ `/etc/X11/Xsession.d/20software_rendering_in_vms`
+ `/etc/X11/Xsession.d/20power_savings_disable_in_vms`
+ `/etc/profile.d/20_power_savings_disable_in_vms.sh`
+ `/etc/sudoers.d/power-savings-disable-in-vms`
+ `/usr/share/kde-power-savings-disable-in-vms/kdedrc`
+ `/usr/share/kde-screen-locker-disable-in-vms/kscreenlockerrc`
  .
  Disables screen locker when running in VMs because that is not useful either.
  .
@@ -36,6 +46,9 @@ Description: usability enhancements inside virtual machines
   * Helps using shared folders with VirtualBox and KVM a bit
  easier (as in requiring fewer manual steps from the user).
  .
+  * `/lib/systemd/system/mnt-shared-vbox.service`
+  * `/lib/systemd/system/mnt-shared-kvm.service`
+ .
  Set screen resolution 1920x1080 by default for VM in VirtualBox and KVM.
  Workaround for low screen resolution 1024x768 at first boot. When using lower
  screen resolutions, Xfce will automatically scale down.
@@ -45,5 +58,6 @@ Description: usability enhancements inside virtual machines
  `virtualbox-guest-additions-iso` is installed if environment variable
  `WHONIX_BUILD_VIRTUALBOX=true` or if running inside VirtualBox.
  (`systemd-detect-virt` returning `oracle`)
+ `/usr/bin/vbox-guest-installer`
  .
  [1] https://github.com/monero-project/monero-gui/issues/2878
