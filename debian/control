@@ -36,4 +36,9 @@ Description: usability enhancements inside virtual machines
   * Helps using shared folders with VirtualBox and KVM a bit
  easier (as in requiring fewer manual steps from the user).
  .
+ Installs VirtualBox guest additions if package
+ `virtualbox-guest-additions-iso` is installed if environment variable
+ `WHONIX_BUILD_VIRTUALBOX=true` or if running inside VirtualBox.
+ (`systemd-detect-virt` returning `oracle`)
+ .
  [1] https://github.com/monero-project/monero-gui/issues/2878
