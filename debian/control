@@ -36,6 +36,4 @@ Description: usability enhancements inside virtual machines
   * Helps using shared folders with VirtualBox and KVM a bit
  easier (as in requiring fewer manual steps from the user).
  .
- When not run inside VMs, this package does nothing.
- .
  [1] https://github.com/monero-project/monero-gui/issues/2878
