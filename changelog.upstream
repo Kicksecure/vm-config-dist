@@ -1,3 +1,19 @@
+commit 2dd4ed2a37b0e7cf2801ced2a4fe622d9d73fd19
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Mon Dec 28 06:08:37 2020 -0500
+
+    fix, run vbox-guest-installer only on installation and when triggered
+    
+    Otherwise vbox-guest-installer needlessly runs every this this pacakge is
+    upgraded. Compiling VirtualBox guest additions might fail under some
+    conditions such as low RAM.
+
+commit cabdd5effa20591937f2878c3f43581221578ef2
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Sun Dec 20 08:00:03 2020 -0500
+
+    bumped changelog version
+
 commit 07ac2f1ad609d525a1e93e304737163f203fe88b
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Sun Dec 20 08:00:02 2020 -0500
