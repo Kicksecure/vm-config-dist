@@ -41,7 +41,7 @@ vbox_guest_installer() {
 
 case "$1" in
    configure)
-      true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
+      true "INFO: $1 $DPKG_MAINTSCRIPT_PACKAGE..."
 
       ## shared-folder-help
       ## Required for KVM.
@@ -50,14 +50,19 @@ case "$1" in
 
       power_savings_disable_in_vms
 
+      true "INFO: End $1 $DPKG_MAINTSCRIPT_PACKAGE."
+      ;;
+
+    install)
+      true "INFO: $1 $DPKG_MAINTSCRIPT_PACKAGE..."
       vbox_guest_installer
-
-      true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
-
+      true "INFO: End $1 $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
     triggered)
+      true "INFO: $1 $DPKG_MAINTSCRIPT_PACKAGE..."
       vbox_guest_installer
+      true "INFO: End $1 $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
    *)
