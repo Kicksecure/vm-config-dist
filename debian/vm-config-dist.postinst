@@ -50,7 +50,13 @@ case "$1" in
 
       power_savings_disable_in_vms
 
-      vbox_guest_installer
+      ## https://askubuntu.com/questions/101962/how-to-run-a-script-only-during-first-install-of-a-package-and-during-upgrades
+      if [ "$2" = "" ]; then
+         true "INFO: Initial installation. Therefore running vbox_guest_installer."
+         vbox_guest_installer
+      else
+         true "INFO: Upgrade. Therefore not running vbox_guest_installer."
+      fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
 
