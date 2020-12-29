@@ -40,6 +40,11 @@ if [ ! "$software_rendering_use" = "true" ]; then
 fi
 
 if [ "$QMLSCENE_DEVICE" = "" ]; then
+   ## useful for:
+   ## - monero-gui
+   ## - signal-desktop
+   ## - maybe also wire-desktop?
+   ##
    ## workaround for Monero bug:
    ## Automatic fallback to softwarecontext renderer
    ## https://github.com/monero-project/monero-gui/issues/2878
