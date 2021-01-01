@@ -1,3 +1,9 @@
+vm-config-dist (3:5.9-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@riseup.net>  Fri, 01 Jan 2021 21:13:07 +0000
+
 vm-config-dist (3:5.8-1) unstable; urgency=medium
 
   * New upstream version (local package).
