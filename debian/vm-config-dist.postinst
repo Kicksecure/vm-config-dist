@@ -16,6 +16,9 @@ true "
 #####################################################################
 "
 
+true "1: '$1'"
+true "2: '$2'"
+
 power_savings_disable_in_vms() {
    if [ "$SUDO_USER" = "" ]; then
       return 0
@@ -64,7 +67,9 @@ case "$1" in
       ;;
 
     triggered)
+      true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE..."
       vbox_guest_installer
+      true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
    *)
