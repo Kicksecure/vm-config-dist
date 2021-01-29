@@ -3,10 +3,10 @@
 ## Copyright (C) 2017 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
 ## See the file COPYING for copying conditions.
 
-if command -v /usr/sbin/virt-what >/dev/null ; then
-   result="$(sudo --non-interactive /usr/sbin/virt-what)"
+if type -P systemd-detect-virt >/dev/null ; then
+   result="$(systemd-detect-virt)"
 else
-   true "$0: /usr/sbin/virt-what not found. Stop."
+   true "$0: systemd-detect-virt not found. Stop."
    return 0
    exit 0
 fi

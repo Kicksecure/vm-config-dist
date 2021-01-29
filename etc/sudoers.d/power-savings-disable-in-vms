@@ -1,3 +1,0 @@
-## required to detect whether we are running in a virtual machine or not in
-## /etc/profile.d/20_disable_powersaving.sh
-ALL ALL=NOPASSWD: /usr/sbin/virt-what
