@@ -3,6 +3,12 @@
 ## Copyright (C) 2012 - 2020 ENCRYPTED SUPPORT LP <adrelanos@riseup.net>
 ## See the file COPYING for copying conditions.
 
+if test -f /usr/share/qubes/marker-vm ; then
+   true "$0: Not running in Qubes, not doing anything."
+   return 0
+   exit 0
+fi
+
 if type -P systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else

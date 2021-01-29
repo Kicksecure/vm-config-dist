@@ -10,6 +10,12 @@ script_name="power-savings-disable-in-vms"
 
 true "$script_name: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
 
+if test -f /usr/share/qubes/marker-vm ; then
+   $output_cmd "$script_name: Not running in Qubes, not doing anything."
+   return 0
+   exit 0
+fi
+
 if ! tty | grep -q /dev/tty ; then
    $output_cmd "$script_name: Not running in a login shell, not doing anything."
    return
