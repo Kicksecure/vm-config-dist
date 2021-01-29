@@ -16,7 +16,6 @@ black screen. Therefore it makes sense to disable power savings in VMs.
 `/etc/X11/Xsession.d/20software_rendering_in_vms`
 `/etc/X11/Xsession.d/20power_savings_disable_in_vms`
 `/etc/profile.d/20_power_savings_disable_in_vms.sh`
-`/etc/sudoers.d/power-savings-disable-in-vms`
 `/usr/share/kde-power-savings-disable-in-vms/kdedrc`
 `/usr/share/kde-screen-locker-disable-in-vms/kscreenlockerrc`
 
