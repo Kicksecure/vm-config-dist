@@ -16,7 +16,7 @@ if ! tty | grep -q /dev/tty ; then
    exit 0
 fi
 
-if ! command -v setterm >/dev/null ; then
+if ! type -P setterm >/dev/null ; then
    $output_cmd "$script_name: setterm not installed. Stop."
    return 0
    exit 0

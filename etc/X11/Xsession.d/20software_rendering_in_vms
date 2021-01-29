@@ -11,7 +11,7 @@
 
 ## virt-what is harder to parse because it can output two lines.
 
-if command -v systemd-detect-virt >/dev/null ; then
+if type -P systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
    echo "$0 ERROR: systemd-detect-virt not found. Stop."

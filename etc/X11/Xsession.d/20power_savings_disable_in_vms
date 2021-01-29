@@ -25,7 +25,7 @@ fi
 export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
 
 xset_command_exit_code="0"
-command -v xset >/dev/null || { xset_command_exit_code="$?" ; true; };
+type -P xset >/dev/null || { xset_command_exit_code="$?" ; true; };
 
 if [ ! "$xset_command_exit_code" = "0" ]; then
    true "$0: xset not installed. Stop."
