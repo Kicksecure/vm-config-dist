@@ -39,8 +39,12 @@ power_savings_disable_in_vms() {
 vbox_guest_installer() {
    true "WHONIX_BUILD_VIRTUALBOX: $WHONIX_BUILD_VIRTUALBOX"
    if [ "$WHONIX_BUILD_VIRTUALBOX" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
+      true "INFO: Running vbox-guest-installer..."
       vbox-guest-installer || true
+      true "INFO: vbox-guest-installer done."
+      return 0
    fi
+      true "INFO: Not running vbox-guest-installer because neither WHONIX_BUILD_VIRTUALBOX is set to 'true' nor systemd-detect-virt output was 'oracle'."
 }
 
 case "$1" in
