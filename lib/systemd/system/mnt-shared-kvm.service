@@ -10,6 +10,7 @@ ConditionVirtualization=|kvm
 
 [Service]
 Type=oneshot
+ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
 ExecStart=/bin/bash -c '/bin/mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true'
 RemainAfterExit=yes
 
