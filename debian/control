@@ -13,7 +13,7 @@ Standards-Version: 4.3.0
 
 Package: vm-config-dist
 Architecture: all
-Depends: virt-what, sudo, adduser, p7zip-full, ${misc:Depends}
+Depends: sudo, adduser, p7zip-full, ${misc:Depends}
 Replaces: power-savings-disable-in-vms, shared-folder-help
 Description: usability enhancements inside virtual machines
  Enables auto login for user `user` in `lightdm`.
