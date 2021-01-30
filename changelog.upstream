@@ -1,3 +1,39 @@
+commit a8919965de7660bba05b70127c904f6b1aee98e6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 22:46:15 2021 -0500
+
+    comment
+
+commit 7a6250bdc632795dce001986344c7ea096144a0f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 22:44:11 2021 -0500
+
+    remove no longer required dependency virt-what
+
+commit 38a9b000a985e104d74c7bddba4d039021366b0f
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 22:41:54 2021 -0500
+
+    fix, do not create folder /mnt/shared outside of VMs or in Qubes VMs
+
+commit 2892ec540ac3d1f3adb8967b4cd1f51a476839f1
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 22:37:37 2021 -0500
+
+    output
+
+commit c4d1db78047840cf1ea466821854d6060c0aefe6
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 22:36:03 2021 -0500
+
+    output
+
+commit 814e7bcf023f08a60abf1563ccb7615481907e64
+Author: Patrick Schleizer <adrelanos@riseup.net>
+Date:   Fri Jan 29 06:18:09 2021 -0500
+
+    bumped changelog version
+
 commit 906bde7130824e5e4e5dc29a075393c27e17eeab
 Author: Patrick Schleizer <adrelanos@riseup.net>
 Date:   Fri Jan 29 06:18:09 2021 -0500
