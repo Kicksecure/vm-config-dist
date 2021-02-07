@@ -1,3 +1,21 @@
+commit fb6020105ee2e5fa43495152ae6b306c21162069
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 7 14:45:55 2021 -0500
+
+    fix
+
+commit 7b6e432ddd593fcbe31d9b06eba5e2f0d693e1d3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 7 14:44:21 2021 -0500
+
+    vbox-guest-installer: set correct kernel version inside chroot
+
+commit 9fcc18c74080829cd19f95106fcebfe5c2e78318
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Feb 7 14:09:48 2021 -0500
+
+    bumped changelog version
+
 commit 046b253f99f82d802c2faa4cd7c2a5d7f4697968
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Feb 7 14:09:47 2021 -0500
