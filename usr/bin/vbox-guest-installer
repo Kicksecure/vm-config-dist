@@ -118,17 +118,17 @@ if ischroot --default-false ; then
    fi
 fi
 
-if dpkg-query --show "virtualbox-guest-x11" &>/dev/null ; then
+if dpkg --status "virtualbox-guest-x11" &>/dev/null ; then
    virtualbox_guest_additions_packages_still_installed
 fi
-if dpkg-query --show "virtualbox-guest-utils" &>/dev/null ; then
+if dpkg --status "virtualbox-guest-utils" &>/dev/null ; then
    virtualbox_guest_additions_packages_still_installed
 fi
-if dpkg-query --show "virtualbox-guest-dkms" &>/dev/null ; then
+if dpkg --status "virtualbox-guest-dkms" &>/dev/null ; then
    virtualbox_guest_additions_packages_still_installed
 fi
 
-if ! dpkg-query --show "virtualbox-guest-additions-iso" &>/dev/null ; then
+if ! dpkg --status "virtualbox-guest-additions-iso" &>/dev/null ; then
    $output_command "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
    $output_command "sudo apt update" >&2
    $output_command "sudo apt install virtualbox-guest-additions-iso" >&2
