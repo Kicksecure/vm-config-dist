@@ -9,7 +9,7 @@ if test -f /usr/share/qubes/marker-vm ; then
    exit 0
 fi
 
-if type -P systemd-detect-virt >/dev/null ; then
+if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
    true "$0: systemd-detect-virt not found. Stop."

@@ -9,7 +9,7 @@ if test -f /usr/share/qubes/marker-vm ; then
    exit 0
 fi
 
-if type -P systemd-detect-virt >/dev/null ; then
+if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
    true "$0: systemd-detect-virt not found. Stop."
@@ -31,7 +31,7 @@ fi
 export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
 
 xset_command_exit_code="0"
-type -P xset >/dev/null || { xset_command_exit_code="$?" ; true; };
+command -v xset >/dev/null || { xset_command_exit_code="$?" ; true; };
 
 if [ ! "$xset_command_exit_code" = "0" ]; then
    true "$0: xset not installed. Stop."

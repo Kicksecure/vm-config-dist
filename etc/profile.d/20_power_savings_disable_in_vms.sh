@@ -22,13 +22,13 @@ if ! tty | grep -q /dev/tty ; then
    exit 0
 fi
 
-if ! type -P setterm >/dev/null ; then
+if ! command -v setterm >/dev/null ; then
    $output_cmd "$script_name: setterm not installed. Stop."
    return 0
    exit 0
 fi
 
-if type -P systemd-detect-virt >/dev/null ; then
+if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
    $output_cmd "$script_name: systemd-detect-virt not executable found. Stop."
