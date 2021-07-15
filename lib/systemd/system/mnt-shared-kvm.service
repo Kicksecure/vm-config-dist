@@ -4,7 +4,6 @@
 [Unit]
 Description=Mounts KVM shared folder during start
 Documentation=https://github.com/Whonix/shared-folder-help
-ConditionPathExists=/mnt/shared
 ConditionVirtualization=|qemu
 ConditionVirtualization=|kvm
 
