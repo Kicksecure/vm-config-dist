@@ -1,3 +1,33 @@
+commit 4e23f74780b45e0d8a30a8aa66062d4bdd07ac95
+Merge: 186cdb7 a017b6b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 15 14:24:36 2021 -0400
+
+    Merge remote-tracking branch 'gitlab-whonix/master'
+
+commit a017b6b559f65ea6e54611dd8536ab8bde12330e
+Merge: 186cdb7 2ed18a9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 15 18:23:46 2021 +0000
+
+    Merge branch 'HulaHoop0-master-patch-60626' into 'master'
+    
+    Removed folder existence conditional to prevent catch-22
+    
+    See merge request whonix/vm-config-dist!1
+
+commit 2ed18a9d67b519ce6b85ab1de03fd3b91af491ca
+Author: HulaHoop0 <procmem@riseup.net>
+Date:   Thu Jul 15 16:10:31 2021 +0000
+
+    Removed folder existence conditional to prevent catch-22
+
+commit 186cdb745efb23ec1ba589eb85a321a564947c50
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Mar 18 09:15:06 2021 -0400
+
+    bumped changelog version
+
 commit ee92065f72cbf6d731fda8c6af692568091c0ddd
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Mar 18 08:57:24 2021 -0400
