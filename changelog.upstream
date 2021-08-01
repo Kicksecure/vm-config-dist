@@ -1,3 +1,15 @@
+commit 1ca6460909aa418a7723b59a76e2bbf66dd3d456
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 1 14:08:19 2021 -0400
+
+    VirtualBox guest additions installer: change from `interest-noawait` to `interest`
+
+commit fd5c6b693afa62b6dc53ec5a182d7d5e1c2cddac
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jul 23 06:52:06 2021 -0400
+
+    bumped changelog version
+
 commit 4e23f74780b45e0d8a30a8aa66062d4bdd07ac95
 Merge: 186cdb7 a017b6b
 Author: Patrick Schleizer <adrelanos@whonix.org>
