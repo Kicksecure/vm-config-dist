@@ -1,3 +1,19 @@
+commit 9a3d7b64a65a32839cf3edc0ef469c9a5e17f586
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 1 14:19:15 2021 -0400
+
+    VirtualBox guest additions installer: switch to `interest-await` trigger
+    
+    Using `interest-await` instead of previously `interest-noawait` because when
+    `virtualbox-guest-additions-iso` was upgraded as the same time as
+    `vm-config-dist` the trigger did was not executed.
+
+commit 8b2a02587a10f1f6e9d5bba50cf3eaa8c0006e4e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 1 14:09:02 2021 -0400
+
+    bumped changelog version
+
 commit 1ca6460909aa418a7723b59a76e2bbf66dd3d456
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Aug 1 14:08:19 2021 -0400
