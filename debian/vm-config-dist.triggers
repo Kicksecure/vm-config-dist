@@ -3,4 +3,8 @@
 
 ## virtualbox-guest-additions-iso
 ## https://www.whonix.org/wiki/Dev/VirtualBox#VirtualBox_Installation_Challenges
-interest /usr/share/virtualbox/VBoxGuestAdditions.iso
+## See also lintian tag: uses-implicit-await-trigger
+## Using interest-await instead of previously interest-noawait because when
+## virtualbox-guest-additions-iso was upgraded as the same time as
+## vm-config-dist the trigger did was not executed.
+interest-await /usr/share/virtualbox/VBoxGuestAdditions.iso
