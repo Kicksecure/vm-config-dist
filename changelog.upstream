@@ -1,3 +1,17 @@
+commit b23e33b69dde7a62d8b63884900095aeacc19024
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 29 17:38:29 2021 -0400
+
+    vbox-guest-installer: recommend, migrate from VirtualBox guest addition ISO to VirtualBox guest addition packages
+    
+    https://www.whonix.org/wiki/VirtualBox/Guest_Additions#Migration_to_Guest_Additions_Packages
+
+commit a8472b205ade9788d10496f2a21d0eafbded967b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Aug 5 17:12:19 2021 -0400
+
+    bumped changelog version
+
 commit 055167e4f7702101d83ee664ff34b06deeb0b3c7
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Aug 3 12:48:59 2021 -0400
