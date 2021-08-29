@@ -15,11 +15,11 @@ output_more_information() {
 }
 
 virtualbox_guest_additions_packages_still_installed() {
-   $output_command "$0 ERROR: VirtualBox guest additions Debian package still installed." >&2
-   $output_command "$0 ERROR: Will not install VirtualBox guest additions from virtualbox-guest-additions-iso." >&2
-   $output_command "$0 ERROR: To remove, run:" >&2
-   $output_command "sudo apt purge virtualbox-guest-x11 virtualbox-guest-utils virtualbox-guest-dkms" >&2
-   output_more_information
+   $output_command "$0 INFO: VirtualBox guest additions Debian package '$1' already installed."
+   $output_command "$0 INFO: Will not install VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
+   $output_command "$0 INFO: This is OK."
+   $output_command "$0 INFO: For more information, see:"
+   $output_command "https://www.whonix.org/wiki/VirtualBox/Guest_Additions#vbox-guest-installer"
    exit 0
 }
 
@@ -84,7 +84,7 @@ fi
 
 trap error_handler ERR
 
-echo "$0 INFO: This is VirtualBox guest additions from package virtualbox-guest-additions-iso installation helper by Whonix developers."
+echo "$0 (part of package 'vm-config-dist') INFO: This is VirtualBox guest additions from Debian package 'virtualbox-guest-additions-iso' installation helper by Whonix developers."
 
 if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
@@ -119,17 +119,19 @@ if ischroot --default-false ; then
 fi
 
 if dpkg --status "virtualbox-guest-x11" &>/dev/null ; then
-   virtualbox_guest_additions_packages_still_installed
+   virtualbox_guest_additions_packages_still_installed virtualbox-guest-x11
 fi
 if dpkg --status "virtualbox-guest-utils" &>/dev/null ; then
-   virtualbox_guest_additions_packages_still_installed
-fi
-if dpkg --status "virtualbox-guest-dkms" &>/dev/null ; then
-   virtualbox_guest_additions_packages_still_installed
+   virtualbox_guest_additions_packages_still_installed virtualbox-guest-utils
 fi
 
-if ! dpkg --status "virtualbox-guest-additions-iso" &>/dev/null ; then
-   $output_command "$0 ERROR: package virtualbox-guest-additions-iso not installed! To install, run:" >&2
+if dpkg --status "virtualbox-guest-additions-iso" &>/dev/null ; then
+   $output_command "$0 INFO: VirtualBox guest additions package 'virtualbox-guest-additions-iso' still installed."
+   $output_command "$0 INFO: Migration from 'virtualbox-guest-additions-iso' to guest additions packages recommended."
+   $output_command "$0 INFO: For more information, see:"
+   $output_command "https://www.whonix.org/wiki/VirtualBox/Guest_Additions#Migration_to_Guest_Additions_Packages"
+else
+   $output_command "$0 ERROR: package 'virtualbox-guest-additions-iso' not installed! To install, run:" >&2
    $output_command "sudo apt update" >&2
    $output_command "sudo apt install virtualbox-guest-additions-iso" >&2
    output_more_information
@@ -143,7 +145,7 @@ mkdir -p /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
 
 pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
 
-echo "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package virtualbox-guest-additions-iso) to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
+echo "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package 'virtualbox-guest-additions-iso') to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
 7z x -o/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso /usr/share/virtualbox/VBoxGuestAdditions.iso >/dev/null
 
 chmod +x VBoxLinuxAdditions.run
@@ -171,10 +173,10 @@ echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted
 echo "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
 
 if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
-   $output_command "$0 INFO: Success, vm-config-dist installed VirtualBox guest additions from package virtualbox-guest-additions-iso."
+   $output_command "$0 INFO: Success, installed VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
    output_more_information
 else
-   $output_command "$0 WARNING: vm-config-dist might have failed to install VirtualBox guest additions from package virtualbox-guest-additions-iso."
+   $output_command "$0 WARNING: Might have failed to install VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
    $output_command "$0 INFO: You could have a look at the installation log file. Run:"
    $output_command "cat /var/log/vboxadd-install.log"
    output_more_information
