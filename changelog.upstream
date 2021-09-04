@@ -1,3 +1,17 @@
+commit ee07d87be47c3c48f4369b5816876d5d826999a4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Sep 4 18:07:15 2021 -0400
+
+    disable dracut module resume in VMs
+    
+    since it might break the boot process if build inside chroot
+
+commit fb73b51ad805fa97c92938f6f87e59fac9313b59
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Aug 29 17:40:45 2021 -0400
+
+    bumped changelog version
+
 commit b23e33b69dde7a62d8b63884900095aeacc19024
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Aug 29 17:38:29 2021 -0400
