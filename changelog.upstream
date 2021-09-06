@@ -1,3 +1,15 @@
+commit 1417726fc0a08bae8fe94c3dca3555aeef82677b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 6 12:07:49 2021 -0400
+
+    add gdm autologin
+
+commit fdc1ea57bec9c70eeeb33948e1d9988b4192f676
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 6 11:59:12 2021 -0400
+
+    bumped changelog version
+
 commit fc802381584056fbaef1e7388c720c2c3c3dcb19
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Sep 6 11:54:20 2021 -0400
