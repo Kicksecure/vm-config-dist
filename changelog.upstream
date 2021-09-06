@@ -1,3 +1,15 @@
+commit b0c1af96519f82a9dcd2baf4f414c5efbc5d87f2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 6 09:42:49 2021 -0400
+
+    fix autologin
+
+commit 0b83ab2a86974c7bd1631fa5ae232089c488ce71
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 6 06:33:52 2021 -0400
+
+    bumped changelog version
+
 commit a41b9d9bd270dec8a3cb76ddade164d0de914696
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Sep 6 06:32:15 2021 -0400
