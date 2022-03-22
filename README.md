@@ -40,7 +40,7 @@ screen resolutions, Xfce will automatically scale down.
 
 Installs VirtualBox guest additions if package
 `virtualbox-guest-additions-iso` is installed if environment variable
-`WHONIX_BUILD_VIRTUALBOX=true` or if running inside VirtualBox.
+`dist_build_virtualbox=true` or if running inside VirtualBox.
 (`systemd-detect-virt` returning `oracle`)
 `/usr/bin/vbox-guest-installer`
 
