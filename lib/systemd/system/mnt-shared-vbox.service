@@ -9,8 +9,8 @@ ConditionVirtualization=oracle
 [Service]
 Type=oneshot
 ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
-## vbox guest additions should create the group and add user,
-## but we'll do it here to avoid any dependencies.
+## VirtualBox Guest Additions should create the group and add user,
+## but it is being done here to avoid any dependencies.
 ExecStart=/bin/bash -c '/usr/sbin/addgroup vboxsf || true'
 
 ## TODO: make sure user "user" exists.
