@@ -14,7 +14,7 @@ ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
 ExecStart=/bin/bash -c '/usr/sbin/addgroup vboxsf || true'
 
 ## TODO: make sure user "user" exists.
-ExecStart=/bin/bash -c '/usr/sbin/addgroup user vboxsf || true'
+ExecStart=/bin/bash -c '/usr/sbin/adduser user vboxsf || true'
 
 RemainAfterExit=yes
 
