@@ -71,7 +71,7 @@ _get_newest_kernel_debian() {
 
 error_handler() {
    $output_command "$0 ERROR: BASH_COMMAND: '$BASH_COMMAND' failed with exit code '$?'." >&2
-   $output_command "$0 ERROR: Please search Whonix forums and report if required." >&2
+   $output_command "$0 ERROR: Please search Kicksecure forums and report if required." >&2
    output_more_information
    exit 0
 }
@@ -84,7 +84,7 @@ fi
 
 trap error_handler ERR
 
-echo "$0 (part of package 'vm-config-dist') INFO: This is VirtualBox guest additions from Debian package 'virtualbox-guest-additions-iso' installation helper by Whonix developers."
+echo "$0 (part of package 'vm-config-dist') INFO: This is VirtualBox guest additions from Debian package 'virtualbox-guest-additions-iso' installation helper by Kicksecure developers."
 
 if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
@@ -127,9 +127,6 @@ fi
 
 if dpkg --status "virtualbox-guest-additions-iso" &>/dev/null ; then
    $output_command "$0 INFO: VirtualBox guest additions package 'virtualbox-guest-additions-iso' still installed."
-   $output_command "$0 INFO: Migration from 'virtualbox-guest-additions-iso' to guest additions packages recommended."
-   $output_command "$0 INFO: For more information, see:"
-   $output_command "https://www.whonix.org/wiki/VirtualBox/Guest_Additions#Migration_to_Guest_Additions_Packages"
 else
    $output_command "$0 ERROR: package 'virtualbox-guest-additions-iso' not installed! To install, run:" >&2
    $output_command "sudo apt update" >&2
