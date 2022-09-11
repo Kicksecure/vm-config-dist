@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Copyright (C) 2020 - 2022 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## Copyright (C) 2020 - 2022 ENCRYPTED SUPPORT LP <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
 set -o pipefail
@@ -11,7 +11,7 @@ output_more_information() {
    $output_command "$0 INFO: This is about usability only."
    $output_command "$0 INFO: If you do not need or have no issues with full screen, clipboard sharing, mouse capture or shared folder this can be safely ignored."
    $output_command "$0 INFO: For more information, see:"
-   $output_command "https://www.whonix.org/wiki/ga"
+   $output_command "https://www.kicksecure.com/wiki/ga"
 }
 
 virtualbox_guest_additions_packages_still_installed() {
@@ -19,7 +19,7 @@ virtualbox_guest_additions_packages_still_installed() {
    $output_command "$0 INFO: Will not install VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
    $output_command "$0 INFO: This is OK."
    $output_command "$0 INFO: For more information, see:"
-   $output_command "https://www.whonix.org/wiki/VirtualBox/Guest_Additions#vbox-guest-installer"
+   $output_command "https://www.kicksecure.com/wiki/VirtualBox/Guest_Additions#vbox-guest-installer"
    exit 0
 }
 
