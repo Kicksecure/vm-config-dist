@@ -22,7 +22,7 @@ Description: usability enhancements inside virtual machines
  https://www.whonix.org/wiki/Desktop#Disable_Autologin
  .
  Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
- Monero bug "Automatic fallback to softwarecontext renderer". [1]
+ "Automatic fallback to softwarecontext renderer".
  .
  It is not useful to open a screensaver or to power down the desktop for
  operating systems that are run inside VMs. There is no real display that could
@@ -60,5 +60,3 @@ Description: usability enhancements inside virtual machines
  `dist_build_virtualbox=true` or if running inside VirtualBox.
  (`systemd-detect-virt` returning `oracle`)
  `/usr/bin/vbox-guest-installer`
- .
- [1] https://github.com/monero-project/monero-gui/issues/2878

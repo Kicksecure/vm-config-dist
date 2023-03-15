@@ -32,13 +32,10 @@ fi
 
 if [ "$QMLSCENE_DEVICE" = "" ]; then
    ## useful for:
-   ## - monero-gui
    ## - signal-desktop
    ## - maybe also wire-desktop?
    ##
-   ## workaround for Monero bug:
    ## Automatic fallback to softwarecontext renderer
-   ## https://github.com/monero-project/monero-gui/issues/2878
    ##
    ## Not great to set this unconditionally in VirtualBox but there is no known
    ## tool which can find out from inside the VM if VirtualBox 3D acceleration
