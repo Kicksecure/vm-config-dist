@@ -5,7 +5,7 @@ Enables auto login for user `user` in `lightdm`.
 https://www.whonix.org/wiki/Desktop#Disable_Autologin
 
 Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
-Monero bug "Automatic fallback to softwarecontext renderer". [1]
+"Automatic fallback to softwarecontext renderer".
 
 It is not useful to open a screensaver or to power down the desktop for
 operating systems that are run inside VMs. There is no real display that could
@@ -44,19 +44,17 @@ Installs VirtualBox guest additions if package
 (`systemd-detect-virt` returning `oracle`)
 `/usr/bin/vbox-guest-installer`
 
-[1] https://github.com/monero-project/monero-gui/issues/2878
-
 ## How to install `vm-config-dist` using apt-get ##
 
 1\. Download the APT Signing Key.
 
 ```
-wget https://www.kicksecure.com/derivative.asc
+wget https://www.kicksecure.com/keys/derivative.asc
 ```
 
 Users can [check the Signing Key](https://www.kicksecure.com/wiki/Signing_Key) for better security.
 
-2\. Add the APT Signing Key..
+2\. Add the APT Signing Key.
 
 ```
 sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
@@ -65,7 +63,7 @@ sudo cp ~/derivative.asc /usr/share/keyrings/derivative.asc
 3\. Add the derivative repository.
 
 ```
-echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bullseye main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
+echo "deb [signed-by=/usr/share/keyrings/derivative.asc] https://deb.kicksecure.com bookworm main contrib non-free" | sudo tee /etc/apt/sources.list.d/derivative.list
 ```
 
 4\. Update your package lists.
@@ -98,7 +96,7 @@ NOTE: Replace `generic-package` with the actual name of this package `vm-config-
 ## Contact ##
 
 * [Free Forum Support](https://forums.kicksecure.com)
-* [Professional Support](https://www.kicksecure.com/wiki/Professional_Support)
+* [Premium Support](https://www.kicksecure.com/wiki/Premium_Support)
 
 ## Donate ##
 
