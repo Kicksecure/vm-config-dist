@@ -6,9 +6,9 @@ Section: misc
 Priority: optional
 Maintainer: Patrick Schleizer <adrelanos@whonix.org>
 Build-Depends: debhelper (>= 13), debhelper-compat (= 13), config-package-dev
-Homepage: https://github.com/Whonix/vm-config-dist
-Vcs-Browser: https://github.com/Whonix/vm-config-dist
-Vcs-Git: https://github.com/Whonix/vm-config-dist.git
+Homepage: https://github.com/Kicksecure/vm-config-dist
+Vcs-Browser: https://github.com/Kicksecure/vm-config-dist
+Vcs-Git: https://github.com/Kicksecure/vm-config-dist.git
 Standards-Version: 4.6.2
 Rules-Requires-Root: no
 
@@ -19,7 +19,7 @@ Replaces: power-savings-disable-in-vms, shared-folder-help
 Description: usability enhancements inside virtual machines
  Enables auto login for user `user` in `lightdm`.
  `/etc/lightdm/lightdm.conf.d/30_autologin.conf`
- https://www.whonix.org/wiki/Desktop#Disable_Autologin
+ https://www.kicksecure.com/wiki/Desktop#Disable_Autologin
  .
  Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
  "Automatic fallback to softwarecontext renderer".
