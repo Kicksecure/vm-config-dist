@@ -1,0 +1,1 @@
+../profile.d/20_power_savings_disable_in_vms.sh
