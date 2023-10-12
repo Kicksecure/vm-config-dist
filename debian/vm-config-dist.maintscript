@@ -2,3 +2,6 @@
 ## See the file COPYING for copying conditions.
 
 rm_conffile /etc/sudoers.d/power-savings-disable-in-vms
+rm_conffile /etc/X11/Xsession.d/20kde_screen_locker_disable_in_vms
+rm_conffile /etc/X11/Xsession.d/20power_savings_disable_in_vms
+rm_conffile /etc/X11/Xsession.d/20software_rendering_in_vms
