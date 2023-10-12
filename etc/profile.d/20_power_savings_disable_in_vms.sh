@@ -71,6 +71,7 @@ fi
 
    if [ "$XDG_SESSION_TYPE" = "x11" ]; then
       if ! command -v xset >/dev/null ; then
+         true "$0: xset unavailable. Exiting."
          exit 0
       fi
       xset s off
