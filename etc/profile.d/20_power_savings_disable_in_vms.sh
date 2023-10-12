@@ -80,6 +80,11 @@ fi
       true "$0: exit code: $?"
    fi
 
+   if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+      true "$0: wayland support not implemented. Exiting."
+      exit 0
+   fi
+
    exit 0
 ) &
 
