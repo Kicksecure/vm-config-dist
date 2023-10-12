@@ -14,22 +14,6 @@ if test -f /usr/share/qubes/marker-vm ; then
    exit 0
 fi
 
-if [ ! "$XDG_SESSION_TYPE" = "tty" ]; then
-   $output_cmd "$0: INFO: Not running in tty, not doing anything."
-fi
-
-if ! tty | grep --quiet /dev/tty ; then
-   $output_cmd "$0: INFO: Not running in a login shell, not doing anything."
-   return
-   exit 0
-fi
-
-if ! command -v setterm >/dev/null ; then
-   $output_cmd "$0: INFO: setterm not installed. Stop."
-   return 0
-   exit 0
-fi
-
 if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
@@ -46,6 +30,16 @@ fi
 true "$0: VM $result found. Continue."
 
 if [ "$XDG_SESSION_TYPE" = "tty" ]; then
+   if ! tty | grep --quiet /dev/tty ; then
+      $output_cmd "$0: INFO: Not running in a login shell, not doing anything."
+      return
+      exit 0
+   fi
+   if ! command -v setterm >/dev/null ; then
+      $output_cmd "$0: INFO: setterm not installed. Stop."
+      return 0
+      exit 0
+   fi
    setterm -blank 0 2>/dev/null
    $output_cmd "$0: INFO: exit code: $?"
    setterm -powerdown 0 2>/dev/null
