@@ -6,28 +6,26 @@
 output_cmd="true"
 #output_cmd="echo"
 
-script_name="power-savings-disable-in-vms"
-
-true "$script_name: INFO: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
+true "$0: INFO: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
 
 if test -f /usr/share/qubes/marker-vm ; then
-   $output_cmd "$script_name: INFO: Not running in Qubes, not doing anything."
+   $output_cmd "$0: INFO: Not running in Qubes, not doing anything."
    return 0
    exit 0
 fi
 
 if [ ! "$XDG_SESSION_TYPE" = "tty" ]; then
-   $output_cmd "$script_name: INFO: Not running in tty, not doing anything."
+   $output_cmd "$0: INFO: Not running in tty, not doing anything."
 fi
 
 if ! tty | grep --quiet /dev/tty ; then
-   $output_cmd "$script_name: INFO: Not running in a login shell, not doing anything."
+   $output_cmd "$0: INFO: Not running in a login shell, not doing anything."
    return
    exit 0
 fi
 
 if ! command -v setterm >/dev/null ; then
-   $output_cmd "$script_name: INFO: setterm not installed. Stop."
+   $output_cmd "$0: INFO: setterm not installed. Stop."
    return 0
    exit 0
 fi
@@ -35,23 +33,23 @@ fi
 if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
-   $output_cmd "$script_name: INFO: systemd-detect-virt not executable found. Stop."
+   $output_cmd "$0: INFO: systemd-detect-virt not executable found. Stop."
    return 0
    exit 0
 fi
 if [ "$result" = "" ]; then
-   $output_cmd "$script_name: INFO: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
+   $output_cmd "$0: INFO: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
    return 0
    exit 0
 fi
 
-true "$script_name: VM $result found. Continue."
+true "$0: VM $result found. Continue."
 
 if [ "$XDG_SESSION_TYPE" = "tty" ]; then
    setterm -blank 0 2>/dev/null
-   $output_cmd "$script_name: INFO: exit code: $?"
+   $output_cmd "$0: INFO: exit code: $?"
    setterm -powerdown 0 2>/dev/null
-   $output_cmd "$script_name: INFO: exit code: $?"
+   $output_cmd "$0: INFO: exit code: $?"
    return 0
    exit 0
 fi
