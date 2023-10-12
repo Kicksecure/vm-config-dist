@@ -9,12 +9,6 @@ if test -f /usr/share/qubes/marker-vm ; then
    exit 0
 fi
 
-if [ ! "$XDG_SESSION_TYPE" = "x11" ]; then
-   true "$0: Not running in x11, not doing anything."
-   return 0
-   exit 0
-fi
-
 if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
@@ -56,10 +50,14 @@ fi
    fi
    sleep 60 &
    wait "$!"
-   xset s off
-   true "$0: exit code: $?"
-   xset -dpms
-   true "$0: exit code: $?"
+
+   if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+      xset s off
+      true "$0: exit code: $?"
+      xset -dpms
+      true "$0: exit code: $?"
+   fi
+
    exit 0
 ) &
 
