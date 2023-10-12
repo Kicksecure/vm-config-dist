@@ -9,6 +9,12 @@ if test -f /usr/share/qubes/marker-vm ; then
    exit 0
 fi
 
+if [ ! "$XDG_SESSION_TYPE" = "x11" ]; then
+   true "$0: Not running in x11, not doing anything."
+   return 0
+   exit 0
+fi
+
 if command -v systemd-detect-virt >/dev/null ; then
    result="$(systemd-detect-virt)"
 else
@@ -21,9 +27,9 @@ if [ "$result" = "" ]; then
    true "$0: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
    return 0
    exit 0
-else
-   true "$0: VM $result found. Continue."
 fi
+
+true "$0: VM $result found. Continue."
 
 if [ -z "$XDG_CONFIG_DIRS" ]; then
    XDG_CONFIG_DIRS=/etc/xdg
