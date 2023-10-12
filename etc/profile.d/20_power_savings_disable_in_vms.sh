@@ -39,17 +39,50 @@ else
    return 0
    exit 0
 fi
-
 if [ "$result" = "" ]; then
    $output_cmd "$script_name: INFO: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
    return 0
    exit 0
 fi
 
-setterm -blank 0 2>/dev/null
-$output_cmd "$script_name: INFO: exit code: $?"
-setterm -powerdown 0 2>/dev/null
-$output_cmd "$script_name: INFO: exit code: $?"
+true "$script_name: VM $result found. Continue."
+
+if [ "$XDG_SESSION_TYPE" = "tty" ]; then
+   setterm -blank 0 2>/dev/null
+   $output_cmd "$script_name: INFO: exit code: $?"
+   setterm -powerdown 0 2>/dev/null
+   $output_cmd "$script_name: INFO: exit code: $?"
+   return 0
+   exit 0
+fi
+
+if [ -z "$XDG_CONFIG_DIRS" ]; then
+   XDG_CONFIG_DIRS=/etc/xdg
+fi
+if ! echo "$XDG_CONFIG_DIRS" | grep --quiet /usr/share/kde-power-savings-disable-in-vms/ ; then
+   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
+fi
+
+(
+   if [ "$(id -u)" = "0" ]; then
+      true "$0: Can not run as root. Exiting."
+      exit 0
+   fi
+   sleep 60 &
+   wait "$!"
+
+   if [ "$XDG_SESSION_TYPE" = "x11" ]; then
+      if ! command -v xset >/dev/null ; then
+         exit 0
+      fi
+      xset s off
+      true "$0: exit code: $?"
+      xset -dpms
+      true "$0: exit code: $?"
+   fi
+
+   exit 0
+) &
 
 return 0
 exit 0
