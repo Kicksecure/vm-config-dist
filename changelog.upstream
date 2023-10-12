@@ -1,3 +1,63 @@
+commit 8d21211a7537455834142562321be1548f64e6b0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:49:28 2023 -0400
+
+    fix
+
+commit a41e61a3f829f06b5c655502e7e1a434be8ec384
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:45:01 2023 -0400
+
+    wayland
+
+commit 4e7bade5fa73ada8599c337e347f188c8a79c822
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:40:34 2023 -0400
+
+    output
+
+commit 71ef9bb54afbd927d9f75b9080293478cbcaf253
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:40:02 2023 -0400
+
+    refactoring
+
+commit d959e0ad25775ddeb311fbcaf777f315ace9ea1b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:39:15 2023 -0400
+
+    refactoring
+
+commit 5ac6a1b774a1ea75785f0f569adcf1ee3b09440e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:28:22 2023 -0400
+
+    rename
+
+commit a617439452f0609100d1880d655b138184ecfdf5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:21:24 2023 -0400
+
+    refactoring
+
+commit e1d1a99d848c9672509603f5bd7d6f224bbef08b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 12:17:38 2023 -0400
+
+    refactoring
+
+commit 760f878c5429b63732309ccc6bb311a82c102c4c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 11:37:27 2023 -0400
+
+    avoid duplicate environment variables
+
+commit 3d12e9c7c5fbe08bf09269f7976e360ba7f75b62
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Oct 12 10:44:33 2023 -0400
+
+    bumped changelog version
+
 commit 3caca910492a1d783ef1032cf2a4a971508521eb
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Oct 12 10:28:12 2023 -0400
