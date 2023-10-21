@@ -31,9 +31,6 @@ power_savings_disable_in_vms() {
    if [ -x "/etc/profile.d/20_power_savings_disable_in_vms.sh" ]; then
       sudo --non-interactive -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
    fi
-   if [ -x "/etc/X11/Xsession.d/20power_savings_disable_in_vms" ]; then
-      sudo --non-interactive -u "$SUDO_USER" "/etc/X11/Xsession.d/20power_savings_disable_in_vms" >/dev/null 2>&1 || true
-   fi
 }
 
 vbox_guest_installer() {
