@@ -58,6 +58,7 @@ fi
 (
    if [ "$(id -u)" = "0" ]; then
       true "$0: Can not run as root. Exiting."
+      return 0
       exit 0
    fi
    sleep 60 &
@@ -76,9 +77,11 @@ fi
 
    if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
       true "$0: wayland support not implemented. Exiting."
+      return 0
       exit 0
    fi
 
+   return 0
    exit 0
 ) &
 
