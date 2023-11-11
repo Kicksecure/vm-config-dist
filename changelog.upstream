@@ -1,3 +1,15 @@
+commit 68a6296bd0ee00255d88a8834710ffe51598d585
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 11 17:31:04 2023 -0500
+
+    lower debugging
+
+commit ba4cccad8ae4152fc2f4b4e9519de9b062bef941
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 11 20:27:34 2023 +0000
+
+    bumped changelog version
+
 commit 6ce2b421ec69155559d074c88de35d7fcdc998ce
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Nov 11 13:41:31 2023 -0500
