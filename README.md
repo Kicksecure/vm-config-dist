@@ -2,7 +2,7 @@
 
 Enables auto login for user `user` in `lightdm`.
 `/etc/lightdm/lightdm.conf.d/30_autologin.conf`
-https://www.whonix.org/wiki/Desktop#Disable_Autologin
+https://www.kicksecure.com/wiki/Desktop#Disable_Autologin
 
 Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
 "Automatic fallback to softwarecontext renderer".
@@ -12,10 +12,9 @@ operating systems that are run inside VMs. There is no real display that could
 be saved and no real power that could be saved. From usability perspective it
 also is counter intuitive when looking at the VM window and only seeing a
 black screen. Therefore it makes sense to disable power savings in VMs.
-`/etc/X11/Xsession.d/20kde_screen_locker_disable_in_vms`
-`/etc/X11/Xsession.d/20software_rendering_in_vms`
-`/etc/X11/Xsession.d/20power_savings_disable_in_vms`
+`/etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms.sh`
 `/etc/profile.d/20_power_savings_disable_in_vms.sh`
+`/etc/X11/Xsession.d/20_software_rendering_in_vms.sh`
 `/usr/share/kde-power-savings-disable-in-vms/kdedrc`
 `/usr/share/kde-screen-locker-disable-in-vms/kscreenlockerrc`
 
