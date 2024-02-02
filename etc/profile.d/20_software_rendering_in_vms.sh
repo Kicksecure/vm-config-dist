@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 if command -v systemd-detect-virt >/dev/null ; then
-   result="$(systemd-detect-virt)"
+   result="$(systemd-detect-virt 2>&1)"
    ## result example:
    ## oracle
 else

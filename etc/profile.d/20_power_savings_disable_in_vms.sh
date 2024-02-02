@@ -15,7 +15,7 @@ if test -f /usr/share/qubes/marker-vm ; then
 fi
 
 if command -v systemd-detect-virt >/dev/null ; then
-   result="$(systemd-detect-virt)"
+   result="$(systemd-detect-virt 2>&1)"
 else
    $output_cmd "$0: INFO: systemd-detect-virt not executable found. Stop."
    return 0

@@ -16,7 +16,7 @@ if [ "$XDG_SESSION_TYPE" = "tty" ]; then
 fi
 
 if command -v systemd-detect-virt >/dev/null ; then
-   result="$(systemd-detect-virt)"
+   result="$(systemd-detect-virt 2>&1)"
 else
    true "$0: INFO: systemd-detect-virt not found. Stop."
    return 0
