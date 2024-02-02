@@ -1,3 +1,21 @@
+commit 1810afaa3845662523787ce96c7b4d0928ff723f
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 2 08:38:50 2024 -0500
+
+    fix /etc/profile.d scripts
+    
+    be silent, do not output stderr in case systemd-detect-virt writes to stderr
+    
+    as this can break Qubes UpdatesProxy
+    
+    https://forums.whonix.org/t/hide-hardware-information-service-running-in-sys-whonix-breaks-apt-and-update-torbrowser/18279
+
+commit 5f39c80ec2c4423c63d22d47cf209a10c9e94c81
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Feb 2 12:39:27 2024 +0000
+
+    bumped changelog version
+
 commit acf5b2d4554baf208ec296dd3392f50bf465e4cc
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Feb 2 07:32:52 2024 -0500
