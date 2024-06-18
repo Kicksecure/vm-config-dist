@@ -5,13 +5,15 @@
 
 ## Hide all script output to prevent showing any output during a (SSH) login shell.
 ## For debugging, comment this line out.
-exec > /dev/null 2>&1
+## Bad idea.
+#exec > /dev/null 2>&1
 
 timeout_wrapper() {
    timeout \
       --kill-after="1" \
       "1" \
-      "$@"
+      "$@" \
+      >/dev/null 2>/dev/null
 }
 
 true "$0: INFO: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
