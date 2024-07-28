@@ -1,3 +1,17 @@
+commit 766ff9d3bae322cf30205e69fb6181d2f3454d52
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jul 28 18:26:04 2024 -0400
+
+    remove autologin
+    
+    will be moved to usability-misc
+
+commit e1200fa10f5d2d9823380cb113d81cf6e05c4b05
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jun 18 16:39:51 2024 +0000
+
+    bumped changelog version
+
 commit 0d170b043c4ae69dd3cf77739de335baa3e29e18
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Jun 18 12:39:10 2024 -0400
