@@ -1,3 +1,27 @@
+commit 4049a9c594615802bfb88fcba254402ff440f097
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 20 02:57:23 2024 -0500
+
+    speed up
+
+commit d18a6a907ed7530a3d25c7f08b816c2dde657d02
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 20 02:49:16 2024 -0500
+
+    fix: run systemd units earlier
+
+commit 1a4b0106bd9c1f293b6f95c5992c9f6270fd94e4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 20 02:03:02 2024 -0500
+
+    update link
+
+commit beebd6db3bad771a0ffd6f912040d893bd5c1574
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Sep 28 03:25:48 2024 +0000
+
+    bumped changelog version
+
 commit 9252f31c5004f098bb2a620df3af82ce7b7a7107
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Sep 27 23:25:31 2024 -0400
