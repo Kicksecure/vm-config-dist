@@ -2,7 +2,7 @@
 ## See the file COPYING for copying condtions.
 
 [Unit]
-Description=creates group vboxsf and adds user "user" to it
+Description=creates group "vboxsf" and adds user "user" to it
 Documentation=https://github.com/Kicksecure/vm-config-dist
 ConditionVirtualization=oracle
 
@@ -13,13 +13,10 @@ After=local-fs.target
 
 [Service]
 Type=oneshot
-ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
 ## VirtualBox Guest Additions should create the group and add user,
 ## but it is being done here to avoid any dependencies.
-ExecStart=/bin/bash -c '/usr/sbin/addgroup vboxsf || true'
-
 ## TODO: make sure user "user" exists.
-ExecStartPost=/bin/bash -c '/usr/sbin/adduser user vboxsf || true'
+ExecStart=/bin/bash -c 'set -x && mkdir --mode 777 --parents /mnt/shared && /usr/sbin/addgroup vboxsf && /usr/sbin/adduser user vboxsf || true'
 
 RemainAfterExit=yes
 
