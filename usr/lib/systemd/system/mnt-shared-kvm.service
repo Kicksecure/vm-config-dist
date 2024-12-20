@@ -7,6 +7,11 @@ Documentation=https://github.com/Kicksecure/vm-config-dist
 ConditionVirtualization=|qemu
 ConditionVirtualization=|kvm
 
+DefaultDependencies=no
+Before=sysinit.target
+Requires=local-fs.target
+After=local-fs.target
+
 [Service]
 Type=oneshot
 ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
@@ -14,4 +19,4 @@ ExecStart=/bin/bash -c '/bin/mount -t 9p -o trans=virtio shared /mnt/shared -ove
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sysinit.target

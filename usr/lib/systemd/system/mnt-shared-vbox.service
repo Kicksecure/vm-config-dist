@@ -6,6 +6,11 @@ Description=creates group vboxsf and adds user "user" to it
 Documentation=https://github.com/Kicksecure/vm-config-dist
 ConditionVirtualization=oracle
 
+DefaultDependencies=no
+Before=sysinit.target
+Requires=local-fs.target
+After=local-fs.target
+
 [Service]
 Type=oneshot
 ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
@@ -14,9 +19,9 @@ ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
 ExecStart=/bin/bash -c '/usr/sbin/addgroup vboxsf || true'
 
 ## TODO: make sure user "user" exists.
-ExecStart=/bin/bash -c '/usr/sbin/adduser user vboxsf || true'
+ExecStartPost=/bin/bash -c '/usr/sbin/adduser user vboxsf || true'
 
 RemainAfterExit=yes
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=sysinit.target
