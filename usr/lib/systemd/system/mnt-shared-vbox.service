@@ -3,7 +3,7 @@
 
 [Unit]
 Description=creates group vboxsf and adds user "user" to it
-Documentation=https://github.com/Whonix/shared-folder-help
+Documentation=https://github.com/Kicksecure/vm-config-dist
 ConditionVirtualization=oracle
 
 [Service]
