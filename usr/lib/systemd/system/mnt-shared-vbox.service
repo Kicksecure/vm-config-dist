@@ -16,6 +16,7 @@ Type=oneshot
 ## VirtualBox Guest Additions should create the group and add user,
 ## but it is being done here to avoid any dependencies.
 ## TODO: make sure user "user" exists.
+## TODO: https://www.kicksecure.com/wiki/Noexec
 ExecStart=/bin/bash -c 'set -x && mkdir --mode 777 --parents /mnt/shared && /usr/sbin/addgroup vboxsf && /usr/sbin/adduser user vboxsf || true'
 
 RemainAfterExit=yes
