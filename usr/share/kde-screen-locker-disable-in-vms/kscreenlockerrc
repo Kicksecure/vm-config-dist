@@ -1,2 +1,5 @@
+## Copyright (C) 2012 - 2023 ENCRYPTED SUPPORT LP <adrelanos@whonix.org>
+## See file COPYING for copying conditons.
+
 [Daemon]
 Autolock=false
