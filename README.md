@@ -1,9 +1,5 @@
 # usability enhancements inside virtual machines #
 
-Enables auto login for user `user` in `lightdm`.
-`/etc/lightdm/lightdm.conf.d/30_autologin.conf`
-https://www.kicksecure.com/wiki/Desktop#Disable_Autologin
-
 Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
 "Automatic fallback to softwarecontext renderer".
 
