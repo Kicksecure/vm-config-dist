@@ -3,25 +3,41 @@
 ## Copyright (C) 2020 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-if command -v systemd-detect-virt >/dev/null ; then
-   result="$(systemd-detect-virt 2>&1)"
-   ## result example:
-   ## oracle
-else
-   echo "$0 ERROR: systemd-detect-virt not found. Stop."
+## Automatic fallback to softwarecontext renderer
+## https://www.kicksecure.com/wiki/Tuning#Renderer
+##
+## Useful for:
+## - Monero
+##   https://github.com/monero-project/monero-gui/issues/2878
+##   https://github.com/monero-project/monero-gui/pull/4419
+## - signal-desktop
+## - maybe also wire-desktop?
+##
+## https://forums.whonix.org/t/video-editing-software-fails-to-launch-on-whonix-virtualbox-kvm/17241
+## Causes issues for:
+## - shotcut
+## - kdenlive
+
+## If 'OpenGL renderer string' is 'llvmpipe' according to 'glxinfo', then
+## set environment variable: QMLSCENE_DEVICE=softwarecontext
+## (Only if not already set to anything else.)
+## Otherwise, do nothing.
+##
+## This means in case hardware acceleration is
+## * Unavailable: Set the environment variable.
+## * Available: Do nothing.
+
+#glxinfo | grep -- "OpenGL renderer string:" | grep --quiet -- llvmpipe
+## example output:
+## OpenGL renderer string: llvmpipe (LLVM 15.0.6, 256 bits)
+
+if ! command -v glxinfo >/dev/null ; then
+   true "$0 ERROR: glxinfo not found. Stop."
    return 0
    exit 0
 fi
 
-if [ "$result" = "oracle" ]; then
-   software_rendering_use=true
-fi
-
-if [ "$result" = "kvm" ]; then
-   software_rendering_use=true
-fi
-
-if [ "$result" = "xen" ]; then
+if glxinfo 2>/dev/null | grep -- "OpenGL renderer string:" | grep --quiet -- llvmpipe ; then
    software_rendering_use=true
 fi
 
@@ -37,20 +53,4 @@ if [ ! "$QMLSCENE_DEVICE" = "" ]; then
    exit 0
 fi
 
-## useful for:
-## - signal-desktop
-## - maybe also wire-desktop?
-##
-## Automatic fallback to softwarecontext renderer
-##
-## Not great to set this unconditionally in VirtualBox but there is no known
-## tool which can find out from inside the VM if VirtualBox 3D acceleration
-## is enabled from inside the VM, see:
-## Test command from inside VM to detect if VirtualBox 3D acceleration is enabled or disabled?
-## https://forums.virtualbox.org/viewtopic.php?f=3&t=97983
-##
-## https://forums.whonix.org/t/video-editing-software-fails-to-launch-on-whonix-virtualbox-kvm/17241
-## Causes issues for:
-## - shotcut
-## - kdenlive
 export QMLSCENE_DEVICE=softwarecontext
