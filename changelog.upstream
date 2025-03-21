@@ -1,3 +1,21 @@
+commit 9a75ae2b11193df2c4adf76235d3c8e57e3e93bb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Mar 21 15:45:59 2025 -0400
+
+    Only if 'OpenGL renderer string' is 'llvmpipe' according to 'glxinfo', then set environment variable `QMLSCENE_DEVICE=softwarecontext`.
+    
+    * https://forums.whonix.org/t/monero-integration-in-whonix/5949/93
+    * https://github.com/monero-project/monero-gui/issues/2878
+    * https://github.com/monero-project/monero-gui/pull/4419
+    
+    Thanks to @everoddandeven mentioning `glxinfo`.
+
+commit 83714c90726bae07fd796651a1012c2b2e0a1218
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jan 24 11:12:40 2025 +0000
+
+    bumped changelog version
+
 commit f69a852aa3510b969dbddfa3c625f617c1844def
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Jan 23 11:13:49 2025 -0500
