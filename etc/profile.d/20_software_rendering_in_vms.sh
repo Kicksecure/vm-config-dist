@@ -27,6 +27,8 @@
 ## * Unavailable: Set the environment variable.
 ## * Available: Do nothing.
 
+## Package 'mesa-utils' provides 'glxinfo'.
+
 #glxinfo | grep -- "OpenGL renderer string:" | grep --quiet -- llvmpipe
 ## example output:
 ## OpenGL renderer string: llvmpipe (LLVM 15.0.6, 256 bits)
