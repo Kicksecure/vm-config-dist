@@ -2,7 +2,7 @@
 ## See the file COPYING for copying condtions.
 
 [Unit]
-Description=creates group "vboxsf" and adds user "user" to it
+Description=creates group "vboxsf" and adds account "user" to it
 Documentation=https://github.com/Kicksecure/vm-config-dist
 ConditionVirtualization=oracle
 
@@ -13,9 +13,9 @@ After=local-fs.target
 
 [Service]
 Type=oneshot
-## VirtualBox Guest Additions should create the group and add user,
+## VirtualBox Guest Additions should create the group and add account,
 ## but it is being done here to avoid any dependencies.
-## TODO: make sure user "user" exists.
+## TODO: make sure account "user" exists.
 ## TODO: https://www.kicksecure.com/wiki/Noexec
 ExecStart=/bin/bash -c 'set -x && mkdir --mode 777 --parents /mnt/shared && /usr/sbin/addgroup vboxsf && /usr/sbin/adduser user vboxsf || true'
 

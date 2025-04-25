@@ -36,7 +36,7 @@ Description: usability enhancements inside virtual machines
  Makes setting up a shared folder for virtual machines a bit easier.
  .
   * Creates a folder `/mnt/shared` with `chmod 777`, adds a group
- "vboxsf", adds user "user" to group "vboxsf". Facilitates auto-mounting of
+ "vboxsf", adds account "user" to group "vboxsf". Facilitates auto-mounting of
  shared folders.
  .
   * Helps using shared folders with VirtualBox and KVM a bit
