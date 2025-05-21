@@ -23,8 +23,13 @@ else
    exit 0
 fi
 
+if [ "$result" = "none" ]; then
+   true "$0: INFO: No virtualization detected, therefore not disabling kde screen saver. Stop."
+   return 0
+   exit 0
+fi
 if [ "$result" = "" ]; then
-   true "$0: INFO: Not running in a Virtual Machine (or none detected), therefore not disabling monitor power saving. Stop."
+   true "$0: INFO: Not running in a Virtual Machine (or none detected), therefore not disabling kde screen saver. Stop."
    return 0
    exit 0
 fi
