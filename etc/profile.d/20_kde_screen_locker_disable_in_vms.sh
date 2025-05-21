@@ -4,7 +4,7 @@
 ## See the file COPYING for copying conditions.
 
 if test -f "/usr/share/qubes/marker-vm" ; then
-   true "$0: INFO: Not running in Qubes, not doing anything."
+   true "$0: INFO: Running inside Qubes. Stop."
    return 0
    exit 0
 fi
@@ -15,7 +15,7 @@ if [ "$XDG_SESSION_TYPE" = "tty" ]; then
    exit 0
 fi
 
-if command -v "systemd-detect-virt" >/dev/null ; then
+if command -v "systemd-detect-virt" >/dev/null 2>/dev/null ; then
    result="$("systemd-detect-virt" 2>&1)" || true
 else
    true "$0: INFO: systemd-detect-virt not found. Stop."

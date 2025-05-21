@@ -29,7 +29,7 @@
 
 ## Package 'mesa-utils' provides 'glxinfo'.
 
-#glxinfo | grep -- "OpenGL renderer string:" | grep --quiet -- llvmpipe
+#glxinfo | grep -- "OpenGL renderer string:" | grep -- llvmpipe
 ## example output:
 ## OpenGL renderer string: llvmpipe (LLVM 15.0.6, 256 bits)
 
@@ -39,7 +39,7 @@ if ! command -v glxinfo >/dev/null 2>/dev/null ; then
    exit 0
 fi
 
-if glxinfo 2>/dev/null | grep -- "OpenGL renderer string:" | grep --quiet -- llvmpipe ; then
+if glxinfo 2>/dev/null | grep -- "OpenGL renderer string:" | grep -- llvmpipe >/dev/null 2>/dev/null; then
    software_rendering_use=true
 fi
 

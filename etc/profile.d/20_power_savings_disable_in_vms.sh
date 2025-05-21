@@ -19,7 +19,7 @@ timeout_wrapper() {
 true "$0: INFO: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
 
 if test -f "/usr/share/qubes/marker-vm" ; then
-   true "$0: INFO: Not running in Qubes, not doing anything."
+   true "$0: INFO: Running inside Qubes. Stop."
    return 0
    exit 0
 fi
@@ -40,9 +40,9 @@ fi
 true "$0: VM $result found. Continue."
 
 if [ "$XDG_SESSION_TYPE" = "tty" ]; then
-   if ! tty | grep -- "/dev/tty" >/dev/null 2>/dev/null ; then
+   if ! tty 2>/dev/null | grep -- "/dev/tty" >/dev/null 2>/dev/null ; then
       true "$0: INFO: Not running in a login shell, not doing anything."
-      return
+      return 0
       exit 0
    fi
    if ! command -v setterm >/dev/null 2>/dev/null ; then
@@ -63,7 +63,7 @@ if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- "/usr/share/kde-power-savings-di
    export XDG_CONFIG_DIRS="/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS"
 fi
 
-if [ "$(id -u)" = "0" ]; then
+if [ "$(id -u 2>/dev/null)" = "0" ]; then
    true "$0: Can not run as root. Exiting."
    return 0
    exit 0
