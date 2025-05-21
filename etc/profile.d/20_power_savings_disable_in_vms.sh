@@ -40,7 +40,7 @@ fi
 true "$0: VM $result found. Continue."
 
 if [ "$XDG_SESSION_TYPE" = "tty" ]; then
-   if ! tty | grep --quiet /dev/tty ; then
+   if ! tty | grep -- /dev/tty >/dev/null 2>/dev/null ; then
       true "$0: INFO: Not running in a login shell, not doing anything."
       return
       exit 0
@@ -61,8 +61,8 @@ fi
 if [ -z "$XDG_CONFIG_DIRS" ]; then
    XDG_CONFIG_DIRS=/etc/xdg
 fi
-if ! echo "$XDG_CONFIG_DIRS" | grep --quiet /usr/share/kde-power-savings-disable-in-vms/ ; then
-   export XDG_CONFIG_DIRS=/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS
+if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- /usr/share/kde-power-savings-disable-in-vms/ >/dev/null 2>/dev/null ; then
+   export XDG_CONFIG_DIRS="/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS"
 fi
 
 if [ "$(id -u)" = "0" ]; then

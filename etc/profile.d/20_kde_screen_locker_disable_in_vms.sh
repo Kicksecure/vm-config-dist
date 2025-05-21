@@ -34,6 +34,6 @@ true "$0: INFO: VM $result found. Continue."
 if [ -z "$XDG_CONFIG_DIRS" ]; then
    XDG_CONFIG_DIRS=/etc/xdg
 fi
-if ! echo "$XDG_CONFIG_DIRS" | grep --quiet /usr/share/kde-screen-locker-disable-in-vms/ ; then
-   export XDG_CONFIG_DIRS=/usr/share/kde-screen-locker-disable-in-vms/:$XDG_CONFIG_DIRS
+if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- /usr/share/kde-screen-locker-disable-in-vms/ >/dev/null 2>/dev/null ; then
+   export XDG_CONFIG_DIRS="/usr/share/kde-screen-locker-disable-in-vms/:$XDG_CONFIG_DIRS"
 fi
