@@ -3,7 +3,7 @@
 ## Copyright (C) 2017 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 ## See the file COPYING for copying conditions.
 
-if test -f /usr/share/qubes/marker-vm ; then
+if test -f "/usr/share/qubes/marker-vm" ; then
    true "$0: INFO: Not running in Qubes, not doing anything."
    return 0
    exit 0
@@ -15,8 +15,8 @@ if [ "$XDG_SESSION_TYPE" = "tty" ]; then
    exit 0
 fi
 
-if command -v systemd-detect-virt >/dev/null ; then
-   result="$(systemd-detect-virt 2>&1)"
+if command -v "systemd-detect-virt" >/dev/null ; then
+   result="$("systemd-detect-virt" 2>&1)" || true
 else
    true "$0: INFO: systemd-detect-virt not found. Stop."
    return 0
@@ -32,8 +32,8 @@ fi
 true "$0: INFO: VM $result found. Continue."
 
 if [ -z "$XDG_CONFIG_DIRS" ]; then
-   XDG_CONFIG_DIRS=/etc/xdg
+   XDG_CONFIG_DIRS="/etc/xdg"
 fi
-if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- /usr/share/kde-screen-locker-disable-in-vms/ >/dev/null 2>/dev/null ; then
+if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- "/usr/share/kde-screen-locker-disable-in-vms/" >/dev/null 2>/dev/null ; then
    export XDG_CONFIG_DIRS="/usr/share/kde-screen-locker-disable-in-vms/:$XDG_CONFIG_DIRS"
 fi

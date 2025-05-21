@@ -33,7 +33,7 @@
 ## example output:
 ## OpenGL renderer string: llvmpipe (LLVM 15.0.6, 256 bits)
 
-if ! command -v glxinfo >/dev/null ; then
+if ! command -v glxinfo >/dev/null 2>/dev/null ; then
    true "$0 ERROR: glxinfo not found. Stop."
    return 0
    exit 0

@@ -18,14 +18,14 @@ timeout_wrapper() {
 
 true "$0: INFO: Using 'return' in combination with 'exit' so this script can be both, being 'source'd as well as executed."
 
-if test -f /usr/share/qubes/marker-vm ; then
+if test -f "/usr/share/qubes/marker-vm" ; then
    true "$0: INFO: Not running in Qubes, not doing anything."
    return 0
    exit 0
 fi
 
-if command -v systemd-detect-virt >/dev/null ; then
-   result="$(timeout_wrapper systemd-detect-virt 2>&1)"
+if command -v "systemd-detect-virt" >/dev/null 2>/dev/null ; then
+   result="$(timeout_wrapper "systemd-detect-virt" 2>&1)" || true
 else
    true "$0: INFO: systemd-detect-virt not executable found. Stop."
    return 0
@@ -40,28 +40,26 @@ fi
 true "$0: VM $result found. Continue."
 
 if [ "$XDG_SESSION_TYPE" = "tty" ]; then
-   if ! tty | grep -- /dev/tty >/dev/null 2>/dev/null ; then
+   if ! tty | grep -- "/dev/tty" >/dev/null 2>/dev/null ; then
       true "$0: INFO: Not running in a login shell, not doing anything."
       return
       exit 0
    fi
-   if ! command -v setterm >/dev/null ; then
+   if ! command -v setterm >/dev/null 2>/dev/null ; then
       true "$0: INFO: setterm not installed. Stop."
       return 0
       exit 0
    fi
-   timeout_wrapper setterm -blank 0
-   true "$0: INFO: exit code: $?"
-   timeout_wrapper setterm -powerdown 0
-   true "$0: INFO: exit code: $?"
+   timeout_wrapper setterm -blank 0 || true
+   timeout_wrapper setterm -powerdown || true
    return 0
    exit 0
 fi
 
 if [ -z "$XDG_CONFIG_DIRS" ]; then
-   XDG_CONFIG_DIRS=/etc/xdg
+   XDG_CONFIG_DIRS="/etc/xdg"
 fi
-if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- /usr/share/kde-power-savings-disable-in-vms/ >/dev/null 2>/dev/null ; then
+if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- "/usr/share/kde-power-savings-disable-in-vms/" >/dev/null 2>/dev/null ; then
    export XDG_CONFIG_DIRS="/usr/share/kde-power-savings-disable-in-vms/:$XDG_CONFIG_DIRS"
 fi
 
@@ -72,14 +70,12 @@ if [ "$(id -u)" = "0" ]; then
 fi
 
 if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-   if ! command -v xset >/dev/null ; then
+   if ! command -v xset >/dev/null 2>/dev/null ; then
       true "$0: xset unavailable. Exiting."
       exit 0
    fi
-   timeout_wrapper xset s off
-   true "$0: exit code: $?"
-   timeout_wrapper xset -dpms
-   true "$0: exit code: $?"
+   timeout_wrapper xset s off || true
+   timeout_wrapper xset -dpms || true
 elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
    true "$0: wayland support not implemented. Exiting."
    return 0
