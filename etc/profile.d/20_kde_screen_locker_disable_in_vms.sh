@@ -46,6 +46,6 @@ if [ -z "$XDG_CONFIG_DIRS" ]; then
    XDG_CONFIG_DIRS="/etc/xdg"
 fi
 
-if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- "/usr/share/kde-screen-locker-disable-in-vms/" >/dev/null 2>/dev/null ; then
-   export XDG_CONFIG_DIRS="/usr/share/kde-screen-locker-disable-in-vms/:$XDG_CONFIG_DIRS"
-fi
+# if ! printf '%s\n' "$XDG_CONFIG_DIRS" | grep -- "/usr/share/kde-screen-locker-disable-in-vms/" >/dev/null 2>/dev/null ; then
+#    export XDG_CONFIG_DIRS="/usr/share/kde-screen-locker-disable-in-vms/:$XDG_CONFIG_DIRS"
+# fi
