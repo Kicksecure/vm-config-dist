@@ -15,8 +15,8 @@ if [ "$XDG_SESSION_TYPE" = "tty" ]; then
    exit 0
 fi
 
-if ! tty 2>/dev/null | grep -- "/dev/tty" >/dev/null 2>/dev/null ; then
-   true "$0: INFO: Not running inside tty. Stop."
+if tty 2>/dev/null | grep -- "/dev/tty" >/dev/null 2>/dev/null ; then
+   true "$0: INFO: Running inside tty. Stop."
    return 0
    exit 0
 fi
