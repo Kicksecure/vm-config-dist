@@ -1,3 +1,39 @@
+commit 17e28122ed96d448fc243d561843456f2b9f79d6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 28 08:33:17 2025 -0400
+
+    fix
+
+commit 72d9fffdfb4e9b476635e9da96a72d7e64d81dd2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 28 08:30:48 2025 -0400
+
+    no longer disable KDE screensaver by default in VMs
+    
+    reasons:
+    
+    - KDE only
+    - missing implementation with main supported desktop environment (Xfce at time of writing)
+    - inconsistent versus systemcheck notifying about autologin check and user account password check
+
+commit 8c3bc4f88ec5d7ba02217322f3e8237aa8b1cffb
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 28 08:29:37 2025 -0400
+
+    minor
+
+commit ab62db28ce256295d741269bf6ff8efb2c701064
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 28 08:26:55 2025 -0400
+
+    fix
+
+commit 7afb5a49f02da87bdd8c658f66ec3fcf796b1881
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed May 21 14:35:25 2025 +0000
+
+    bumped changelog version
+
 commit 64229041f11fac00c7840f8c528c5c3baa30771f
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed May 21 09:23:13 2025 -0400
