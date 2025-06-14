@@ -14,12 +14,14 @@ black screen. Therefore it makes sense to disable power savings in VMs.
 `/usr/share/kde-power-savings-disable-in-vms/kdedrc`
 `/usr/share/kde-screen-locker-disable-in-vms/kscreenlockerrc`
 
-Disables screen locker when running in VMs because that is not useful either.
+Optional: Disables screen locker when running in VMs because that is not
+useful either. This feature can be enabled in file:
+`/etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms.sh`
 
 Makes setting up a shared folder for virtual machines a bit easier.
 
 * Creates a folder `/mnt/shared` with `chmod 777`, adds a group
-"vboxsf", adds user "user" to group "vboxsf". Facilitates auto-mounting of
+"vboxsf", adds account "user" to group "vboxsf". Facilitates auto-mounting of
 shared folders.
 
 * Helps using shared folders with VirtualBox and KVM a bit
