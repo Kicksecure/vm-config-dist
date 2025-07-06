@@ -1,0 +1,58 @@
+#!/bin/bash
+
+## Copyright (C) 2012 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+source /usr/libexec/helper-scripts/as_root.sh
+
+shared_folder_users=( 'user' 'sysmaint' )
+
+main() {
+  local virt_type shared_folder_group account_name target_group_id
+
+  virt_type="${1:-}"
+  case "${virt_type}" in
+    kvm) shared_folder_group='kvmsf';;
+    vbox) shared_folder_group='vboxsf';;
+    *)
+      printf '%s\n' "ERROR: Unknown virtualization type '${virt_type}'!"
+      exit 1
+      ;;
+  esac
+
+  ## Create group for shared folder permissions and add appropriate users to
+  ## it if needed
+  if ! accountctl "${shared_folder_group}" is-group; then
+    /usr/sbin/addgroup "${shared_folder_group}"
+  fi
+  for account_name in "${shared_folder_users[@]}"; do
+    if accountctl "${account_name}" is-user; then
+      /usr/sbin/adduser "${account_name}" "${shared_folder_group}"
+    fi
+  done
+
+  ## Create shared folder.
+  # shellcheck disable=SC2174
+  mkdir --parents /mnt/shared --mode 775 || exit 1
+  chown "root:${shared_folder_group}" /mnt/shared || exit 1
+
+  ## Mount the shared folder.
+  case "${virt_type}" in
+    kvm)
+      ## QEMU 9pfs does not respect uid, gid, or umask parameters.
+      mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true
+      ;;
+    vbox)
+      target_group_id="$(accountctl vboxsf get-entry group gid)"
+      mount -t vboxsf -o uid=0,gid="${target_group_id}",umask=0007 shared /mnt/shared
+      ;;
+  esac
+}
+
+as_root
+main "$@"

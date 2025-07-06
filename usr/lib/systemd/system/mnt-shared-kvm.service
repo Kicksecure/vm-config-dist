@@ -15,8 +15,7 @@ After=local-fs.target
 [Service]
 Type=oneshot
 ## TODO: https://www.kicksecure.com/wiki/Noexec
-ExecStartPre=/bin/bash -c 'mkdir --mode 777 --parents /mnt/shared || true'
-ExecStart=/bin/bash -c '/bin/mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true'
+ExecStart=/usr/libexec/vm-config-dist/mount-shared kvm
 RemainAfterExit=yes
 
 [Install]

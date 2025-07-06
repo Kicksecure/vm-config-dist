@@ -15,9 +15,8 @@ After=local-fs.target
 Type=oneshot
 ## VirtualBox Guest Additions should create the group and add account,
 ## but it is being done here to avoid any dependencies.
-## TODO: make sure account "user" exists.
 ## TODO: https://www.kicksecure.com/wiki/Noexec
-ExecStart=/bin/bash -c 'set -x && mkdir --mode 777 --parents /mnt/shared && /usr/sbin/addgroup vboxsf && /usr/sbin/adduser user vboxsf || true'
+ExecStart=/usr/libexec/vm-config-dist/mount-shared vbox
 
 RemainAfterExit=yes
 
