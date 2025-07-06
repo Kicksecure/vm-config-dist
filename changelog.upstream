@@ -1,3 +1,28 @@
+commit a306eb91676560b74c37dc447bbced7e20db4f82
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jul 6 12:13:58 2025 -0400
+
+    remove unicode
+
+commit 004dc6c314378801bec80688654328414b23e026
+Merge: 8b279f4 e69c4ce
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jul 6 12:08:34 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/screen-lock'
+
+commit e69c4ce53edcc7be7c65d5370c01d80a63c11308
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jul 1 16:20:36 2025 -0500
+
+    Add XScreenSaver configuration for VMs
+
+commit 8b279f4546e029a14c897dccb2dd357a5061ea54
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jun 14 12:02:08 2025 +0000
+
+    bumped changelog version
+
 commit e093a8f4edc28ddd0e57c351c164281fc486315d
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Jun 14 07:59:44 2025 -0400
