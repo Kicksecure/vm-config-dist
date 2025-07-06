@@ -33,6 +33,8 @@
 ! screensaver from automatically kicking in a screensaver from kicking in and
 ! consuming CPU power.
 !
+! Removed unicode.
+!
 ! The rest of this file is identical to the
 ! /etc/X11/app-defaults/XScreenSaver-nogl file from Debian 12.
 *mode:			off
@@ -667,10 +669,10 @@ XScreenSaver.bourneShell:		/bin/sh
 *hacks.memscroller.name:    Mem Scroller
 *hacks.metaballs.name:      Meta Balls
 *hacks.mirrorblob.name:     Mirror Blob
-*hacks.moebius.name:        Möbius
-*hacks.moebiusgears.name:   Möbius Gears
-*hacks.moire.name:          Moiré
-*hacks.moire2.name:         Moiré 2
+*hacks.moebius.name:        Moebius
+*hacks.moebiusgears.name:   Moebius Gears
+*hacks.moire.name:          Moire
+*hacks.moire2.name:         Moire 2
 *hacks.morph3d.name:        Morph 3D
 *hacks.nerverot.name:       Nerve Rot
 *hacks.noseguy.name:        Nose Guy
