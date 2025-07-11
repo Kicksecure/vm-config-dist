@@ -1,3 +1,28 @@
+commit 204d3e641d72c51c05d1a5725a0164653349b5bd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jul 11 10:53:45 2025 -0400
+
+    fix
+
+commit 929e52ead9efcb08d42ec665af5c6d98600b99c0
+Merge: fef6fcf e88414a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jul 11 08:08:37 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/enhance'
+
+commit e88414a81a9b966d06c5d3ffd664db837a0958dc
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Jul 6 15:05:11 2025 -0500
+
+    Refactor/unbreak automatic shared folder mounting, harden permissions on shared folders
+
+commit fef6fcfdbd66fe995d67e183660bb255e7a71d3a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jul 6 16:14:35 2025 +0000
+
+    bumped changelog version
+
 commit a306eb91676560b74c37dc447bbced7e20db4f82
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Jul 6 12:13:58 2025 -0400
