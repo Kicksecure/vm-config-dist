@@ -49,7 +49,7 @@ main() {
       ;;
     vbox)
       target_group_id="$(accountctl vboxsf get-entry group gid)"
-      mount -t vboxsf -o uid=0,gid="${target_group_id}",umask=0007 shared /mnt/shared
+      mount -t vboxsf -o uid=0,gid="${target_group_id}",umask=0007 shared /mnt/shared || true
       ;;
   esac
 }
