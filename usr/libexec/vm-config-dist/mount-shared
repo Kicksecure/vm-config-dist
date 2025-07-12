@@ -38,7 +38,7 @@ main() {
 
   ## Create shared folder.
   # shellcheck disable=SC2174
-  mkdir --parents /mnt/shared --mode 775 || exit 1
+  mkdir --parents /mnt/shared --mode 770 || exit 1
   chown "root:${shared_folder_group}" /mnt/shared || exit 1
 
   ## Mount the shared folder.
