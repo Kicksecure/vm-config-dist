@@ -1,3 +1,22 @@
+commit 6b629f2542614cd9107023041b18deb2feabf3ef
+Merge: 1a1e8d8 93e0102
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 24 02:18:20 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/enhance'
+
+commit 93e01025a67867d987bd7001d67475afa8d783d6
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Jul 23 19:49:31 2025 -0500
+
+    Silence stderr from accountctl when necessary
+
+commit 1a1e8d86000823d881e45c48dd51c01e3c511ab9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jul 12 07:17:27 2025 +0000
+
+    bumped changelog version
+
 commit 45b7e15db1b5fae1fee08a5f4cbbc81b51299a22
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Jul 12 02:58:04 2025 -0400
