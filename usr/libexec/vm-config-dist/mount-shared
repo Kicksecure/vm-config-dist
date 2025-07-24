@@ -27,11 +27,11 @@ main() {
 
   ## Create group for shared folder permissions and add appropriate users to
   ## it if needed
-  if ! accountctl "${shared_folder_group}" is-group; then
+  if ! accountctl "${shared_folder_group}" is-group 2>/dev/null; then
     /usr/sbin/addgroup "${shared_folder_group}"
   fi
   for account_name in "${shared_folder_users[@]}"; do
-    if accountctl "${account_name}" is-user; then
+    if accountctl "${account_name}" is-user 2>/dev/null; then
       /usr/sbin/adduser "${account_name}" "${shared_folder_group}"
     fi
   done
