@@ -1,3 +1,34 @@
+commit deac427a9fab44e8f48c36a7ffd92d0559dc89ba
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 08:47:54 2025 -0400
+
+    --no-clobber
+
+commit 540c3fb959e739db4a7b92a0d054b7814f7526dc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 08:47:20 2025 -0400
+
+    end-of-options
+
+commit 2d728aee6c0532cefa6a825d99cfb96b961cf249
+Merge: 844b12e 5b36325
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 08:46:52 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/shared-folder-readme'
+
+commit 5b363258c864307d447bc6b2de8d5e388aefe826
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Jul 29 21:32:30 2025 -0500
+
+    Add shared folder README, add shared folder shortcut to Thunar
+
+commit 844b12e904da7737bbc6fd4a5ba20fd27ffde0f4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Jul 24 06:46:36 2025 +0000
+
+    bumped changelog version
+
 commit 6b629f2542614cd9107023041b18deb2feabf3ef
 Merge: 1a1e8d8 93e0102
 Author: Patrick Schleizer <adrelanos@whonix.org>
