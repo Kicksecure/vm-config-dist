@@ -44,12 +44,12 @@ main() {
   ## Copy the appropriate README file, and mount the shared folder if possible.
   case "${virt_type}" in
     kvm)
-      cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-kvm-README.md /mnt/shared/README.md
+      cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-kvm-README.md /mnt/shared/README.md || true
       ## QEMU 9pfs does not respect uid, gid, or umask parameters.
       mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true
       ;;
     vbox)
-      cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-vbox-README.md /mnt/shared/README.md
+      cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-vbox-README.md /mnt/shared/README.md || true
       target_group_id="$(accountctl vboxsf get-entry group gid)"
       mount -t vboxsf -o uid=0,gid="${target_group_id}",umask=0007 shared /mnt/shared || true
       ;;
