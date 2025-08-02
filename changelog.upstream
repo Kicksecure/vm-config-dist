@@ -1,3 +1,21 @@
+commit 767506b49a3d4221b3356331f76a942b1b92dbd4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 08:57:47 2025 -0400
+
+    || true
+
+commit 989dcb80a6cb3edfae1ebb22ed9fffdfcb1ce35d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 08:57:16 2025 -0400
+
+    move file to fix lintian warning
+
+commit 47cb434fd17fe79ffba196830f4bf7557b07aef3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Aug 2 12:54:02 2025 +0000
+
+    bumped changelog version
+
 commit deac427a9fab44e8f48c36a7ffd92d0559dc89ba
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Aug 2 08:47:54 2025 -0400
