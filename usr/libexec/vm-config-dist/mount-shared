@@ -32,7 +32,7 @@ main() {
   fi
   for account_name in "${shared_folder_users[@]}"; do
     if accountctl "${account_name}" is-user 2>/dev/null; then
-      /usr/sbin/adduser "${account_name}" "${shared_folder_group}"
+      /usr/sbin/adduser "${account_name}" "${shared_folder_group}" 2>/dev/null || true
     fi
   done
 
