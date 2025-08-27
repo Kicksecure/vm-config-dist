@@ -1,8 +1,41 @@
+commit e98f5372f76b2151b2a1d26ed6333d39a87a50fa
+Merge: 2ea8795 4ad50e7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Aug 27 13:06:20 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 4ad50e7837d30c0ecdaa9616ba5ff56d09cd00b7
+Merge: 95e91eb 2ea8795
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Aug 26 19:23:14 2025 -0500
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit 2ea8795b574eaff76c3ddc6796bfd61e719067a7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Aug 26 09:27:03 2025 +0000
+
+    bumped changelog version
+
 commit 2ff1c58c94d9cbecbcee9a8c59876a7f30e8369b
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Aug 26 05:27:02 2025 -0400
 
     re-generate man pages (generated using "genmkfile manpages")
+
+commit 95e91eb0c470a5198944bc5d0b84548aa6197d68
+Merge: 19509fd e70434c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Aug 21 20:23:28 2025 -0500
+
+    Merge branch 'master' into arraybolt3/trixie
+
+commit 19509fd21f7492f051ceb0b77dc537947ceb7804
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Aug 21 18:55:51 2025 -0500
+
+    Add TODO, fix XDG handling
 
 commit e70434c370c059ad1a5a313cc627a9cc47c9486d
 Merge: 82f214a 70efd23
