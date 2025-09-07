@@ -1,1 +1,2 @@
 /etc/gdm3/daemon.conf.dist
+/usr/bin/spice-vdagent.dist
