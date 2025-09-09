@@ -1,3 +1,22 @@
+commit 0eb2939b930762b7c07a6f931fb3d7c5577e7a7c
+Merge: 7761f0a 4fa7956
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 9 11:51:04 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 4fa7956c2c0cd251136b0f10e99506bfa1c8bd90
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Sep 7 17:10:18 2025 -0500
+
+    Fix AC97 audio speed
+
+commit 7761f0aabb5b4932cbe760e4a00b3b84dbffb1c3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Sep 7 08:06:38 2025 +0000
+
+    bumped changelog version
+
 commit f48ff048fcb3b90178ab31b98872de8657f41aeb
 Merge: 6aee863 19a4d0a
 Author: Patrick Schleizer <adrelanos@whonix.org>
