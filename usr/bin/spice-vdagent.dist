@@ -3,7 +3,7 @@
 ## Copyright (C) 2020 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
-if ! command -v spice-vdagent.real >/dev/null 2>/dev/null; then
+if ! command -v spice-vdagent.dist-orig >/dev/null 2>/dev/null; then
   echo 'Please install the spice-vdagent package to use this tool.'
   exit 1
 fi
