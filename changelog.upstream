@@ -1,3 +1,22 @@
+commit 2f0c37181f86ff321f7045f74930886c5cfceb66
+Merge: d7a93b0 048c205
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 1 05:40:11 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 048c20508e5ba55c8aa602292b62ed4403cf736e
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Sep 28 20:21:43 2025 -0500
+
+    Fix spice-vdagent wrapper
+
+commit d7a93b044a8572301954d44c617a4a713aed8681
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Sep 19 16:23:52 2025 +0000
+
+    bumped changelog version
+
 commit dd64220f912784f0f97c01917e227d15820c0f6a
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Thu Sep 18 10:08:35 2025 -0400
