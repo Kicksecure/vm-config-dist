@@ -1,0 +1,10 @@
+#!/usr/bin/python3 -su
+
+# Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+# See the file COPYING for copying conditions.
+
+import sys
+sys.dont_write_bytecode = True
+
+from wlr_resize_watcher import wlr_resize_watcher
+wlr_resize_watcher.main()

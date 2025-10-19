@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Virtual display resize helper
+Exec=/usr/bin/wlr-resize-watcher
+StartupNotify=false
+NoDisplay=true
