@@ -3,6 +3,15 @@
 # Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
 # See the file COPYING for copying conditions.
 
+# pylint: disable=broad-exception-caught
+
+"""
+wlr_resize_watcher.py - Watches for changes to the native display resolution
+of all displays attached to all graphics cards on the system, and instructs
+the Wayland compositor to change the display resolution for that display to
+match. This allows dynamic resolution changes to work in VirtualBox and KVM.
+"""
+
 import sys
 import re
 import time
@@ -10,15 +19,8 @@ import os
 import subprocess
 import traceback
 from pathlib import Path
-from typing import Pattern
-import pyudev
-
-"""
-disp_resize_watcher.py - Watches for changes to the native display resolution
-of all displays attached to all graphics cards on the system, and instructs
-the Wayland compositor to change the display resolution for that display to
-match. This allows dynamic resolution changes to work in VirtualBox and KVM.
-"""
+from typing import Pattern, NoReturn
+import pyudev # type: ignore
 
 drm_match_re: Pattern[str] = re.compile(r".*/drm/card\d+$")
 card_match_re: Pattern[str] = re.compile(r"^card\d+$")
@@ -27,7 +29,12 @@ whitespace_start_re: Pattern[str] = re.compile(r"^\s+")
 modes_re: Pattern[str] = re.compile(r"\s+Modes:$")
 current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
 
+# pylint: disable=too-few-public-methods
 class DisplayInfo:
+    """
+    Stores the name and resolution associated with a display.
+    """
+
     def __init__(self, disp_name: str, disp_mode: str) -> None:
         self.disp_name = disp_name
         self.disp_mode = disp_mode
@@ -48,6 +55,7 @@ def get_udev_card_event(udev_mon: pyudev.Monitor) -> str:
     assert card_name is not None
     return card_name
 
+# pylint: disable=too-many-branches
 def get_compositor_disp_list() -> list[DisplayInfo] | None:
     """
     Gets all displays that the compositor currently sees, along with their
@@ -290,7 +298,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                 )
                 traceback.print_exc(file=sys.stderr)
 
-def main():
+def main() -> NoReturn:
     """
     Main function.
     """
