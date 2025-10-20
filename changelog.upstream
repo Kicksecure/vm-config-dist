@@ -1,3 +1,40 @@
+commit 7f4b471fd4ac3661955cab10a26ecc098d03f59c
+Merge: a627750 082aa5c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 10:44:38 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 082aa5cf3fc0e9eeebd89638f2abd4c930b92111
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 20:11:10 2025 -0500
+
+    Make wlr_resize_watcher.py valid as a standalone Python executable
+
+commit e58c9498adabd659fc9c5dd99fcea8620fb108bd
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 19:51:02 2025 -0500
+
+    Cleanup, blacken wlr_resize_watcher
+
+commit ee4e7d1b7a48fdba59a1fc8bd8fdab116b2fe48c
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 18:55:27 2025 -0500
+
+    Fix wlr_resize_watcher mypy and pylint gripes
+
+commit bbc2633fe329229465ac7ab87bc08eef0e01e6a3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 19 14:10:14 2025 -0500
+
+    Add tool for dynamic resolution resizing on wlroots-based compositors
+
+commit a62775034a22fe9e5544a2c894e1118ac7c61685
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 1 09:43:32 2025 +0000
+
+    bumped changelog version
+
 commit 2f0c37181f86ff321f7045f74930886c5cfceb66
 Merge: d7a93b0 048c205
 Author: Patrick Schleizer <adrelanos@whonix.org>
