@@ -20,7 +20,7 @@ import subprocess
 import traceback
 from pathlib import Path
 from typing import Pattern, NoReturn
-import pyudev # type: ignore
+import pyudev  # type: ignore
 
 drm_match_re: Pattern[str] = re.compile(r".*/drm/card\d+$")
 card_match_re: Pattern[str] = re.compile(r"^card\d+$")
@@ -28,6 +28,7 @@ disp_match_re: Pattern[str] = re.compile(r"^card\d+-.*$")
 whitespace_start_re: Pattern[str] = re.compile(r"^\s+")
 modes_re: Pattern[str] = re.compile(r"\s+Modes:$")
 current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
+
 
 # pylint: disable=too-few-public-methods
 class DisplayInfo:
@@ -38,6 +39,7 @@ class DisplayInfo:
     def __init__(self, disp_name: str, disp_mode: str) -> None:
         self.disp_name = disp_name
         self.disp_mode = disp_mode
+
 
 def get_udev_card_event(udev_mon: pyudev.Monitor) -> str:
     """
@@ -55,6 +57,7 @@ def get_udev_card_event(udev_mon: pyudev.Monitor) -> str:
     assert card_name is not None
     return card_name
 
+
 # pylint: disable=too-many-branches
 def get_compositor_disp_list() -> list[DisplayInfo] | None:
     """
@@ -70,7 +73,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
             },
             check=True,
             capture_output=True,
-            encoding="utf-8"
+            encoding="utf-8",
         ).stdout.split("\n")
     except Exception:
         print(
@@ -153,18 +156,8 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
         if current_mode_re.match(line_parts[4]):
             disp_mode = line_parts[0]
 
-    ## Append the last display, it will be left over from the loop
-    #if disp_name is None or disp_mode is None:
-    #    print(
-    #        "FATAL ERROR: Unable to find active display mode for "
-    #        "a screen in wlr-randr output! wlr-randr output:",
-    #        file=sys.stderr,
-    #    )
-    #    print(f"{"\n".join(wlr_randr_lines)}", file=sys.stderr)
-    #    sys.exit(1)
-    #out_list.append(DisplayInfo(disp_name, disp_mode))
-
     return out_list
+
 
 def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
     """
@@ -178,9 +171,9 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
         try:
             card_path: Path = Path(f"/sys/class/drm/{card}")
             disp_list: list[str] = [
-                x.name for x in card_path.iterdir()
-                if x.is_dir()
-                and disp_match_re.match(x.name)
+                x.name
+                for x in card_path.iterdir()
+                if x.is_dir() and disp_match_re.match(x.name)
             ]
         except FileNotFoundError:
             ## This will happen if the card no longer exists. We don't
@@ -208,9 +201,11 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
                 display_modes_path: Path = Path(
                     f"/sys/class/drm/{card}/{display}/modes"
                 )
-                display_modes_lines: list[str] = display_modes_path.read_text(
-                    encoding="utf-8"
-                ).strip().split("\n")
+                display_modes_lines: list[str] = (
+                    display_modes_path.read_text(encoding="utf-8")
+                    .strip()
+                    .split("\n")
+                )
                 if (
                     len(display_modes_lines) == 1
                     and display_modes_lines[0] == ""
@@ -253,16 +248,14 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
             )
             sys.exit(1)
         real_card_list = [
-            x.name for x in drm_path.iterdir()
-            if x.is_dir()
-            and card_match_re.match(x.name)
+            x.name
+            for x in drm_path.iterdir()
+            if x.is_dir() and card_match_re.match(x.name)
         ]
     else:
         real_card_list = [card_name]
 
-    compositor_disp_list: list[DisplayInfo] | None = (
-        get_compositor_disp_list()
-    )
+    compositor_disp_list: list[DisplayInfo] | None = get_compositor_disp_list()
     if compositor_disp_list is None:
         return
 
@@ -298,6 +291,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                 )
                 traceback.print_exc(file=sys.stderr)
 
+
 def main() -> NoReturn:
     """
     Main function.
@@ -327,7 +321,7 @@ def main() -> NoReturn:
     try:
         udev_ctx: pyudev.Context = pyudev.Context()
         udev_mon: pyudev.Monitor = pyudev.Monitor.from_netlink(udev_ctx)
-        udev_mon.filter_by('drm')
+        udev_mon.filter_by("drm")
     except Exception:
         print(
             "FATAL ERROR: Cannot listen for DRM udev events!",
