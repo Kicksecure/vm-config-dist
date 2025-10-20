@@ -336,3 +336,6 @@ def main() -> NoReturn:
         mod_card: str = get_udev_card_event(udev_mon)
         time.sleep(0.5)
         sync_hw_resolution_with_compositor(mod_card)
+
+if __name__ == "__main__":
+    main()
