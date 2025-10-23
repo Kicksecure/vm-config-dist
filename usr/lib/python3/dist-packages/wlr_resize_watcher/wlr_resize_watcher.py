@@ -292,6 +292,28 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                 traceback.print_exc(file=sys.stderr)
 
 
+def executable_exists_and_is_running(exe_name: str) -> int:
+    """
+    Checks if the specified executable exists and is actively running. Note
+    that this will give a false negative if an executable was executed from a
+    relative path when an absolute path was provided, or vice versa. It may
+    also fail if the executable name contains characters that pgrep considers
+    part of a regex, thus it should not be run with untrusted input.
+
+    Returns 0 on success, 1 if the executable is missing, 2 if the executable
+    is not running.
+    """
+
+    if not Path(exe_name).is_file():
+        return 1
+    if not subprocess.run(
+        ["/usr/bin/pgrep", "-f", f"^{exe_name}( |$)"],
+        check=False,
+    ).returncode == 0:
+        return 2
+    return 0
+
+
 def main() -> NoReturn:
     """
     Main function.
@@ -317,6 +339,62 @@ def main() -> NoReturn:
     ## Note that we always assume that the desired display frequency is 60 Hz.
     ## This may not always hold true for physical screens, but should be fine
     ## for virtual displays.
+
+    try:
+        hypervisor_str: str = subprocess.run(
+            ["/usr/bin/systemd-detect-virt"],
+            check=True,
+            capture_output=True,
+            encoding="utf-8",
+        ).stdout.strip()
+        if hypervisor_str == "oracle":
+            found_drm_client: int = executable_exists_and_is_running(
+                "/usr/bin/VBoxDRMClient"
+            )
+            if found_drm_client == 1:
+                print(
+                    "FATAL ERROR: VBoxDRMClient is missing!",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            if found_drm_client == 2:
+                print(
+                    "FATAL ERROR: VBoxDRMClient is not running!",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+
+        elif hypervisor_str == "kvm":
+            found_spice_vdagentd: int = executable_exists_and_is_running(
+                "/usr/bin/spice-vdagentd"
+            )
+            if found_spice_vdagentd == 1:
+                print(
+                    "FATAL ERROR: spice-vdagentd is missing!",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+            if found_spice_vdagentd == 2:
+                print(
+                    "FATAL ERROR: spice-vdagentd is not running!",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+
+        else:
+            print(
+                "Running on an unsupported hypervisor. Exiting.",
+                file=sys.stderr,
+            )
+            sys.exit(0)
+
+    except Exception:
+        print(
+            "FATAL ERROR: Cannot detect virtualizer in use!",
+            file=sys.stderr,
+        )
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
 
     try:
         udev_ctx: pyudev.Context = pyudev.Context()
