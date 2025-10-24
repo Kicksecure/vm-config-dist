@@ -309,6 +309,7 @@ def executable_exists_and_is_running(exe_name: str) -> int:
     if not subprocess.run(
         ["/usr/bin/pgrep", "-f", f"^{exe_name}( |$)"],
         check=False,
+        capture_output=True,
     ).returncode == 0:
         return 2
     return 0
