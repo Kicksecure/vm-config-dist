@@ -1,3 +1,22 @@
+commit 1028c7d5669e98d3cff6bb72a9eadb7947a8b524
+Merge: 37a409a 166a3e1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 24 00:23:58 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 166a3e13a2ad1369265aed7f23e3a7ae21cdea89
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 23 18:20:17 2025 -0500
+
+    Add hypervisor-specific graphics helper checks to wlr_resize_watcher
+
+commit 37a409a75b45c13bc5ba8c4d8e9326684e8e1627
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 20 14:52:39 2025 +0000
+
+    bumped changelog version
+
 commit 7f4b471fd4ac3661955cab10a26ecc098d03f59c
 Merge: a627750 082aa5c
 Author: Patrick Schleizer <adrelanos@whonix.org>
