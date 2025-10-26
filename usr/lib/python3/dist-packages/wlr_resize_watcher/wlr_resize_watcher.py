@@ -77,7 +77,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
         ).stdout.split("\n")
     except Exception:
         print(
-            "FATAL ERROR: Could not get list of displays from compositor!",
+            "ERROR: Could not get list of displays from compositor!",
             file=sys.stderr,
         )
         traceback.print_exc(file=sys.stderr)
@@ -98,7 +98,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
         if idx == 0:
             if whitespace_start_re.match(line):
                 print(
-                    "FATAL ERROR: Unexpected whitespace on first line of "
+                    "ERROR: Unexpected whitespace on first line of "
                     "wlr-randr output! wlr-randr output:",
                     file=sys.stderr,
                 )
@@ -110,7 +110,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
         if not whitespace_start_re.match(line):
             if disp_name is None or disp_mode is None:
                 print(
-                    "FATAL ERROR: Unable to find active display mode for "
+                    "ERROR: Unable to find active display mode for "
                     "a screen in wlr-randr output! wlr-randr output:",
                     file=sys.stderr,
                 )
@@ -143,7 +143,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
         line_parts: list[str] = line.strip().split(" ", maxsplit=4)
         if len(line_parts) < 4:
             print(
-                "FATAL ERROR: Too few fields in wlr-randr mode "
+                "ERROR: Too few fields in wlr-randr mode "
                 "specification! wlr-randr output:",
                 file=sys.stderr,
             )
@@ -181,7 +181,7 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
             continue
         except Exception:
             print(
-                "FATAL ERROR: Cannot enumerate displays from a graphics card!",
+                "ERROR: Cannot enumerate displays from a graphics card!",
                 file=sys.stderr,
             )
             traceback.print_exc(file=sys.stderr)
@@ -191,7 +191,7 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
             display_name_list: list[str] = display.split("-", maxsplit=1)
             if len(display_name_list) != 2:
                 print(
-                    f"FATAL ERROR: Bug in parsing display ID '{display}'!",
+                    f"ERROR: Bug in parsing display ID '{display}'!",
                     file=sys.stderr,
                 )
                 sys.exit(1)
@@ -219,7 +219,7 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
                 continue
             except Exception:
                 print(
-                    "FATAL ERROR: Cannot read mode information for a display!",
+                    "ERROR: Cannot read mode information for a display!",
                     file=sys.stderr,
                 )
                 traceback.print_exc(file=sys.stderr)
@@ -242,7 +242,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
         drm_path: Path = Path("/sys/class/drm")
         if not drm_path.is_dir():
             print(
-                "FATAL ERROR: /sys/class/drm does not exist or is not a "
+                "ERROR: /sys/class/drm does not exist or is not a "
                 "directory!",
                 file=sys.stderr,
             )
@@ -309,6 +309,7 @@ def executable_exists_and_is_running(exe_name: str) -> int:
     if not subprocess.run(
         ["/usr/bin/pgrep", "-f", f"^{exe_name}( |$)"],
         check=False,
+        capture_output=True,
     ).returncode == 0:
         return 2
     return 0
@@ -353,16 +354,14 @@ def main() -> NoReturn:
             )
             if found_drm_client == 1:
                 print(
-                    "FATAL ERROR: VBoxDRMClient is missing!",
+                    "WARNING: VBoxDRMClient is missing!",
                     file=sys.stderr,
                 )
-                sys.exit(1)
             if found_drm_client == 2:
                 print(
-                    "FATAL ERROR: VBoxDRMClient is not running!",
+                    "WARNING: VBoxDRMClient is not running!",
                     file=sys.stderr,
                 )
-                sys.exit(1)
 
         elif hypervisor_str == "kvm":
             found_spice_vdagentd: int = executable_exists_and_is_running(
@@ -370,31 +369,27 @@ def main() -> NoReturn:
             )
             if found_spice_vdagentd == 1:
                 print(
-                    "FATAL ERROR: spice-vdagentd is missing!",
+                    "WARNING: spice-vdagentd is missing!",
                     file=sys.stderr,
                 )
-                sys.exit(1)
             if found_spice_vdagentd == 2:
                 print(
-                    "FATAL ERROR: spice-vdagentd is not running!",
+                    "WARNING: spice-vdagentd is not running!",
                     file=sys.stderr,
                 )
-                sys.exit(1)
 
         else:
             print(
-                "Running on an unsupported hypervisor. Exiting.",
+                "WARNING: Running on an unsupported hypervisor!",
                 file=sys.stderr,
             )
-            sys.exit(0)
 
     except Exception:
         print(
-            "FATAL ERROR: Cannot detect virtualizer in use!",
+            "WARNING: Cannot detect virtualizer in use!",
             file=sys.stderr,
         )
         traceback.print_exc(file=sys.stderr)
-        sys.exit(1)
 
     try:
         udev_ctx: pyudev.Context = pyudev.Context()
@@ -402,7 +397,7 @@ def main() -> NoReturn:
         udev_mon.filter_by("drm")
     except Exception:
         print(
-            "FATAL ERROR: Cannot listen for DRM udev events!",
+            "ERROR: Cannot listen for DRM udev events!",
             file=sys.stderr,
         )
         traceback.print_exc(file=sys.stderr)
