@@ -14,7 +14,8 @@ Rules-Requires-Root: no
 
 Package: vm-config-dist
 Architecture: all
-Depends: sudo, adduser, 7zip, helper-scripts, python3, ${misc:Depends}
+Depends: sudo, adduser, 7zip, helper-scripts, python3,
+ python3-pyudev, ${misc:Depends}
 Replaces: power-savings-disable-in-vms, shared-folder-help
 Description: usability enhancements inside virtual machines
  Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
