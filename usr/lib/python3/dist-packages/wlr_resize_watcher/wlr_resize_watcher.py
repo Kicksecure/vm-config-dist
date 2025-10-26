@@ -315,6 +315,104 @@ def executable_exists_and_is_running(exe_name: str) -> int:
     return 0
 
 
+def set_all_displays_resolution_to_default() -> None:
+    """
+    Sets the screen resolution of all displays to a default (hardcoded) value,
+    currently 1920x1080.
+    """
+
+    disp_list: list[DisplayInfo] | None = get_compositor_disp_list()
+    hardcoded_res: str = "1920x1080"
+
+    if disp_list is None:
+        return
+    for disp in disp_list:
+        try:
+            subprocess.run(
+                [
+                    "/usr/bin/wlr-randr",
+                    "--output",
+                    disp.disp_name,
+                    "--custom-mode",
+                    f"{hardcoded_res}@60",
+                ],
+                check=True,
+            )
+        except subprocess.CalledProcessError:
+            print(
+                "WARNING: Unable to set default display resolution for "
+                f"display '{disp.disp_name}'!",
+                file=sys.stderr,
+            )
+            traceback.print_exc(file=sys.stderr)
+
+
+# pylint: disable=too-many-return-statements
+def check_virtualizer_helpers() -> bool:
+    """
+    Displays an error message and returns False if a needed virtualizer helper
+    is not detected.
+    """
+
+    try:
+        virtualizer_str: str = subprocess.run(
+            ["/usr/bin/systemd-detect-virt"],
+            check=True,
+            capture_output=True,
+            encoding="utf-8",
+        ).stdout.strip()
+        if virtualizer_str == "oracle":
+            found_drm_client: int = executable_exists_and_is_running(
+                "/usr/bin/VBoxDRMClient"
+            )
+            if found_drm_client == 1:
+                print(
+                    "WARNING: VBoxDRMClient is missing!",
+                    file=sys.stderr,
+                )
+                return False
+            if found_drm_client == 2:
+                print(
+                    "WARNING: VBoxDRMClient is not running!",
+                    file=sys.stderr,
+                )
+                return False
+
+        elif virtualizer_str == "kvm":
+            found_spice_vdagentd: int = executable_exists_and_is_running(
+                "/usr/bin/spice-vdagentd"
+            )
+            if found_spice_vdagentd == 1:
+                print(
+                    "WARNING: spice-vdagentd is missing!",
+                    file=sys.stderr,
+                )
+                return False
+            if found_spice_vdagentd == 2:
+                print(
+                    "WARNING: spice-vdagentd is not running!",
+                    file=sys.stderr,
+                )
+                return False
+
+        else:
+            print(
+                "WARNING: Running on an unsupported virtualizer!",
+                file=sys.stderr,
+            )
+            return False
+
+    except Exception:
+        print(
+            "WARNING: Cannot detect virtualizer in use!",
+            file=sys.stderr,
+        )
+        traceback.print_exc(file=sys.stderr)
+        return False
+
+    return True
+
+
 def main() -> NoReturn:
     """
     Main function.
@@ -341,55 +439,12 @@ def main() -> NoReturn:
     ## This may not always hold true for physical screens, but should be fine
     ## for virtual displays.
 
-    try:
-        hypervisor_str: str = subprocess.run(
-            ["/usr/bin/systemd-detect-virt"],
-            check=True,
-            capture_output=True,
-            encoding="utf-8",
-        ).stdout.strip()
-        if hypervisor_str == "oracle":
-            found_drm_client: int = executable_exists_and_is_running(
-                "/usr/bin/VBoxDRMClient"
-            )
-            if found_drm_client == 1:
-                print(
-                    "WARNING: VBoxDRMClient is missing!",
-                    file=sys.stderr,
-                )
-            if found_drm_client == 2:
-                print(
-                    "WARNING: VBoxDRMClient is not running!",
-                    file=sys.stderr,
-                )
-
-        elif hypervisor_str == "kvm":
-            found_spice_vdagentd: int = executable_exists_and_is_running(
-                "/usr/bin/spice-vdagentd"
-            )
-            if found_spice_vdagentd == 1:
-                print(
-                    "WARNING: spice-vdagentd is missing!",
-                    file=sys.stderr,
-                )
-            if found_spice_vdagentd == 2:
-                print(
-                    "WARNING: spice-vdagentd is not running!",
-                    file=sys.stderr,
-                )
-
-        else:
-            print(
-                "WARNING: Running on an unsupported hypervisor!",
-                file=sys.stderr,
-            )
-
-    except Exception:
-        print(
-            "WARNING: Cannot detect virtualizer in use!",
-            file=sys.stderr,
-        )
-        traceback.print_exc(file=sys.stderr)
+    ## If we can't find an active virtualizer helper, set all displays to a
+    ## comfortable default display resolution.
+    if not check_virtualizer_helpers():
+        set_all_displays_resolution_to_default()
+    else:
+        sync_hw_resolution_with_compositor(None)
 
     try:
         udev_ctx: pyudev.Context = pyudev.Context()
@@ -402,8 +457,6 @@ def main() -> NoReturn:
         )
         traceback.print_exc(file=sys.stderr)
         sys.exit(1)
-
-    sync_hw_resolution_with_compositor(None)
 
     while True:
         mod_card: str = get_udev_card_event(udev_mon)
