@@ -1,3 +1,21 @@
+commit b834208291c91f7b56c2f4d8f292cbcc344e9406
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 06:57:31 2025 -0400
+
+    fix: do not needlessly start `wlr-resize-watcher` in Qubes
+
+commit c73944bdc539181acb87d716cea0b24b226e10fd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 06:47:41 2025 -0400
+
+    `Depends: python3-pyudev` for `wlr-resize-watcher`
+
+commit 0eb997c10d53fcbb083e01401a86f5c0fccfd5cf
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 10:22:21 2025 +0000
+
+    bumped changelog version
+
 commit 8e1f0eb6fbf532045ec14fd061be293b8ec636cc
 Merge: 2cd7f57 b57cfa0
 Author: Patrick Schleizer <adrelanos@whonix.org>
