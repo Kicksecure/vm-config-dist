@@ -1,3 +1,28 @@
+commit 8e1f0eb6fbf532045ec14fd061be293b8ec636cc
+Merge: 2cd7f57 b57cfa0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 06:15:32 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit b57cfa0f395599ccddf10e11c60d24f0bb55d4d1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Oct 24 16:14:51 2025 -0500
+
+    Suppress unwanted PID being written to stdout in wlr-resize-watcher
+
+commit 87077a68320e24ecab063b27a41f2869d3715cde
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Oct 24 16:06:26 2025 -0500
+
+    In wlr-resize-watcher, don't error out if an expected but not necessarily essential component is missing
+
+commit 2cd7f578a90d22a583a29b2cc0c9d1e467995730
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 24 04:32:46 2025 +0000
+
+    bumped changelog version
+
 commit 1028c7d5669e98d3cff6bb72a9eadb7947a8b524
 Merge: 37a409a 166a3e1
 Author: Patrick Schleizer <adrelanos@whonix.org>
