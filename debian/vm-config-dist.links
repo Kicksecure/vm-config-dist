@@ -4,8 +4,5 @@
 /etc/profile.d/20_power_savings_disable_in_vms.sh /etc/zprofile.d/20_power_savings_disable_in_vms.zsh
 /etc/profile.d/20_power_savings_disable_in_vms.sh /etc/X11/Xsession.d/20_power_savings_disable_in_vms
 
-/etc/profile.d/20_kde_screen_locker_disable_in_vms.sh /etc/zprofile.d/20_kde_screen_locker_disable_in_vms.zsh
-/etc/profile.d/20_kde_screen_locker_disable_in_vms.sh /etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms
-
 /etc/profile.d/20_software_rendering_in_vms.sh /etc/zprofile.d/20_software_rendering_in_vms.zsh
 /etc/profile.d/20_software_rendering_in_vms.sh /etc/X11/Xsession.d/20_software_rendering_in_vms
