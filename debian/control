@@ -51,8 +51,6 @@ Description: usability enhancements inside virtual machines
  Set screen resolution 1920x1080 by default for VM in VirtualBox and KVM.
  Workaround for low screen resolution 1024x768 at first boot. When using lower
  screen resolutions, Xfce will automatically scale down.
- `/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml` TODO: This
- may no longer be the case with Wayland.
  .
  Installs VirtualBox guest additions if package
  `virtualbox-guest-additions-iso` is installed if environment variable
