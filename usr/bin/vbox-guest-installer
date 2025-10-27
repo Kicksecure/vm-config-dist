@@ -56,15 +56,15 @@ _get_newest_kernel_debian() {
         fi
 
         # if $kernel is greater than $COMPARE_TO
-        if [ `dpkg --compare-versions "$KERNEL_VERSION-$ABI" ge "$COMPARE_TO" && echo "yes" || \
-              echo "no"` = "yes" ]; then
+        if [ `dpkg --compare-versions "$KERNEL_VERSION-$ABI" ge "$COMPARE_TO" && printf '%s\n' "yes" || \
+              printf '%s\n' "no"` = "yes" ]; then
             NEWEST_KERNEL=$KERNEL
             NEWEST_VERSION=$KERNEL_VERSION
             NEWEST_ABI=$ABI
         fi
     done
 
-    echo "$NEWEST_KERNEL"
+    printf '%s\n' "$NEWEST_KERNEL"
 }
 
 ## }}}
@@ -79,12 +79,12 @@ error_handler() {
 if test -o xtrace ; then
    output_command=true
 else
-   output_command=echo
+   output_command=printf '%s\n'
 fi
 
 trap error_handler ERR
 
-echo "$0 (part of package 'vm-config-dist') INFO: This is VirtualBox guest additions from Debian package 'virtualbox-guest-additions-iso' installation helper by Kicksecure developers."
+printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: This is VirtualBox guest additions from Debian package 'virtualbox-guest-additions-iso' installation helper by Kicksecure developers."
 
 if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
@@ -93,7 +93,7 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 if ischroot --default-false ; then
-   echo "$0 INFO: chroot detected."
+   printf '%s\n' "$0 INFO: chroot detected."
    ## /opt/VBoxGuestAdditions-6.1.18/init/vboxadd uses:
    # test -z "${TARGET_VER}" && TARGET_VER=`uname -r`
    #
@@ -111,9 +111,9 @@ if ischroot --default-false ; then
    ## Hence, manually setting to correct version.
    TARGET_VER="$(_get_newest_kernel_debian)"
    export TARGET_VER
-   echo "$0 INFO: chroot detected. Therefore: export TARGET_VER='$TARGET_VER'"
+   printf '%s\n' "$0 INFO: chroot detected. Therefore: export TARGET_VER='$TARGET_VER'"
    if [ "$TARGET_VER" = "" ]; then
-      echo "$0 ERROR: variable TARGET_VER is empty. Failing closed. Exit error."
+      printf '%s\n' "$0 ERROR: variable TARGET_VER is empty. Failing closed. Exit error."
       exit 1
    fi
 fi
@@ -142,20 +142,20 @@ mkdir -p -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
 
 pushd -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
 
-echo "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package 'virtualbox-guest-additions-iso') to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
+printf '%s\n' "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package 'virtualbox-guest-additions-iso') to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
 7z x -o/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso /usr/share/virtualbox/VBoxGuestAdditions.iso >/dev/null
 
 chmod +x -- VBoxLinuxAdditions.run
 
-echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run --check' now..."
+printf '%s\n' "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run --check' now..."
 ./VBoxLinuxAdditions.run --check >/dev/null
 
 ## Could run VBoxLinuxAdditions.run directly but extracting it allows easier debugging in case of failure.
 #./VBoxLinuxAdditions.run
 
 ## Add new line because './VBoxLinuxAdditions.run --check' did not.
-echo ""
-echo "$0 INFO: Extracting file '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run' to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself' now..."
+printf '%s\n' ""
+printf '%s\n' "$0 INFO: Extracting file '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run' to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself' now..."
 ./VBoxLinuxAdditions.run --noexec --keep --target /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
 popd >/dev/null
@@ -164,10 +164,10 @@ pushd -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev
 
 installer_exit_code=0
 
-echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh force force' now..."
+printf '%s\n' "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh force force' now..."
 ./install.sh force force || { installer_exit_code=$? ; true; };
 
-echo "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
+printf '%s\n' "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
 
 if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
    $output_command "$0 INFO: Success, installed VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
