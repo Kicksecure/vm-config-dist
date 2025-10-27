@@ -1,3 +1,86 @@
+commit 154347d3f1642a9a5ff25c2e58f785017d2afe3d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 07:07:49 2025 -0400
+
+    readme
+
+commit 4ed2005b0961bd8ec96d39d033f5157896da9ba0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 07:02:14 2025 -0400
+
+    description
+
+commit 3410937d3e5fa59b4061054a158cbf6c047d2920
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:59:54 2025 -0400
+
+    description
+
+commit 0a38d35d97ddce52ef753cd50b70199f191a30ed
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:55:54 2025 -0400
+
+    code simplification: remove no longer maintained KDE related functionality
+
+commit 16ac4d57b8e55c11ef5c0b35171a92f3b2ff4b0d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:47:22 2025 -0400
+
+    comment
+
+commit fc2b619db1a83f06368f2c7da4aeba361092569a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:43:12 2025 -0400
+
+    comment
+
+commit d270a49d3b433b4078dbd0eed4a3c5233a14cd59
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:29:07 2025 -0400
+
+    minor
+
+commit 77387b057a07219af6af5cbae462be4cc1874356
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:28:43 2025 -0400
+
+    minor
+
+commit 9b34842da7ecb700529fb5e3a8a253b4c6785ae9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:27:12 2025 -0400
+
+    no longer ship, config-package-dev `displace` `/etc/gdm3/daemon.conf.dist`
+    config-package-dev `undisplace` `/etc/gdm3/daemon.conf.dist`
+    because gdm (3 or any version) is no longer supported out of the box
+    
+    This file used to enable autologin in VMs. This is nowadays handled
+    elsewhere in `autologinchange`.
+
+commit e84f0017abc3da366d7833b27078109cfe0d83a4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:15:08 2025 -0400
+
+    printf
+
+commit 790f4d67f258e4a887ea16697d1f6bd24b4e378b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:14:14 2025 -0400
+
+    end-of-options
+
+commit 4187806a960f29c5e33abad846f7bc2e921ca42a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 06:12:36 2025 -0400
+
+    refactoring
+
+commit c541c126cd01cbb06ebf67ea2fb7905c3221197e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 08:43:45 2025 +0000
+
+    bumped changelog version
+
 commit 6a0a4b680e7e84bd850175d8e7c29c326948f114
 Merge: c6d5547 a330e95
 Author: Patrick Schleizer <adrelanos@whonix.org>
