@@ -29,6 +29,8 @@ power_savings_disable_in_vms() {
    fi
 
    if [ -x "/etc/profile.d/20_power_savings_disable_in_vms.sh" ]; then
+      ## '/etc/profile.d/20_power_savings_disable_in_vms.sh' will exit zero and take no action
+      ## in case there is no virtualization.
       sudo --non-interactive -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
    fi
 }
