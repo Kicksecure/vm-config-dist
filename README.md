@@ -1,28 +1,22 @@
 # usability enhancements inside virtual machines #
 
-Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as workaround for
-"Automatic fallback to softwarecontext renderer".
+Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as a workaround
+for "Automatic fallback to softwarecontext renderer".
 
 It is not useful to open a screensaver or to power down the desktop for
 operating systems that are run inside VMs. There is no real display that could
-be saved and no real power that could be saved. From usability perspective it
-also is counter intuitive when looking at the VM window and only seeing a
-black screen. Therefore it makes sense to disable power savings in VMs.
-`/etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms.sh`
+be saved and no real power that could be conserved. From a usability
+perspective, it is also counterintuitive when looking at the VM window and
+only seeing a black screen. Therefore, it makes sense to disable power savings
+in VMs.
 `/etc/profile.d/20_power_savings_disable_in_vms.sh`
 `/etc/X11/Xsession.d/20_software_rendering_in_vms.sh`
-`/usr/share/kde-power-savings-disable-in-vms/kdedrc`
-`/usr/share/kde-screen-locker-disable-in-vms/kscreenlockerrc`
-
-Optional: Disables screen locker when running in VMs because that is not
-useful either. This feature can be enabled in file:
-`/etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms.sh`
 
 Makes setting up a shared folder for virtual machines a bit easier.
 
 * Creates a folder `/mnt/shared` with `chmod 777`, adds a group
-"vboxsf", adds account "user" to group "vboxsf". Facilitates auto-mounting of
-shared folders.
+"vboxsf", and adds account "user" to group "vboxsf". Facilitates auto-mounting
+of shared folders.
 
 * Helps using shared folders with VirtualBox and KVM a bit
 easier (as in requiring fewer manual steps from the user).
@@ -30,14 +24,13 @@ easier (as in requiring fewer manual steps from the user).
 * `/lib/systemd/system/mnt-shared-vbox.service`
 * `/lib/systemd/system/mnt-shared-kvm.service`
 
-Set screen resolution 1920x1080 by default for VM in VirtualBox and KVM.
-Workaround for low screen resolution 1024x768 at first boot. When using lower
-screen resolutions, Xfce will automatically scale down.
-`/etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml`
+Sets screen resolution to 1920x1080 by default for VMs in VirtualBox and KVM.
+This is a workaround for the low screen resolution of 1024x768 at first boot.
+When using lower screen resolutions, Xfce will automatically scale down.
 
-Installs VirtualBox guest additions if package
-`virtualbox-guest-additions-iso` is installed if environment variable
-`dist_build_virtualbox=true` or if running inside VirtualBox.
+Installs VirtualBox guest additions if the package
+`virtualbox-guest-additions-iso` is installed, if the environment variable
+`dist_build_virtualbox=true` is set, or if running inside VirtualBox.
 (`systemd-detect-virt` returning `oracle`)
 `/usr/bin/vbox-guest-installer`
 
