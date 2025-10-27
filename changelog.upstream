@@ -1,3 +1,22 @@
+commit 6a0a4b680e7e84bd850175d8e7c29c326948f114
+Merge: c6d5547 a330e95
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 03:05:37 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit a330e95a1b8c4f31f0d49dedc58ba5c29109b1a4
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Oct 26 16:28:46 2025 -0500
+
+    wlr_resize_watcher: Set all displays to a resolution of 1920x1080 if dynamic resizing is not possible
+
+commit c6d55476768c1ee206a0b1d5aa713f3499be1031
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Oct 26 10:58:21 2025 +0000
+
+    bumped changelog version
+
 commit b834208291c91f7b56c2f4d8f292cbcc344e9406
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Oct 26 06:57:31 2025 -0400
