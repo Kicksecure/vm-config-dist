@@ -59,7 +59,6 @@ case "$1" in
       fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
-
       ;;
 
     triggered)
