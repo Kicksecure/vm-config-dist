@@ -135,17 +135,17 @@ else
    exit 0
 fi
 
-rm -r -f /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
-rm -r -f /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
+rm -r -f -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
+rm -r -f -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
-mkdir -p /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
+mkdir -p -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
 
-pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
+pushd -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso >/dev/null
 
 echo "$0 INFO: Extracting file '/usr/share/virtualbox/VBoxGuestAdditions.iso' (from package 'virtualbox-guest-additions-iso') to folder '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso' now..."
 7z x -o/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso /usr/share/virtualbox/VBoxGuestAdditions.iso >/dev/null
 
-chmod +x VBoxLinuxAdditions.run
+chmod +x -- VBoxLinuxAdditions.run
 
 echo "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-extracted-iso/VBoxLinuxAdditions.run --check' now..."
 ./VBoxLinuxAdditions.run --check >/dev/null
@@ -160,7 +160,7 @@ echo "$0 INFO: Extracting file '/var/cache/vm-config-dist/vbox-guest-additions-e
 
 popd >/dev/null
 
-pushd /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/null
+pushd -- /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself >/dev/null
 
 installer_exit_code=0
 
