@@ -135,8 +135,8 @@ else
    exit 0
 fi
 
-rm -rf /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
-rm -rf /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
+rm -r -f /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
+rm -r -f /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself
 
 mkdir -p /var/cache/vm-config-dist/vbox-guest-additions-extracted-iso
 
