@@ -41,7 +41,7 @@ vbox_guest_installer() {
       true "INFO: vbox-guest-installer done."
       return 0
    fi
-      true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true' nor systemd-detect-virt output was 'oracle'."
+   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true' nor systemd-detect-virt output was 'oracle'."
 }
 
 case "$1" in
