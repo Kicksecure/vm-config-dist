@@ -1,3 +1,22 @@
+commit 61cea561dddca40756b444da86bbf9961ba58225
+Merge: 069f7ca 36aa33c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 29 03:21:58 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 36aa33c0e64a9a73a83db4753ee4005af5007ceb
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Tue Oct 28 22:13:34 2025 -0500
+
+    Switch from glxinfo to eglinfo in 20_software_rendering_in_vms.sh
+
+commit 069f7caa2b5c341a278bc87762be8c2460d71f5a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Oct 27 11:50:06 2025 +0000
+
+    bumped changelog version
+
 commit 154347d3f1642a9a5ff25c2e58f785017d2afe3d
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Oct 27 07:07:49 2025 -0400
