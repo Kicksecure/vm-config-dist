@@ -18,8 +18,8 @@
 ## - shotcut
 ## - kdenlive
 
-## If 'OpenGL renderer string' is 'llvmpipe' according to 'glxinfo', then
-## set environment variable: QMLSCENE_DEVICE=softwarecontext
+## If 'OpenGL core profile renderer' is 'llvmpipe' according to 'eglinfo',
+## then set environment variable: QMLSCENE_DEVICE=softwarecontext
 ## (Only if not already set to anything else.)
 ## Otherwise, do nothing.
 ##
@@ -27,19 +27,19 @@
 ## * Unavailable: Set the environment variable.
 ## * Available: Do nothing.
 
-## Package 'mesa-utils' provides 'glxinfo'.
+## Package 'mesa-utils' provides 'eglinfo'.
 
-#glxinfo | grep -- "OpenGL renderer string:" | grep -- llvmpipe
+#eglinfo | grep -- "OpenGL core profile renderer" | grep -- llvmpipe
 ## example output:
-## OpenGL renderer string: llvmpipe (LLVM 15.0.6, 256 bits)
+## OpenGL core profile renderer: llvmpipe (LLVM 19.1.7, 256 bits)
 
-if ! command -v glxinfo >/dev/null 2>/dev/null ; then
-   true "$0 ERROR: glxinfo not found. Stop."
+if ! command -v eglinfo >/dev/null 2>/dev/null ; then
+   true "$0 ERROR: eglinfo not found. Stop."
    return 0
    exit 0
 fi
 
-if glxinfo 2>/dev/null | grep -- "OpenGL renderer string:" | grep -- llvmpipe >/dev/null 2>/dev/null; then
+if eglinfo 2>/dev/null | grep -- "OpenGL core profile renderer" | grep -- llvmpipe >/dev/null 2>/dev/null; then
    software_rendering_use=true
 fi
 
