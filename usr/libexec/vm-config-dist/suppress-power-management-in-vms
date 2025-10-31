@@ -1,0 +1,45 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+source /usr/libexec/helper-scripts/as_root.sh
+
+command -v sponge || exit 1
+command -v timeout || exit 1
+
+timeout_wrapper() {
+  timeout \
+    --kill-after="1" \
+    "1" \
+    "$@" \
+    >/dev/null 2>/dev/null
+}
+
+suppress_locking_file='/usr/share/vm-config-dist/lxqt/lxqt-powermanagement.conf'
+in_virtual_machine="$(
+  if command -v systemd-detect-virt >/dev/null; then
+    if [ "$(timeout_wrapper systemd-detect-virt 2>&1)" = 'none' ]; then
+      printf '%s\n' 'false'
+    else
+      printf '%s\n' 'true'
+    fi
+  else
+    printf '%s\n' 'false'
+  fi
+)"
+
+if [ "$in_virtual_machine" = 'true' ]; then
+  mkdir --parents -- "$(dirname "$suppress_locking_file")"
+  printf '%s\n' "\
+[General]
+idlenessACAction=-1
+idlenessBatteryAction=-1" | sponge -- "$suppress_locking_file"
+else
+  safe-rm --force -- "$suppress_locking_file"
+fi

@@ -1,0 +1,19 @@
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See file COPYING for copying conditons.
+
+[Unit]
+Description=Disables power management by default inside VMs
+Documentation=https://github.com/Kicksecure/vm-config-dist
+
+DefaultDependencies=no
+Before=sysinit.target
+Requires=local-fs.target
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/vm-config-dist/suppress-power-management-in-vms
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

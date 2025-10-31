@@ -1,0 +1,4 @@
+This directory contains dynamically generated config files that are useful
+when running Kicksecure or Whonix in a virtual machine. This file is here to
+ensure the directory is created properly when the vm-config-dist package is
+installed.
