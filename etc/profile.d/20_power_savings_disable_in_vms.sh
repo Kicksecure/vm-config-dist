@@ -62,29 +62,9 @@ if [ "$XDG_SESSION_TYPE" = "tty" ]; then
    exit 0
 fi
 
-if [ -z "$XDG_CONFIG_DIRS" ]; then
-   XDG_CONFIG_DIRS="/etc:/etc/xdg:/usr/share"
-fi
-
-if [ "$(id -u 2>/dev/null)" = "0" ]; then
-   true "$0: Can not run as root. Exiting."
-   return 0
-   exit 0
-fi
-
-if [ "$XDG_SESSION_TYPE" = "x11" ]; then
-   if ! command -v xset >/dev/null 2>/dev/null ; then
-      true "$0: xset unavailable. Exiting."
-      return 0
-      exit 0
-   fi
-   timeout_wrapper xset s off || true
-   timeout_wrapper xset -dpms || true
-elif [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-   true "$0: wayland support not implemented. Exiting."
-   return 0
-   exit 0
-fi
+## GUI power management configuration is in:
+## - /usr/libexec/vm-config-dist/suppress-power-management-in-vms
+## - /usr/lib/systemd/system/suppress-power-management-in-vms.service
 
 return 0
 exit 0
