@@ -1,3 +1,22 @@
+commit 3b2594dcfaab7aeee1294a845d69e79a3f58974b
+Merge: d6afc61 dff642c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 31 10:35:36 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit dff642ca00b0d57885c547f13e7a8646cea67ca1
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Oct 30 20:13:59 2025 -0500
+
+    Suppress VM power management under LXQt
+
+commit d6afc612489debfbbcbf9cef218811b768236876
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Oct 29 07:38:53 2025 +0000
+
+    bumped changelog version
+
 commit 61cea561dddca40756b444da86bbf9961ba58225
 Merge: 069f7ca 36aa33c
 Author: Patrick Schleizer <adrelanos@whonix.org>
