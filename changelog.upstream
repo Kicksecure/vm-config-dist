@@ -1,3 +1,28 @@
+commit 081e1b26213759c17612c5a7937a7825a462409b
+Merge: 7f6255a c1a01bc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 04:12:05 2025 -0400
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 7f6255af6053954416d8a823f8e8608fedb81abc
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Nov 1 03:30:08 2025 -0400
+
+    no longer depend on sudo
+
+commit c1a01bcb7926462fb50c7a22e83de2665031f4b0
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Fri Oct 31 16:07:33 2025 -0500
+
+    Use better settings for disabling LXQt power management
+
+commit f6c3308b69460df7cf5e8740a40749f1c5841038
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Oct 31 14:40:29 2025 +0000
+
+    bumped changelog version
+
 commit 3b2594dcfaab7aeee1294a845d69e79a3f58974b
 Merge: d6afc61 dff642c
 Author: Patrick Schleizer <adrelanos@whonix.org>
