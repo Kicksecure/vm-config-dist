@@ -357,7 +357,7 @@ def check_virtualizer_helpers() -> bool:
     try:
         virtualizer_str: str = subprocess.run(
             ["/usr/bin/systemd-detect-virt"],
-            check=True,
+            check=False,
             capture_output=True,
             encoding="utf-8",
         ).stdout.strip()
@@ -394,6 +394,12 @@ def check_virtualizer_helpers() -> bool:
                     file=sys.stderr,
                 )
                 return False
+        elif virtualizer_str == "none":
+            print(
+                "INFO: Running on physical hardware. Exiting.",
+                file=sys.stderr,
+            )
+            sys.exit(0)
 
         else:
             print(
