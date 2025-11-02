@@ -394,9 +394,10 @@ def check_virtualizer_helpers() -> bool:
                     file=sys.stderr,
                 )
                 return False
+
         elif virtualizer_str == "none":
             print(
-                "INFO: Running on physical hardware. Exiting.",
+                "INFO: Running on physical hardware, exiting.",
                 file=sys.stderr,
             )
             sys.exit(0)
@@ -423,6 +424,10 @@ def main() -> NoReturn:
     """
     Main function.
     """
+
+    if Path("/usr/share/qubes/marker-vm").is_file():
+        print("INFO: Qubes OS detected, exiting.", file=sys.stderr)
+        sys.exit(0)
 
     ## The method we use for detecting display resolution changes is as
     ## follows:
