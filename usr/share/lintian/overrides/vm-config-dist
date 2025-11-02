@@ -2,7 +2,7 @@
 ## See the file COPYING for copying conditions.
 
 ## The whole point of the package.
-vm-config-dist: package-contains-file-in-etc-skel [etc/skel/*]
+#vm-config-dist: package-contains-file-in-etc-skel [etc/skel/*]
 
 ## Not package documentation, directory documentation.
 vm-config-dist: package-contains-documentation-outside-usr-share-doc [usr/share/vm-config-dist/README]
