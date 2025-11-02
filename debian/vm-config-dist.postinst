@@ -52,22 +52,26 @@ case "$1" in
    configure)
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
 
-      power_savings_disable_in_vms
+      ## Only disables power savings in TTYs now, a logout/login cycle or
+      ## reboot is needed to fully disable power savings.
+      #power_savings_disable_in_vms
 
       ## https://askubuntu.com/questions/101962/how-to-run-a-script-only-during-first-install-of-a-package-and-during-upgrades
-      if [ "$2" = "" ]; then
-         true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
-         vbox_guest_installer
-      else
-         true "INFO: Upgrade. Therefore not calling function vbox_guest_installer."
-      fi
+      ## Unnecessary, possibly dangerous.
+      #if [ "$2" = "" ]; then
+      #   true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
+      #   vbox_guest_installer
+      #else
+      #   true "INFO: Upgrade. Therefore not calling function vbox_guest_installer."
+      #fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
     triggered)
       true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE..."
-      vbox_guest_installer
+      ## Unnecessary, possibly dangerous.
+      #vbox_guest_installer
       true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 

@@ -1,0 +1,64 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+printf "%s\n" "$0: INFO: START" >&2
+
+command -v systemd-detect-virt >/dev/null
+command -v sponge >/dev/null
+command -v append-once >/dev/null
+
+bookmark_str='file:///mnt/shared'
+
+config_mnt_shared_bookmark() {
+  local gtk_conf_dir bookmarks_file virt_mode
+
+  if [ -z "${XDG_CONFIG_HOME:-}" ]; then
+    printf '%s\n' "$0: ERROR: 'XDG_CONFIG_HOME' is not set!" >&2
+    exit 1
+  fi
+
+  gtk_conf_dir="$XDG_CONFIG_HOME/gtk-3.0"
+  bookmarks_file="$gtk_conf_dir/bookmarks"
+  if ! mkdir --verbose --parents -- "$gtk_conf_dir"; then
+    printf '%s\n' "$0: ERROR: Could not ensure existence of directory '$gtk_conf_dir'!" >&2
+    exit 1
+  fi
+  if ! touch -- "$bookmarks_file"; then
+    printf '%s\n' "$0: ERROR: Could not ensure existence of file '$bookmarks_file'!" >&2
+    exit 1
+  fi
+
+  virt_mode="$(systemd-detect-virt)" || true
+  case "$virt_mode" in
+    oracle|kvm)
+      printf '%s\n' "$0: INFO: Adding '$bookmark_str' bookmark to '$bookmarks_file' if needed..." >&2
+      if ! append-once "$bookmarks_file" "$bookmark_str"; then
+        printf '%s\n' "$0: ERROR: Could not add '$bookmark_str' bookmark to '$bookmarks_file'!" >&2
+        exit 1
+      fi
+      ;;
+    *)
+      printf '%s\n' "$0: INFO: Removing '$bookmark_str' bookmark from '$bookmarks_file' if needed..." >&2
+      if grep --quiet -- "^$bookmark_str" "$bookmarks_file"; then
+        if ! grep --invert-match -- "^$bookmark_str" "$bookmarks_file" | sponge "$bookmarks_file"; then
+          printf '%s\n' "$0: ERROR: Could not remove '$bookmark_str' bookmark from '$bookmarks_file'!" >&2
+          exit 1
+        fi
+        printf '%s\n' "$0: INFO: '$bookmark_str' removed from '$bookmarks_file'." >&2
+      else
+        printf '%s\n' "$0: INFO: '$bookmark_str' did not exist in '$bookmarks_file', ok." >&2
+      fi
+      ;;
+  esac
+}
+
+config_mnt_shared_bookmark
+
+printf "%s\n" "$0: INFO: END" >&2

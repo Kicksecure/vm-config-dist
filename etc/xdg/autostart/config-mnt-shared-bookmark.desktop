@@ -1,0 +1,9 @@
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Desktop Entry]
+Name=config-mnt-shared-bookmark
+Comment=Configure shared folder bookmark for virtual machines
+Type=Application
+Terminal=false
+Exec=/usr/libexec/vm-config-dist/config-mnt-shared-bookmark

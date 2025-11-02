@@ -357,7 +357,7 @@ def check_virtualizer_helpers() -> bool:
     try:
         virtualizer_str: str = subprocess.run(
             ["/usr/bin/systemd-detect-virt"],
-            check=True,
+            check=False,
             capture_output=True,
             encoding="utf-8",
         ).stdout.strip()
@@ -395,6 +395,13 @@ def check_virtualizer_helpers() -> bool:
                 )
                 return False
 
+        elif virtualizer_str == "none":
+            print(
+                "INFO: Running on physical hardware, exiting.",
+                file=sys.stderr,
+            )
+            sys.exit(0)
+
         else:
             print(
                 "WARNING: Running on an unsupported virtualizer!",
@@ -417,6 +424,10 @@ def main() -> NoReturn:
     """
     Main function.
     """
+
+    if Path("/usr/share/qubes/marker-vm").is_file():
+        print("INFO: Qubes OS detected, exiting.", file=sys.stderr)
+        sys.exit(0)
 
     ## The method we use for detecting display resolution changes is as
     ## follows:

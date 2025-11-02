@@ -1,4 +1,4 @@
-vbox-guest-installer(8) -- Qubes Remote Support Provider
+vbox-guest-installer(8) -- Install VirtualBox guest additions from ISO package
 =============================================
 
 <!--
@@ -10,7 +10,9 @@ vbox-guest-installer(8) -- Qubes Remote Support Provider
 `vbox-guest-installer`
 
 ## DESCRIPTION
-Installs
+Installs the VirtualBox guest additions from the ISO provided by the `virtualbox-guest-additions-iso` package.
+
+VirtualBox Guest Additions are preinstalled on most images where it makes sense for it to be installed. You probably do not need to run this tool.
 
 ## EXAMPLES
 `vbox-guest-installer`
