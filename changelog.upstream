@@ -1,3 +1,28 @@
+commit bab34d43dae2d3a9be97f39fa75067b6c149ede2
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 3 05:55:43 2025 -0500
+
+    links
+
+commit 75e518ddb7d101511b57bd9e9b2cf4c0b074c598
+Merge: 7ed34b8 6ba613d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 3 05:53:28 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 6ba613df52c5c5fb9ea16abe0359cc5a48be8718
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 2 19:24:15 2025 -0600
+
+    Ensure vm-config-dist XDG_CONFIG_DIRS setting takes precedence over desktop-config-dist
+
+commit 7ed34b8d3252141fcfe21c64cf8a342f892a63c9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Nov 2 12:31:10 2025 +0000
+
+    bumped changelog version
+
 commit 49b30f0fc22835c4ebb70618a8fbfb1d311baeab
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Nov 2 07:29:43 2025 -0500
