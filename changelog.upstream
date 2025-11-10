@@ -1,3 +1,22 @@
+commit 0e9c41285f139e701462724401da688053f1700e
+Merge: 150b24c 9422691
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 10 02:54:53 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 94226910a05008cc5acf4b7ab40a3a6f1c1a0568
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sun Nov 9 19:50:58 2025 -0600
+
+    Delay suppress-power-management-in-vms.service until tmp.mount is done
+
+commit 150b24c70531203430288651d22b471cde19575c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Nov 7 10:46:59 2025 +0000
+
+    bumped changelog version
+
 commit 533406ccac727cdcc2317753155bf589800301db
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Nov 7 05:33:51 2025 -0500
