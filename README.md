@@ -26,13 +26,12 @@ easier (as in requiring fewer manual steps from the user).
 
 Sets screen resolution to 1920x1080 by default for VMs in VirtualBox and KVM.
 This is a workaround for the low screen resolution of 1024x768 at first boot.
-When using lower screen resolutions, Xfce will automatically scale down.
 
 Installs VirtualBox guest additions if the package
 `virtualbox-guest-additions-iso` is installed, if the environment variable
 `dist_build_virtualbox=true` is set, or if running inside VirtualBox.
 (`systemd-detect-virt` returning `oracle`)
-`/usr/bin/vbox-guest-installer`
+`/usr/bin/vbox-guest-installer
 
 ## How to install `vm-config-dist` using apt-get ##
 
