@@ -1,3 +1,27 @@
+commit 002865d5e91d93569cb620863e708fb8bd1be2dd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 13 05:22:50 2025 -0500
+
+    readme
+
+commit dc4531ee6ccaeffe0c5baabdd75c7778f1ddef9d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 13 05:20:54 2025 -0500
+
+    fix
+
+commit 6349df70b34bdd770305f1974cb2963a8d9f7a21
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Thu Nov 13 05:18:43 2025 -0500
+
+    bring back `vbox-guest-installer`
+
+commit 7dd0ce505fe9d0fb0665881158601260439e87cd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Nov 10 08:02:17 2025 +0000
+
+    bumped changelog version
+
 commit 0e9c41285f139e701462724401da688053f1700e
 Merge: 150b24c 9422691
 Author: Patrick Schleizer <adrelanos@whonix.org>
