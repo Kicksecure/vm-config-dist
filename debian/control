@@ -45,6 +45,8 @@ Description: usability enhancements inside virtual machines
  Sets screen resolution to 1920x1080 by default for VMs in VirtualBox and KVM.
  This is a workaround for the low screen resolution of 1024x768 at first boot.
  .
- Provides a tool for installing VirtualBox guest additions if the package
- `virtualbox-guest-additions-iso` is installed.
- `/usr/bin/vbox-guest-installer`
+ Installs VirtualBox guest additions if the package
+ `virtualbox-guest-additions-iso` is installed, if the environment variable
+ `dist_build_virtualbox=true` is set, or if running inside VirtualBox.
+ (`systemd-detect-virt` returning `oracle`)
+ `/usr/bin/vbox-guest-installer

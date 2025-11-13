@@ -3,6 +3,7 @@
 ## Copyright (C) 2020 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@kicksecure.com>
 ## See the file COPYING for copying conditions.
 
+set -e
 set -o pipefail
 
 output_more_information() {
@@ -90,6 +91,13 @@ if [ "$(id -u)" != "0" ]; then
    $output_command "$0 ERROR: Must run as root. Run:"
    $output_command "sudo $0"
    exit 112
+fi
+
+if [ "$dist_build_virtualbox" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
+   true "INFO: dist_build_virtualbox=true or systemd-detect-virt returned oracle, therefore proceed."
+else
+   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
+   exit 0
 fi
 
 if ischroot --default-false ; then

@@ -57,21 +57,19 @@ case "$1" in
       #power_savings_disable_in_vms
 
       ## https://askubuntu.com/questions/101962/how-to-run-a-script-only-during-first-install-of-a-package-and-during-upgrades
-      ## Unnecessary, possibly dangerous.
-      #if [ "$2" = "" ]; then
-      #   true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
-      #   vbox_guest_installer
-      #else
-      #   true "INFO: Upgrade. Therefore not calling function vbox_guest_installer."
-      #fi
+      if [ "$2" = "" ]; then
+        true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
+        vbox_guest_installer
+      else
+        true "INFO: Upgrade. Therefore not calling function vbox_guest_installer."
+      fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
     triggered)
       true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE..."
-      ## Unnecessary, possibly dangerous.
-      #vbox_guest_installer
+      vbox_guest_installer
       true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE."
       ;;
 
