@@ -126,14 +126,14 @@ if ischroot --default-false ; then
    fi
 fi
 
-if /usr/libexec/helper-scripts/package_installed_check.bsh "virtualbox-guest-x11" ; then
+if package-installed-check "virtualbox-guest-x11" ; then
    virtualbox_guest_additions_packages_still_installed virtualbox-guest-x11
 fi
-if /usr/libexec/helper-scripts/package_installed_check.bsh "virtualbox-guest-utils" ; then
+if package-installed-check "virtualbox-guest-utils" ; then
    virtualbox_guest_additions_packages_still_installed virtualbox-guest-utils
 fi
 
-if /usr/libexec/helper-scripts/package_installed_check.bsh "virtualbox-guest-additions-iso" ; then
+if package-installed-check "virtualbox-guest-additions-iso" ; then
    $output_command "$0 INFO: VirtualBox guest additions package 'virtualbox-guest-additions-iso' still installed."
 else
    $output_command "$0 ERROR: package 'virtualbox-guest-additions-iso' not installed! To install, run:" >&2
