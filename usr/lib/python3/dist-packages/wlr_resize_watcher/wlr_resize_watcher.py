@@ -22,12 +22,21 @@ from pathlib import Path
 from typing import Pattern, NoReturn
 import pyudev  # type: ignore
 
-drm_match_re: Pattern[str] = re.compile(r".*/drm/card\d+$")
-card_match_re: Pattern[str] = re.compile(r"^card\d+$")
-disp_match_re: Pattern[str] = re.compile(r"^card\d+-.*$")
-whitespace_start_re: Pattern[str] = re.compile(r"^\s+")
-modes_re: Pattern[str] = re.compile(r"\s+Modes:$")
-current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
+
+# pylint: disable=too-few-public-methods
+class GlobalData:
+    """
+    Global variables for wlr_resize_watcher.
+    """
+
+    drm_match_re: Pattern[str] = re.compile(r".*/drm/card\d+$")
+    card_match_re: Pattern[str] = re.compile(r"^card\d+$")
+    disp_match_re: Pattern[str] = re.compile(r"^card\d+-.*$")
+    whitespace_start_re: Pattern[str] = re.compile(r"^\s+")
+    modes_re: Pattern[str] = re.compile(r"\s+Modes:$")
+    current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
+    virtualizer_str: str | None = ""
+    resize_helper_present: bool = False
 
 
 # pylint: disable=too-few-public-methods
@@ -50,7 +59,7 @@ def get_udev_card_event(udev_mon: pyudev.Monitor) -> str:
     card_name: str | None = None
     for udev_dev in iter(udev_mon.poll, None):
         dev_name: str = udev_dev.sys_path
-        if drm_match_re.match(dev_name):
+        if GlobalData.drm_match_re.match(dev_name):
             dev_name_parts: list[str] = dev_name.split("/")
             card_name = dev_name_parts[len(dev_name_parts) - 1]
             break
@@ -96,7 +105,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
 
     for idx, line in enumerate(wlr_randr_lines):
         if idx == 0:
-            if whitespace_start_re.match(line):
+            if GlobalData.whitespace_start_re.match(line):
                 print(
                     "ERROR: Unexpected whitespace on first line of "
                     "wlr-randr output! wlr-randr output:",
@@ -107,7 +116,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
             disp_name = line.split(" ")[0]
             continue
 
-        if not whitespace_start_re.match(line):
+        if not GlobalData.whitespace_start_re.match(line):
             if disp_name is None or disp_mode is None:
                 print(
                     "ERROR: Unable to find active display mode for "
@@ -122,7 +131,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
             in_modes_zone = False
             continue
 
-        if modes_re.match(line):
+        if GlobalData.modes_re.match(line):
             in_modes_zone = True
             continue
 
@@ -153,7 +162,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
             ## This mode specification is not the active one for the
             ## current display, skip it
             continue
-        if current_mode_re.match(line_parts[4]):
+        if GlobalData.current_mode_re.match(line_parts[4]):
             disp_mode = line_parts[0]
 
     return out_list
@@ -173,7 +182,7 @@ def get_hw_disp_list(card_list: list[str]) -> list[DisplayInfo] | None:
             disp_list: list[str] = [
                 x.name
                 for x in card_path.iterdir()
-                if x.is_dir() and disp_match_re.match(x.name)
+                if x.is_dir() and GlobalData.disp_match_re.match(x.name)
             ]
         except FileNotFoundError:
             ## This will happen if the card no longer exists. We don't
@@ -250,7 +259,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
         real_card_list = [
             x.name
             for x in drm_path.iterdir()
-            if x.is_dir() and card_match_re.match(x.name)
+            if x.is_dir() and GlobalData.card_match_re.match(x.name)
         ]
     else:
         real_card_list = [card_name]
@@ -317,12 +326,19 @@ def executable_exists_and_is_running(exe_name: str) -> int:
 
 def set_all_displays_resolution_to_default() -> None:
     """
-    Sets the screen resolution of all displays to a default (hardcoded) value,
-    currently 1920x1080.
+    Sets the screen resolution of all displays to a default (hardcoded) value
+    appropriate for the virtualizer.
     """
 
     disp_list: list[DisplayInfo] | None = get_compositor_disp_list()
-    hardcoded_res: str = "1920x1080"
+    hardcoded_res: str
+    if GlobalData.virtualizer_str == "xen":
+        ## labwc encounters memory allocation issues when running at 1920x1080
+        ## resolution under Xen's default VGA emulation. It works well at
+        ## 1024x768.
+        hardcoded_res = "1024x768"
+    else:
+        hardcoded_res = "1920x1080"
 
     if disp_list is None:
         return
@@ -348,20 +364,20 @@ def set_all_displays_resolution_to_default() -> None:
 
 
 # pylint: disable=too-many-return-statements
-def check_virtualizer_helpers() -> bool:
+def check_virtualizer_type() -> None:
     """
-    Displays an error message and returns False if a needed virtualizer helper
-    is not detected.
+    Records the currently-in-use virtualizer in a global variable and checks
+    to see if a display resize helper is present and running.
     """
 
     try:
-        virtualizer_str: str = subprocess.run(
+        GlobalData.virtualizer_str = subprocess.run(
             ["/usr/bin/systemd-detect-virt"],
             check=False,
             capture_output=True,
             encoding="utf-8",
         ).stdout.strip()
-        if virtualizer_str == "oracle":
+        if GlobalData.virtualizer_str == "oracle":
             found_drm_client: int = executable_exists_and_is_running(
                 "/usr/bin/VBoxDRMClient"
             )
@@ -370,15 +386,15 @@ def check_virtualizer_helpers() -> bool:
                     "WARNING: VBoxDRMClient is missing!",
                     file=sys.stderr,
                 )
-                return False
+                return
             if found_drm_client == 2:
                 print(
                     "WARNING: VBoxDRMClient is not running!",
                     file=sys.stderr,
                 )
-                return False
+                return
 
-        elif virtualizer_str == "kvm":
+        elif GlobalData.virtualizer_str == "kvm":
             found_spice_vdagentd: int = executable_exists_and_is_running(
                 "/usr/bin/spice-vdagentd"
             )
@@ -387,15 +403,19 @@ def check_virtualizer_helpers() -> bool:
                     "WARNING: spice-vdagentd is missing!",
                     file=sys.stderr,
                 )
-                return False
+                return
             if found_spice_vdagentd == 2:
                 print(
                     "WARNING: spice-vdagentd is not running!",
                     file=sys.stderr,
                 )
-                return False
+                return
 
-        elif virtualizer_str == "none":
+        elif GlobalData.virtualizer_str == "xen":
+            ## Xen has no virtualizer helper.
+            return
+
+        elif GlobalData.virtualizer_str == "none":
             print(
                 "INFO: Running on physical hardware, exiting.",
                 file=sys.stderr,
@@ -407,7 +427,7 @@ def check_virtualizer_helpers() -> bool:
                 "WARNING: Running on an unsupported virtualizer!",
                 file=sys.stderr,
             )
-            return False
+            return
 
     except Exception:
         print(
@@ -415,9 +435,9 @@ def check_virtualizer_helpers() -> bool:
             file=sys.stderr,
         )
         traceback.print_exc(file=sys.stderr)
-        return False
+        return
 
-    return True
+    GlobalData.resize_helper_present = True
 
 
 def main() -> NoReturn:
@@ -452,10 +472,11 @@ def main() -> NoReturn:
 
     ## If we can't find an active virtualizer helper, set all displays to a
     ## comfortable default display resolution.
-    if not check_virtualizer_helpers():
-        set_all_displays_resolution_to_default()
-    else:
+    check_virtualizer_type()
+    if GlobalData.resize_helper_present:
         sync_hw_resolution_with_compositor(None)
+    else:
+        set_all_displays_resolution_to_default()
 
     try:
         udev_ctx: pyudev.Context = pyudev.Context()
