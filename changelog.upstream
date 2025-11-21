@@ -1,3 +1,22 @@
+commit e214d65fbb59ba7b7dccc657da796c9837b79085
+Merge: ea6387a 18215bd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Nov 21 04:09:55 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 18215bdc6bc456a172ca827ca7e2c3d5a0bb0f56
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Nov 19 23:31:27 2025 -0600
+
+    Set labwc resolution to 1024x768 by default under Xen
+
+commit ea6387a7c2f3289eef166d976edc542df5e7b984
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Nov 14 06:23:55 2025 +0000
+
+    bumped changelog version
+
 commit 087c371cd04019748da8afb976bceae05644d899
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Nov 14 00:58:58 2025 -0500
