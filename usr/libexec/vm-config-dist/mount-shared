@@ -45,8 +45,11 @@ main() {
   case "${virt_type}" in
     kvm)
       cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-kvm-README.md /mnt/shared/README.md || true
-      ## QEMU 9pfs does not respect uid, gid, or umask parameters.
-      mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true
+      ## Try virtiofs first, it works much better and is now recommended.
+      ## If that fails, fall back to 9pfs.
+      ## 9pfs does not respect uid, gid, or umask parameters. virtiofs should not be used with any of these parameters.
+      mount -t virtiofs shared /mnt/shared \
+        || mount -t 9p -o trans=virtio shared /mnt/shared -oversion=9p2000.L || true
       ;;
     vbox)
       cp --no-clobber -- /usr/share/doc/vm-config-dist/shared-folder-vbox-README.md /mnt/shared/README.md || true
