@@ -1,3 +1,22 @@
+commit b0d957eccbaf5687f735b30fc794a9d1746ac3dd
+Merge: f7c22c8 ec571f3
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Dec 22 22:06:50 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit ec571f3b63924137e3a9330d193b869077b4267b
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Dec 22 20:13:48 2025 -0600
+
+    Add virtiofs support to mount-shared
+
+commit f7c22c86dae95721983e05bca4ce93544b6dd8d6
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Nov 21 09:22:18 2025 +0000
+
+    bumped changelog version
+
 commit e214d65fbb59ba7b7dccc657da796c9837b79085
 Merge: ea6387a 18215bd
 Author: Patrick Schleizer <adrelanos@whonix.org>
