@@ -19,8 +19,11 @@ import os
 import subprocess
 import traceback
 from pathlib import Path
-from typing import Pattern, NoReturn
+from typing import Pattern, NoReturn, Any
+
 import pyudev  # type: ignore
+import schema  # type: ignore
+from strict_config_parser import strict_config_parser
 
 
 # pylint: disable=too-few-public-methods
@@ -37,6 +40,39 @@ class GlobalData:
     current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
     virtualizer_str: str | None = ""
     resize_helper_present: bool = False
+
+    conf_dir_list: list[str] = [
+        "/etc/wlr_resize_watcher.d",
+        "/usr/local/etc/wlr_resize_watcher.d",
+    ]
+    conf_schema: dict[str, str] = schema.Schema(
+        {
+            "enable_dynamic_resolution": bool,
+            "warn_on_dynamic_resolution_refuse": bool,
+            "standard_default_resolution": schema.And(
+                str,
+                lambda s: re.match(r"\d+x\d+", s),
+            ),
+            "small_default_resolution": schema.And(
+                str,
+                lambda s: re.match(r"\d+x\d+", s),
+            ),
+        },
+    )
+    conf_defaults: dict[str, Any] = {
+        "enable_dynamic_resolution": True,
+        "warn_on_dynamic_resolution_refuse": True,
+        "standard_default_resolution": "1920x1080",
+        "small_default_resolution": "1024x768",
+    }
+
+    enable_dynamic_resolution: bool = True
+    warn_on_dynamic_resolution_refuse: bool = True
+    standard_default_resolution: str = "1920x1080"
+    ## labwc encounters memory allocation issues when running at 1920x1080
+    ## resolution under Xen's default VGA emulation. It works well at
+    ## 1024x768.
+    small_default_resolution: str = "1024x768"
 
 
 # pylint: disable=too-few-public-methods
@@ -245,6 +281,24 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
     graphics cards to the native resolution.
     """
 
+    ## Optionally send a notification and exit if dynamic resolution has
+    ## been disabled.
+    if not GlobalData.enable_dynamic_resolution:
+        if GlobalData.warn_on_dynamic_resolution_refuse:
+            GlobalData.warn_on_dynamic_resolution_refuse = False
+            subprocess.run(
+                [
+                    "/usr/bin/notify-send",
+                    "--app-name=wlr_resize_watcher",
+                    "Not resizing display!",
+                    "Dynamic resolution is disabled. If you want to enable "
+                    "it, open the System Maintenance Panel and click "
+                    "'Configure Dynamic Resolution'.",
+                ],
+                check=False,
+            )
+        return
+
     real_card_list: list[str]
     if card_name is None:
         ## Manually discover all available cards from /sys/class/drm.
@@ -331,14 +385,11 @@ def set_all_displays_resolution_to_default() -> None:
     """
 
     disp_list: list[DisplayInfo] | None = get_compositor_disp_list()
-    hardcoded_res: str
+    selected_res: str
     if GlobalData.virtualizer_str == "xen":
-        ## labwc encounters memory allocation issues when running at 1920x1080
-        ## resolution under Xen's default VGA emulation. It works well at
-        ## 1024x768.
-        hardcoded_res = "1024x768"
+        selected_res = GlobalData.small_default_resolution
     else:
-        hardcoded_res = "1920x1080"
+        selected_res = GlobalData.standard_default_resolution
 
     if disp_list is None:
         return
@@ -350,7 +401,7 @@ def set_all_displays_resolution_to_default() -> None:
                     "--output",
                     disp.disp_name,
                     "--custom-mode",
-                    f"{hardcoded_res}@60",
+                    f"{selected_res}@60",
                 ],
                 check=True,
             )
@@ -396,7 +447,7 @@ def check_virtualizer_type() -> None:
 
         elif GlobalData.virtualizer_str == "kvm":
             found_spice_vdagentd: int = executable_exists_and_is_running(
-                "/usr/bin/spice-vdagentd"
+                "/usr/sbin/spice-vdagentd"
             )
             if found_spice_vdagentd == 1:
                 print(
@@ -440,6 +491,42 @@ def check_virtualizer_type() -> None:
     GlobalData.resize_helper_present = True
 
 
+def parse_config_files() -> None:
+    """
+    Parses config files for wlr_resize_watcher, modifying the ConfigData class
+    to reflect the correct configuration state.
+    """
+
+    try:
+        config_dict: dict[str, Any] = strict_config_parser.parse_config_files(
+            conf_item_list=GlobalData.conf_dir_list,
+            conf_schema=GlobalData.conf_schema,
+            defaults_dict=GlobalData.conf_defaults,
+        )
+    except Exception:
+        print(
+            "ERROR: Cannot parse configuration!",
+            file=sys.stderr,
+        )
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
+    assert isinstance(config_dict["enable_dynamic_resolution"], bool)
+    assert isinstance(config_dict["warn_on_dynamic_resolution_refuse"], bool)
+    assert isinstance(config_dict["standard_default_resolution"], str)
+    assert isinstance(config_dict["small_default_resolution"], str)
+    GlobalData.enable_dynamic_resolution = config_dict[
+        "enable_dynamic_resolution"
+    ]
+    GlobalData.warn_on_dynamic_resolution_refuse = config_dict[
+        "warn_on_dynamic_resolution_refuse"
+    ]
+    GlobalData.standard_default_resolution = config_dict[
+        "standard_default_resolution"
+    ]
+    GlobalData.small_default_resolution = config_dict[
+        "small_default_resolution"
+    ]
+
 def main() -> NoReturn:
     """
     Main function.
@@ -470,12 +557,17 @@ def main() -> NoReturn:
     ## This may not always hold true for physical screens, but should be fine
     ## for virtual displays.
 
-    ## If we can't find an active virtualizer helper, set all displays to a
-    ## comfortable default display resolution.
+    parse_config_files()
+
     check_virtualizer_type()
-    if GlobalData.resize_helper_present:
+    if (
+        GlobalData.resize_helper_present
+        and GlobalData.enable_dynamic_resolution
+    ):
         sync_hw_resolution_with_compositor(None)
     else:
+        ## If we can't find an active virtualizer helper, set all displays to
+        ## a comfortable default display resolution.
         set_all_displays_resolution_to_default()
 
     try:
