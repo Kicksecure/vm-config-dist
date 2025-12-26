@@ -41,6 +41,11 @@ class GlobalData:
     virtualizer_str: str | None = ""
     resize_helper_present: bool = False
 
+    enable_dynamic_resolution: bool = False
+    warn_on_dynamic_resolution_refuse: bool = False
+    standard_default_resolution: str = ""
+    small_default_resolution: str = ""
+
     conf_dir_list: list[str] = [
         "/etc/wlr_resize_watcher.d",
         "/usr/local/etc/wlr_resize_watcher.d",
@@ -63,16 +68,11 @@ class GlobalData:
         "enable_dynamic_resolution": True,
         "warn_on_dynamic_resolution_refuse": True,
         "standard_default_resolution": "1920x1080",
+        ## labwc encounters memory allocation issues when running at 1920x1080
+        ## resolution under Xen's default VGA emulation. It works well at
+        ## 1024x768.
         "small_default_resolution": "1024x768",
     }
-
-    enable_dynamic_resolution: bool = True
-    warn_on_dynamic_resolution_refuse: bool = True
-    standard_default_resolution: str = "1920x1080"
-    ## labwc encounters memory allocation issues when running at 1920x1080
-    ## resolution under Xen's default VGA emulation. It works well at
-    ## 1024x768.
-    small_default_resolution: str = "1024x768"
 
 
 # pylint: disable=too-few-public-methods
@@ -291,9 +291,9 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                     "/usr/bin/notify-send",
                     "--app-name=wlr_resize_watcher",
                     "Not resizing display!",
-                    "Dynamic resolution is disabled. If you want to enable "
-                    "it, open the System Maintenance Panel and click "
-                    "'Configure Dynamic Resolution'.",
+                    "Dynamic resolution is disabled to enhance anonymity. If "
+                    "you want to enable it, open the System Maintenance "
+                    "Panel and click 'Configure Dynamic Resolution'.",
                 ],
                 check=False,
             )
