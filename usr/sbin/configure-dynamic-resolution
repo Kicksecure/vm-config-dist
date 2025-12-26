@@ -1,0 +1,199 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o errtrace
+set -o pipefail
+
+config_dir='/etc/wlr_resize_watcher.d'
+target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
+
+validate_bool_opt() {
+  local orig_bool_opt bool_opt_lowercase
+
+  orig_bool_opt="${1:-}"
+  bool_opt_lowercase="${orig_bool_opt,,}"
+  case "${bool_opt_lowercase}" in
+    'true'|'false')
+      printf '%s\n' "${bool_opt_lowercase}"
+      ;;
+    *)
+      true
+      ;;
+  esac
+}
+
+validate_resolution_opt() {
+  local orig_resolution_opt resolution_opt_lowercase
+
+  orig_resolution_opt="${1:-}"
+  resolution_opt_lowercase="${orig_resolution_opt,,}"
+  if [[ "${resolution_opt_lowercase}" =~ ^[0-9]+x[0-9]+$ ]]; then
+    printf '%s\n' "${resolution_opt_lowercase}"
+  fi
+  ## Don't print anything if resolution_opt_lowercase fails the
+  ## validation regex.
+}
+
+write_config_value() {
+  local opt_key opt_val config_file_contents
+
+  opt_key="${1:-}"
+  opt_val="${2:-}"
+  if [ -f "${target_config_file}" ]; then
+    config_file_contents="$(stcatn "${target_config_file}")"
+  else
+    config_file_contents=""
+  fi
+
+  config_file_contents="$(sed "/${opt_key}=/d" <<< "${config_file_contents}")"
+  ## Bash strips the file's trailing newline, so we have to put it back, but
+  ## only if we loaded a non-empty file to begin with
+  if [ -n "${config_file_contents}" ]; then
+    config_file_contents+=$'\n'
+  fi
+  ## Then append the config option and a new trailing newline
+  config_file_contents+="${opt_key}=${opt_val}"$'\n'
+
+  printf "%s" "${config_file_contents}" | sponge "${target_config_file}"
+}
+
+set_bool_opt() {
+  local config_option_id orig_bool_opt bool_opt
+
+  config_option_id="${1:-}"
+  orig_bool_opt="${2:-}"
+
+  bool_opt="$(validate_bool_opt "${orig_bool_opt}")"
+  if [ -z "${bool_opt}" ]; then
+    printf '%s\n' "ERROR: Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
+    printf '\n'
+    return
+  fi
+  write_config_value "${config_option_id}" "${bool_opt}"
+  printf '%s\n' "INFO: Set option '${config_option_id}' to '${bool_opt}'."
+  printf '\n'
+}
+
+set_resolution_opt() {
+  local config_option_id orig_resolution_opt resolution_opt
+
+  config_option_id="${1:-}"
+  orig_resolution_opt="${2:-}"
+
+  resolution_opt="$(validate_resolution_opt "${orig_resolution_opt}")"
+  if [ -z "${resolution_opt}" ]; then
+    printf '%s\n' "ERROR: Provided option '${orig_resolution_opt}' is not a valid display resolution!"
+    printf '\n'
+    return
+  fi
+  ## TOML requires strings to be quoted, thus we wrap the resolution opt in
+  ## escaped quotes.
+  write_config_value "${config_option_id}" "\"${resolution_opt}\""
+  printf '%s\n' "INFO: Set option '${config_option_id}' to '${resolution_opt}'."
+  printf '\n'
+}
+
+configure_dynamic_resolution() {
+  local config_option_list config_option_id_list config_option \
+    config_option_id config_option_idx selected_idx bool_opt resolution_opt
+
+  if [ "$(id -u)" != '0' ]; then
+    printf '%s\n' 'ERROR: This script must run as root!'
+    exit 1
+  fi
+
+  if ! [ -d "${config_dir}" ]; then
+    mkdir --parents -- "${config_dir}" || {
+      printf '%s\n' "ERROR: Could not create config directory '${config_dir}'!"
+      return 1
+    }
+  fi
+  if ! [ -f "${target_config_file}" ] && [ -e "${target_config_file}" ]; then
+    printf '%s\n' "ERROR: '${target_config_file}' exists but is not a file!"
+    return 1
+  fi
+
+  config_option_list=(
+    'Enable or disable dynamic resolution'
+    'Enable or disable dynamic resolution refuse warning'
+    'Set standard default resolution'
+    'Set small default resolution (only applicable with Xen)'
+    'Exit configuration editor'
+  )
+
+  config_option_id_list=(
+    'enable_dynamic_resolution'
+    'warn_on_dynamic_resolution_refuse'
+    'standard_default_resolution'
+    'small_default_resolution'
+    'exit'
+  )
+
+  printf '\n'
+
+  while true; do
+    printf '%s\n' 'Available configuration options:'
+    printf '\n'
+    config_option_idx=0
+    for config_option in "${config_option_list[@]}"; do
+      (( config_option_idx++ )) || true
+      printf '%s\n' "  ${config_option_idx}: ${config_option}"
+    done
+    printf '\n'
+    read -r -p 'Enter the number of the desired action: ' selected_idx
+
+    if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
+      printf '%s\n' 'ERROR: Did not specify an action number!'
+      printf '\n'
+      continue
+    fi
+    ## selected_idx starts at 1, not 0, so we have to adjust for that
+    if (( selected_idx < 1 )) \
+      || (( (selected_idx - 1) >= ${#config_option_list[@]} )); then
+      printf '%s\n' 'ERROR: Specified action is out of range!'
+      printf '\n'
+      continue
+    fi
+
+    config_option_id="${config_option_id_list[selected_idx - 1]}"
+    case "${config_option_id}" in
+      'enable_dynamic_resolution')
+        read -r -p "Enter 'true' to enable dynamic resolution, 'false' to disable it: " bool_opt
+        set_bool_opt "${config_option_id}" "${bool_opt}"
+        ;;
+      'warn_on_dynamic_resolution_refuse')
+        read -r -p "Enter 'true' to enable dynamic resolution refuse warnings, 'false' to disable them: " bool_opt
+        set_bool_opt "${config_option_id}" "${bool_opt}"
+        ;;
+      'standard_default_resolution')
+        read -r -p 'Enter the desired resolution (for example, 1920x1080): ' resolution_opt
+        set_resolution_opt "${config_option_id}" "${resolution_opt}"
+        ;;
+      'small_default_resolution')
+        read -r -p 'Enter the desired resolution (for example, 1920x1080): ' resolution_opt
+        set_resolution_opt "${config_option_id}" "${resolution_opt}"
+        ;;
+      'exit')
+        printf '%s\n' "INFO: Done configuring dynamic resolution settings."
+        printf '\n'
+        exit 0
+        ;;
+      *)
+        ## This should be unreachable.
+        printf '%s\n' 'ERROR: Unreachable code hit!'
+        exit 1
+        ;;
+    esac
+  done
+}
+
+command -v id >/dev/null
+command -v stcatn >/dev/null
+command -v sed >/dev/null
+command -v sponge >/dev/null
+
+configure_dynamic_resolution
