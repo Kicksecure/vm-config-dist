@@ -1,3 +1,28 @@
+commit acb0e4b6df389653c1f3bcf0f6be49266d8b59fa
+Merge: 03a4961 446b84e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 26 14:01:25 2025 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 446b84eca703706a09a338764a8790f3058b4ca2
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Thu Dec 25 21:34:25 2025 -0600
+
+    Minor polish on wlr_resize_watcher.py, add dynamic resolution config utility
+
+commit d83eee3adbad510552470e79a5d69cecd9e13251
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Wed Dec 24 19:46:54 2025 -0600
+
+    Add configuration file to wlr_resize_watcher, fix spice-vdagentd detection
+
+commit 03a4961fc792285cfd23204edde385b877b2fc67
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Dec 23 03:09:53 2025 +0000
+
+    bumped changelog version
+
 commit b0d957eccbaf5687f735b30fc794a9d1746ac3dd
 Merge: f7c22c8 ec571f3
 Author: Patrick Schleizer <adrelanos@whonix.org>
