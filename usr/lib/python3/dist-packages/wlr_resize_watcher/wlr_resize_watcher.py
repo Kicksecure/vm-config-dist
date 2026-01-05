@@ -40,17 +40,20 @@ class GlobalData:
     current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
     virtualizer_str: str | None = ""
     resize_helper_present: bool = False
+    in_sysmaint_mode: bool = False
 
     enable_dynamic_resolution: bool = False
     warn_on_dynamic_resolution_refuse: bool = False
     standard_default_resolution: str = ""
     small_default_resolution: str = ""
+    normal_wait_proc_list: list[str] = []
+    sysmaint_wait_proc_list: list[str] = []
 
     conf_dir_list: list[str] = [
         "/etc/wlr_resize_watcher.d",
         "/usr/local/etc/wlr_resize_watcher.d",
     ]
-    conf_schema: dict[str, str] = schema.Schema(
+    conf_schema: schema.Schema = schema.Schema(
         {
             "enable_dynamic_resolution": bool,
             "warn_on_dynamic_resolution_refuse": bool,
@@ -62,6 +65,8 @@ class GlobalData:
                 str,
                 lambda s: re.match(r"\d+x\d+", s),
             ),
+            "normal_wait_proc_list": [str],
+            "sysmaint_wait_proc_list": [str],
         },
     )
     conf_defaults: dict[str, Any] = {
@@ -72,6 +77,10 @@ class GlobalData:
         ## resolution under Xen's default VGA emulation. It works well at
         ## 1024x768.
         "small_default_resolution": "1024x768",
+        ## No defaults are specified for 'normal_wait_proc_list' and
+        ## 'sysmaint_wait_proc_list', since they would end up being added to
+        ## the start of the respective lists before configured process names,
+        ## rather than being overridden.
     }
 
 
@@ -491,6 +500,75 @@ def check_virtualizer_type() -> None:
     GlobalData.resize_helper_present = True
 
 
+def check_sysmaint_mode() -> None:
+    """
+    Detects if the system is running in sysmaint mode or not.
+    """
+
+    proc_cmdline_file_list: list[Path] = [
+        Path("/proc/cmdline"),
+        Path("/proc/1/cmdline"),
+    ]
+    chosen_proc_cmdline_file: str | None = None
+
+    for proc_cmdline_file in proc_cmdline_file_list:
+        if proc_cmdline_file.is_file():
+            chosen_proc_cmdline_file = str(proc_cmdline_file)
+            break
+
+    if chosen_proc_cmdline_file is None:
+        print(
+            "ERROR: Cannot find the kernel command line file!",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    try:
+        with open(
+            chosen_proc_cmdline_file, "r", encoding="utf-8"
+        ) as kernel_cmdline_file:
+            kernel_cmdline: str = kernel_cmdline_file.read()
+        if "boot-role=sysmaint" in kernel_cmdline:
+            GlobalData.in_sysmaint_mode = True
+    except Exception:
+        print(
+            "ERROR: Cannot open the kernel command line file!",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+
+def wait_for_required_processes() -> None:
+    """
+    Waits for all processes in the relevant wait_proc_list to be running.
+    Ensures at least one second has passed since all processes in the list
+    have started.
+    """
+
+    wait_proc_list: list[str] = (
+        GlobalData.sysmaint_wait_proc_list
+        if GlobalData.in_sysmaint_mode
+        else GlobalData.normal_wait_proc_list
+    )
+
+    while True:
+        running_proc_list: list[str] = subprocess.run(
+            ["ps", "axo", "comm"],
+            check=False,
+            capture_output=True,
+            encoding="utf-8",
+        ).stdout.split("\n")
+        time.sleep(1)
+        do_retry_loop: bool = False
+        for wait_proc in wait_proc_list:
+            if wait_proc not in running_proc_list:
+                do_retry_loop = True
+                break
+        if do_retry_loop:
+            continue
+        break
+
+
 def parse_config_files() -> None:
     """
     Parses config files for wlr_resize_watcher, modifying the ConfigData class
@@ -526,6 +604,10 @@ def parse_config_files() -> None:
     GlobalData.small_default_resolution = config_dict[
         "small_default_resolution"
     ]
+    GlobalData.normal_wait_proc_list = config_dict["normal_wait_proc_list"]
+    GlobalData.sysmaint_wait_proc_list = config_dict[
+        "sysmaint_wait_proc_list"
+    ]
 
 def main() -> NoReturn:
     """
@@ -560,6 +642,8 @@ def main() -> NoReturn:
     parse_config_files()
 
     check_virtualizer_type()
+    check_sysmaint_mode()
+    wait_for_required_processes()
     if (
         GlobalData.resize_helper_present
         and GlobalData.enable_dynamic_resolution
