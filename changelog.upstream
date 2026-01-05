@@ -1,3 +1,22 @@
+commit b60b4960442ef44b00abd92e7eb1bd0429392207
+Merge: d301c54 a201895
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 5 04:17:49 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit a20189515bb03f748681215e18df5c222cfab1c3
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Jan 3 20:32:46 2026 -0600
+
+    Avoid resizing VM resolution before the pcmanfm-qt desktop is able to resize along with it
+
+commit d301c5446585c5aa318d53a98326818ae867abea
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Dec 26 19:04:51 2025 +0000
+
+    bumped changelog version
+
 commit acb0e4b6df389653c1f3bcf0f6be49266d8b59fa
 Merge: 03a4961 446b84e
 Author: Patrick Schleizer <adrelanos@whonix.org>
