@@ -48,6 +48,7 @@ class GlobalData:
     small_default_resolution: str = ""
     normal_wait_proc_list: list[str] = []
     sysmaint_wait_proc_list: list[str] = []
+    wait_proc_timeout: int = 0
 
     conf_dir_list: list[str] = [
         "/etc/wlr_resize_watcher.d",
@@ -67,6 +68,7 @@ class GlobalData:
             ),
             "normal_wait_proc_list": [str],
             "sysmaint_wait_proc_list": [str],
+            "wait_proc_timeout": int,
         },
     )
     conf_defaults: dict[str, Any] = {
@@ -81,6 +83,7 @@ class GlobalData:
         ## 'sysmaint_wait_proc_list', since they would end up being added to
         ## the start of the respective lists before configured process names,
         ## rather than being overridden.
+        "wait_proc_timeout": 10,
     }
 
 
@@ -550,6 +553,7 @@ def wait_for_required_processes() -> None:
         if GlobalData.in_sysmaint_mode
         else GlobalData.normal_wait_proc_list
     )
+    sleep_count: int = 0
 
     while True:
         running_proc_list: list[str] = subprocess.run(
@@ -559,6 +563,9 @@ def wait_for_required_processes() -> None:
             encoding="utf-8",
         ).stdout.split("\n")
         time.sleep(1)
+        sleep_count += 1
+        if sleep_count >= GlobalData.wait_proc_timeout:
+            break
         do_retry_loop: bool = False
         for wait_proc in wait_proc_list:
             if wait_proc not in running_proc_list:
@@ -608,6 +615,7 @@ def parse_config_files() -> None:
     GlobalData.sysmaint_wait_proc_list = config_dict[
         "sysmaint_wait_proc_list"
     ]
+    GlobalData.wait_proc_timeout = config_dict["wait_proc_timeout"]
 
 def main() -> NoReturn:
     """
