@@ -1,3 +1,22 @@
+commit 8ce57f7343caa9141fffa6c6a13047c696e64b8b
+Merge: 3409092 627bfd4
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 6 07:58:36 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 627bfd4bc5959e0e2fb3bc4a0585995472bc9abc
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Mon Jan 5 20:13:14 2026 -0600
+
+    Add timeout to wlr_resize_watcher process wait mechanism
+
+commit 34090922f7be0eb87de130382d9c41ed8f2062b0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Jan 5 10:31:38 2026 +0000
+
+    bumped changelog version
+
 commit b60b4960442ef44b00abd92e7eb1bd0429392207
 Merge: d301c54 a201895
 Author: Patrick Schleizer <adrelanos@whonix.org>
