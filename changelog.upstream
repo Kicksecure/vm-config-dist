@@ -1,3 +1,22 @@
+commit 333fc1139a6d86c87edcee0775e2a903b074470b
+Merge: 6c9b7ba 5130903
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sun Jan 11 05:39:00 2026 -0500
+
+    Merge remote-tracking branch 'ArrayBolt3/arraybolt3/trixie'
+
+commit 5130903354b795695c658e4ba942caf84422d9cd
+Author: Aaron Rainbolt <arraybolt3@ubuntu.com>
+Date:   Sat Jan 10 21:54:48 2026 -0600
+
+    Fix suppress-power-management-in-vms always thinking it's running on a VM
+
+commit 6c9b7ba9b58a358986416fcd506d5fa183dfc6de
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jan 6 13:02:19 2026 +0000
+
+    bumped changelog version
+
 commit 8ce57f7343caa9141fffa6c6a13047c696e64b8b
 Merge: 3409092 627bfd4
 Author: Patrick Schleizer <adrelanos@whonix.org>
