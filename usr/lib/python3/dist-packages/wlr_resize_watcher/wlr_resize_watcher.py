@@ -295,6 +295,14 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
 
     print(f"INFO: sync_hw_resolution_with_compositor start (card_name={card_name!r})", file=sys.stderr)
 
+    not_resizing_display_message = '''
+Not resizing display!
+
+Dynamic resolution is disabled to enhance anonymity. If you want to enable it, open the System Maintenance Panel and click 'Configure Dynamic Resolution'.
+
+(Or run: 'configure-dynamic-resolution')
+    '''
+
     ## Optionally send a notification and exit if dynamic resolution has
     ## been disabled.
     if not GlobalData.enable_dynamic_resolution:
@@ -307,10 +315,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                 [
                     "/usr/bin/notify-send",
                     "--app-name=wlr_resize_watcher",
-                    "Not resizing display!",
-                    "Dynamic resolution is disabled to enhance anonymity. If "
-                    "you want to enable it, open the System Maintenance "
-                    "Panel and click 'Configure Dynamic Resolution'.",
+                    not_resizing_display_message,
                 ],
                 check=False,
             )
@@ -319,10 +324,7 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                     "/usr/libexec/msgcollector/one-time-popup",
                     one_time_popup_status_file,
                     "wlr-resize-watcher",
-                    "Not resizing display!"
-                    "Dynamic resolution is disabled to enhance anonymity. If "
-                    "you want to enable it, open the System Maintenance "
-                    "Panel and click 'Configure Dynamic Resolution'.",
+                    not_resizing_display_message,
                 ],
                 check=False,
             )
