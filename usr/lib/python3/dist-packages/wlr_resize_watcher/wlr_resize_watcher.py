@@ -302,11 +302,24 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
         if GlobalData.warn_on_dynamic_resolution_refuse:
             GlobalData.warn_on_dynamic_resolution_refuse = False
             print("INFO: warn_on_dynamic_resolution_refuse=1 -> sending notify and disabling further warnings.", file=sys.stderr)
+            one_time_popup_status_file = os.path.expanduser("~/.wlr-resize-watcher_one-time-popup")
             subprocess.run(
                 [
                     "/usr/bin/notify-send",
                     "--app-name=wlr_resize_watcher",
                     "Not resizing display!",
+                    "Dynamic resolution is disabled to enhance anonymity. If "
+                    "you want to enable it, open the System Maintenance "
+                    "Panel and click 'Configure Dynamic Resolution'.",
+                ],
+                check=False,
+            )
+            subprocess.run(
+                [
+                    "/usr/libexec/msgcollector/one-time-popup",
+                    one_time_popup_status_file,
+                    "wlr-resize-watcher",
+                    "Not resizing display!"
                     "Dynamic resolution is disabled to enhance anonymity. If "
                     "you want to enable it, open the System Maintenance "
                     "Panel and click 'Configure Dynamic Resolution'.",
