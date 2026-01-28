@@ -1,3 +1,69 @@
+commit c6ac073ee0cfe1971df9efbdf8609201d26b815b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:58:21 2026 -0500
+
+    output
+
+commit 1c90e5ef74a58636f469eff8486a56be974e03a9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:48:46 2026 -0500
+
+    update path
+
+commit e8276b645a778a8d969ed8e9165fe3c231297d1e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:47:40 2026 -0500
+
+    output
+
+commit ec39590c7689a84f448866cd6d5fceccd7963c49
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:45:44 2026 -0500
+
+    /etc/wlr_resize_watcher.d -> /etc/wlr-resize-watcher.d
+
+commit c8aaad0123b27ed2b9248ef03906bca8069c0a8d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:38:47 2026 -0500
+
+    comment
+
+commit fa54eca16f0453844a6f42ad2ade9350851d077b
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:37:21 2026 -0500
+
+    comment
+
+commit a3741899b7a58bbd08473ea87750fef433a7251e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:33:39 2026 -0500
+
+    improve
+
+commit b9b8335db041d48bc34e78675438b9cd5ee4050c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 03:24:01 2026 -0500
+
+    improve
+
+commit af4cfcde9d057df05794e5f4f2ed2a7d792b778a
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 02:39:51 2026 -0500
+
+    improve
+
+commit 0ad942bb9e2fc62c003fa5bb54f4a6daa8b54368
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 02:28:03 2026 -0500
+
+    end-of-options
+
+commit d7d18d89a1c08d2dcaa860a6edd9578f42767b74
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 07:16:54 2026 +0000
+
+    bumped changelog version
+
 commit 31166c64380d2a28940440dea0c1c0cb5d1c56fe
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jan 28 02:15:28 2026 -0500
