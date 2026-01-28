@@ -8,7 +8,7 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
-config_dir='/etc/wlr_resize_watcher.d'
+config_dir='/etc/wlr-resize-watcher.d'
 target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
 
 validate_bool_opt() {
