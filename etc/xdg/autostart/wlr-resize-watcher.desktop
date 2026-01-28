@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=Virtual display resize helper
-Exec=/usr/bin/wlr-resize-watcher
+Name=Virtual display resize helper wlr-resize-watcher
+Exec=systemctl --user start wlr-resize-watcher.service
 StartupNotify=false
 NoDisplay=true
 NotShowIn=QUBES;

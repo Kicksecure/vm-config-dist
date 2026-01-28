@@ -1,0 +1,14 @@
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+[Unit]
+Description=wlr-resize-watcher dynamic screen resolution adjustment
+
+[Service]
+Type=simple
+#Type=notify
+ExecStart=/usr/bin/wlr-resize-watcher
+## 7 hours.
+#WatchdogSec=25200
+#NotifyAccess=all
+#Restart=always
