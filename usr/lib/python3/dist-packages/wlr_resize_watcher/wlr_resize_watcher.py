@@ -548,6 +548,8 @@ def wait_for_required_processes() -> None:
     have started.
     """
 
+    print(f"INFO: Wait for wait_for_required_processes...", file=sys.stderr,)
+
     wait_proc_list: list[str] = (
         GlobalData.sysmaint_wait_proc_list
         if GlobalData.in_sysmaint_mode
@@ -565,6 +567,7 @@ def wait_for_required_processes() -> None:
         time.sleep(1)
         sleep_count += 1
         if sleep_count >= GlobalData.wait_proc_timeout:
+            print(f"INFO: Wait for wait_for_required_processes timeout.", file=sys.stderr)
             break
         do_retry_loop: bool = False
         for wait_proc in wait_proc_list:
@@ -573,6 +576,7 @@ def wait_for_required_processes() -> None:
                 break
         if do_retry_loop:
             continue
+        print(f"INFO: Wait for wait_for_required_processes success.", file=sys.stderr)
         break
 
 
@@ -650,14 +654,20 @@ def main() -> NoReturn:
     parse_config_files()
 
     check_virtualizer_type()
+    print(f"INFO: virtualizer: '{GlobalData.virtualizer_str}'", file=sys.stderr)
+
     check_sysmaint_mode()
+    print(f"INFO: in_sysmaint_mode: '{GlobalData.in_sysmaint_mode}'", file=sys.stderr)
+
     wait_for_required_processes()
     if (
         GlobalData.resize_helper_present
         and GlobalData.enable_dynamic_resolution
     ):
+        print(f"INFO: resize_helper_present and GlobalData.enable_dynamic_resolution: yes", file=sys.stderr)
         sync_hw_resolution_with_compositor(None)
     else:
+        print(f"INFO: resize_helper_present and GlobalData.enable_dynamic_resolution: no", file=sys.stderr)
         ## If we can't find an active virtualizer helper, set all displays to
         ## a comfortable default display resolution.
         set_all_displays_resolution_to_default()
