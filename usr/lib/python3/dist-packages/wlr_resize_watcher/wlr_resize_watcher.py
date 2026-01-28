@@ -51,8 +51,8 @@ class GlobalData:
     wait_proc_timeout: int = 0
 
     conf_dir_list: list[str] = [
-        "/etc/wlr_resize_watcher.d",
-        "/usr/local/etc/wlr_resize_watcher.d",
+        "/etc/wlr-resize-watcher.d",
+        "/usr/local/etc/wlr-resize-watcher.d",
     ]
     conf_schema: schema.Schema = schema.Schema(
         {

@@ -11,3 +11,5 @@ rm_conffile /etc/profile.d/20_kde_screen_locker_disable_in_vms.sh
 rm_conffile /etc/zprofile.d/20_kde_screen_locker_disable_in_vms.zsh
 rm_conffile /etc/X11/Xsession.d/20_kde_screen_locker_disable_in_vms
 rm_conffile /etc/profile.d/15_vm-config-dist.sh
+
+rm_conffile /etc/wlr_resize_watcher.d/30_default.conf
