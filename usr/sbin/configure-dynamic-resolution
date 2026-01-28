@@ -8,6 +8,12 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+# shellcheck source=../libexec/helper-scripts/log_run_die.sh
+source /usr/libexec/helper-scripts/log_run_die.sh
+
+# shellcheck source=../libexec/helper-scripts/as_root.sh
+source /usr/libexec/helper-scripts/as_root.sh
+
 config_dir='/etc/wlr-resize-watcher.d'
 target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
 
@@ -74,7 +80,7 @@ set_bool_opt() {
     return
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
-  printf '%s\n' "INFO: Set option '${config_option_id}' to '${bool_opt}'."
+  log notice "Set option '${config_option_id}' to '${bool_opt}'."
   printf '\n'
 }
 
@@ -93,7 +99,7 @@ set_resolution_opt() {
   ## TOML requires strings to be quoted, thus we wrap the resolution opt in
   ## escaped quotes.
   write_config_value "${config_option_id}" "\"${resolution_opt}\""
-  printf '%s\n' "INFO: Set option '${config_option_id}' to '${resolution_opt}'."
+  log notice "Set option '${config_option_id}' to '${resolution_opt}'."
   printf '\n'
 }
 
@@ -101,10 +107,7 @@ configure_dynamic_resolution() {
   local config_option_list config_option_id_list config_option \
     config_option_id config_option_idx selected_idx bool_opt resolution_opt
 
-  if [ "$(id -u)" != '0' ]; then
-    printf '%s\n' 'ERROR: This script must run as root!'
-    exit 1
-  fi
+  as_root
 
   if ! [ -d "${config_dir}" ]; then
     mkdir --parents -- "${config_dir}" || {
@@ -144,7 +147,8 @@ configure_dynamic_resolution() {
       printf '%s\n' "  ${config_option_idx}: ${config_option}"
     done
     printf '\n'
-    read -r -p 'Enter the number of the desired action: ' selected_idx
+    log question "Enter the number of the desired action:"
+    read -r selected_idx
 
     if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
       printf '%s\n' 'ERROR: Did not specify an action number!'
@@ -162,23 +166,27 @@ configure_dynamic_resolution() {
     config_option_id="${config_option_id_list[selected_idx - 1]}"
     case "${config_option_id}" in
       'enable_dynamic_resolution')
-        read -r -p "Enter 'true' to enable dynamic resolution, 'false' to disable it: " bool_opt
+        log question "Enter 'true' to enable dynamic resolution, 'false' to disable it:"
+        read -r bool_opt
         set_bool_opt "${config_option_id}" "${bool_opt}"
         ;;
       'warn_on_dynamic_resolution_refuse')
-        read -r -p "Enter 'true' to enable dynamic resolution refuse warnings, 'false' to disable them: " bool_opt
+        log question "Enter 'true' to enable dynamic resolution refuse warnings, 'false' to disable them:"
+        read -r bool_opt
         set_bool_opt "${config_option_id}" "${bool_opt}"
         ;;
       'standard_default_resolution')
-        read -r -p 'Enter the desired resolution (for example, 1920x1080): ' resolution_opt
+        log question "Enter the desired resolution (for example, 1920x1080):"
+        read -r resolution_opt
         set_resolution_opt "${config_option_id}" "${resolution_opt}"
         ;;
       'small_default_resolution')
-        read -r -p 'Enter the desired resolution (for example, 1920x1080): ' resolution_opt
+        log question "Enter the desired resolution (for example, 1920x1080):"
+        read -r resolution_opt
         set_resolution_opt "${config_option_id}" "${resolution_opt}"
         ;;
       'exit')
-        printf '%s\n' "INFO: Done configuring dynamic resolution settings."
+        log notice "Done configuring dynamic resolution settings."
         printf '\n'
         return 0
         ;;
@@ -198,8 +206,11 @@ command -v overwrite >/dev/null
 
 configure_dynamic_resolution
 
-printf '%s\n' "INFO: '${target_config_file}' contents:"
+log notice "'${target_config_file}' contents:"
 printf '%s\n' "########################################"
 stcatn "${target_config_file}"
 printf '%s\n' "########################################"
-printf '%s\n' "INFO: Success."
+
+## Failed to connect to user scope bus via local transport: $DBUS_SESSION_BUS_ADDRESS and $XDG_RUNTIME_DIR not defined (consider using --machine=<user>@.host --user to connect to bus of other user)
+#log_run notice sudo -u "$SUDO_USER" -- systemctl --user start wlr-resize-watcher.service
+log notice "Success."
