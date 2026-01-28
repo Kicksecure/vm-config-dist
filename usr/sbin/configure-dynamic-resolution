@@ -58,7 +58,7 @@ write_config_value() {
   ## Then append the config option and a new trailing newline
   config_file_contents+="${opt_key}=${opt_val}"$'\n'
 
-  printf "%s" "${config_file_contents}" | sponge -- "${target_config_file}"
+  overwrite "${target_config_file}" "${config_file_contents}"
 }
 
 set_bool_opt() {
@@ -180,7 +180,7 @@ configure_dynamic_resolution() {
       'exit')
         printf '%s\n' "INFO: Done configuring dynamic resolution settings."
         printf '\n'
-        exit 0
+        return 0
         ;;
       *)
         ## This should be unreachable.
@@ -194,6 +194,12 @@ configure_dynamic_resolution() {
 command -v id >/dev/null
 command -v stcatn >/dev/null
 command -v sed >/dev/null
-command -v sponge >/dev/null
+command -v overwrite >/dev/null
 
 configure_dynamic_resolution
+
+printf '%s\n' "INFO: '${target_config_file}' contents:"
+printf '%s\n' "########################################"
+stcatn "${target_config_file}"
+printf '%s\n' "########################################"
+printf '%s\n' "INFO: Success."
