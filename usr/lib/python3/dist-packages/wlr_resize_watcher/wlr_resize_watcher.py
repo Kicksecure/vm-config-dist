@@ -301,6 +301,9 @@ Not resizing display!
 Dynamic resolution is disabled to enhance anonymity. If you want to enable it, open the System Maintenance Panel and click 'Configure Dynamic Resolution'.
 
 (Or run: 'configure-dynamic-resolution')
+
+See also:
+https://www.whonix.org/wiki/resize
     '''
 
     ## Optionally send a notification and exit if dynamic resolution has
