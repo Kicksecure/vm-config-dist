@@ -296,11 +296,11 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
     print(f"INFO: sync_hw_resolution_with_compositor start (card_name={card_name!r})", file=sys.stderr)
 
     not_resizing_display_message = '''
-Not resizing display!
+Not changing screen resolution!
 
-Dynamic resolution is disabled to enhance anonymity. If you want to enable it, open the System Maintenance Panel and click 'Configure Dynamic Resolution'.
+Automatic screen resizing is turned off by default inside the workstation to improve privacy (it can reduce fingerprinting). If you want to turn it on, open the System Maintenance Panel and click 'Configure Dynamic Resolution'.
 
-(Or run: 'configure-dynamic-resolution')
+Or run: configure-dynamic-resolution
 
 See also:
 https://www.whonix.org/wiki/resize
