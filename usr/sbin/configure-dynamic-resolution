@@ -58,7 +58,7 @@ write_config_value() {
   ## Then append the config option and a new trailing newline
   config_file_contents+="${opt_key}=${opt_val}"$'\n'
 
-  printf "%s" "${config_file_contents}" | sponge "${target_config_file}"
+  printf "%s" "${config_file_contents}" | sponge -- "${target_config_file}"
 }
 
 set_bool_opt() {
