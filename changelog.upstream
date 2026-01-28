@@ -1,3 +1,27 @@
+commit 8346528cae05fae3fa8d13e564f9bc5b16ff9d3d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 05:34:57 2026 -0500
+
+    improve
+
+commit 1081f065a59efec6b14e2536e5a14000245c60a5
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 05:18:02 2026 -0500
+
+    improve
+
+commit b1f65a55688e5ff02ab9266ded2aab9dbba478e9
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 05:08:37 2026 -0500
+
+    implement wlr-resize-watcher systemd user unit
+
+commit ea6f7aab0aa6f634e69670fc072948fa05507303
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jan 28 09:42:02 2026 +0000
+
+    bumped changelog version
+
 commit c6ac073ee0cfe1971df9efbdf8609201d26b815b
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jan 28 03:58:21 2026 -0500
