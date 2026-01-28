@@ -293,11 +293,15 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
     graphics cards to the native resolution.
     """
 
+    print(f"INFO: sync_hw_resolution_with_compositor start (card_name={card_name!r})", file=sys.stderr)
+
     ## Optionally send a notification and exit if dynamic resolution has
     ## been disabled.
     if not GlobalData.enable_dynamic_resolution:
+        print("INFO: Dynamic resolution disabled by config. Skipping sync.", file=sys.stderr)
         if GlobalData.warn_on_dynamic_resolution_refuse:
             GlobalData.warn_on_dynamic_resolution_refuse = False
+            print("INFO: warn_on_dynamic_resolution_refuse=1 -> sending notify and disabling further warnings.", file=sys.stderr)
             subprocess.run(
                 [
                     "/usr/bin/notify-send",
@@ -314,39 +318,47 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
     real_card_list: list[str]
     if card_name is None:
         ## Manually discover all available cards from /sys/class/drm.
+        print("INFO: card_name=None -> discovering cards in /sys/class/drm", file=sys.stderr)
         drm_path: Path = Path("/sys/class/drm")
         if not drm_path.is_dir():
-            print(
-                "ERROR: /sys/class/drm does not exist or is not a "
-                "directory!",
-                file=sys.stderr,
-            )
+            print("ERROR: /sys/class/drm does not exist or is not a directory!", file=sys.stderr)
             sys.exit(1)
         real_card_list = [
             x.name
             for x in drm_path.iterdir()
             if x.is_dir() and GlobalData.card_match_re.match(x.name)
         ]
+        print(f"INFO: discovered cards: {real_card_list!r}", file=sys.stderr)
     else:
         real_card_list = [card_name]
+        print(f"INFO: card_name provided -> using cards: {real_card_list!r}", file=sys.stderr)
 
     compositor_disp_list: list[DisplayInfo] | None = get_compositor_disp_list()
     if compositor_disp_list is None:
+        print("INFO: compositor_disp_list=None (compositor likely sees no displays) -> returning", file=sys.stderr)
         return
+    print(f"INFO: compositor reports {len(compositor_disp_list)} display(s): {[(d.disp_name, d.disp_mode) for d in compositor_disp_list]!r}", file=sys.stderr)
 
     hw_disp_list: list[DisplayInfo] | None = get_hw_disp_list(real_card_list)
     if hw_disp_list is None:
+        print(f"INFO: hw_disp_list=None (no connected displays found for cards {real_card_list!r}) -> returning", file=sys.stderr)
         return
+    print(f"INFO: hardware reports {len(hw_disp_list)} display(s): {[(d.disp_name, d.disp_mode) for d in hw_disp_list]!r}", file=sys.stderr)
 
     for hw_display in hw_disp_list:
+        print(f"INFO: checking hw display '{hw_display.disp_name}' native_mode='{hw_display.disp_mode}'", file=sys.stderr)
         matched_compositor_display: DisplayInfo | None = None
         for compositor_display in compositor_disp_list:
             if compositor_display.disp_name == hw_display.disp_name:
                 matched_compositor_display = compositor_display
                 break
         if matched_compositor_display is None:
+            print(f"INFO: no compositor match for hw display '{hw_display.disp_name}', skipping", file=sys.stderr)
             continue
+        print(f"INFO: matched compositor display '{matched_compositor_display.disp_name}' current_mode='{matched_compositor_display.disp_mode}'", file=sys.stderr)
+
         if hw_display.disp_mode != matched_compositor_display.disp_mode:
+            print(f"INFO: mode mismatch -> attempting sync: '{hw_display.disp_name}' {matched_compositor_display.disp_mode} -> {hw_display.disp_mode}", file=sys.stderr)
             try:
                 subprocess.run(
                     [
@@ -358,13 +370,14 @@ def sync_hw_resolution_with_compositor(card_name: str | None) -> None:
                     ],
                     check=True,
                 )
+                print(f"INFO: synced display '{hw_display.disp_name}' to '{hw_display.disp_mode}@60'", file=sys.stderr)
             except subprocess.CalledProcessError:
-                print(
-                    "WARNING: Unable to sync display resolution for display "
-                    f"'{hw_display.disp_name}'!",
-                    file=sys.stderr,
-                )
+                print(f"WARNING: Unable to sync display resolution for display '{hw_display.disp_name}'!", file=sys.stderr)
                 traceback.print_exc(file=sys.stderr)
+        else:
+            print(f"INFO: display '{hw_display.disp_name}' already matches native mode '{hw_display.disp_mode}', no action needed", file=sys.stderr)
+
+    print("INFO: sync_hw_resolution_with_compositor end", file=sys.stderr)
 
 
 def executable_exists_and_is_running(exe_name: str) -> int:
