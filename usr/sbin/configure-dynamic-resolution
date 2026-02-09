@@ -187,7 +187,7 @@ configure_dynamic_resolution() {
         ;;
       'exit')
         log notice "Done configuring dynamic resolution settings."
-        printf '\n'
+        printf '%s\n' ""
         return 0
         ;;
       *)
@@ -210,7 +210,7 @@ log notice "'${target_config_file}' contents:"
 printf '%s\n' "########################################"
 stcatn "${target_config_file}"
 printf '%s\n' "########################################"
-printf '%s\n'
+printf '%s\n' ""
 
 if [ -n "${SUDO_USER-}" ]; then
   xdg_runtime_dir="/run/user/$(id -u -- "$SUDO_USER")"
