@@ -76,12 +76,12 @@ set_bool_opt() {
   bool_opt="$(validate_bool_opt "${orig_bool_opt}")"
   if [ -z "${bool_opt}" ]; then
     printf '%s\n' "ERROR: Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
-    printf '\n'
+    printf '%s\n' ""
     return
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
   log notice "Set option '${config_option_id}' to '${bool_opt}'."
-  printf '\n'
+  printf '%s\n' ""
 }
 
 set_resolution_opt() {
@@ -93,14 +93,14 @@ set_resolution_opt() {
   resolution_opt="$(validate_resolution_opt "${orig_resolution_opt}")"
   if [ -z "${resolution_opt}" ]; then
     printf '%s\n' "ERROR: Provided option '${orig_resolution_opt}' is not a valid display resolution!"
-    printf '\n'
+    printf '%s\n' ""
     return
   fi
   ## TOML requires strings to be quoted, thus we wrap the resolution opt in
   ## escaped quotes.
   write_config_value "${config_option_id}" "\"${resolution_opt}\""
   log notice "Set option '${config_option_id}' to '${resolution_opt}'."
-  printf '\n'
+  printf '%s\n' ""
 }
 
 configure_dynamic_resolution() {
@@ -136,30 +136,30 @@ configure_dynamic_resolution() {
     'exit'
   )
 
-  printf '\n'
+  printf '%s\n' ""
 
   while true; do
     printf '%s\n' 'Available configuration options:'
-    printf '\n'
+    printf '%s\n' ""
     config_option_idx=0
     for config_option in "${config_option_list[@]}"; do
       (( config_option_idx++ )) || true
       printf '%s\n' "  ${config_option_idx}: ${config_option}"
     done
-    printf '\n'
+    printf '%s\n' ""
     log question "Enter the number of the desired action:"
     read -r selected_idx
 
     if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
       printf '%s\n' 'ERROR: Did not specify an action number!'
-      printf '\n'
+      printf '%s\n' ""
       continue
     fi
     ## selected_idx starts at 1, not 0, so we have to adjust for that
     if (( selected_idx < 1 )) \
       || (( (selected_idx - 1) >= ${#config_option_list[@]} )); then
       printf '%s\n' 'ERROR: Specified action is out of range!'
-      printf '\n'
+      printf '%s\n' ""
       continue
     fi
 
