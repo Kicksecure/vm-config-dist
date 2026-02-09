@@ -213,8 +213,8 @@ printf '%s\n' "########################################"
 printf '%s\n' ""
 
 if [ -n "${SUDO_USER-}" ]; then
-  xdg_runtime_dir="/run/user/$(id -u -- "$SUDO_USER")"
-  log_run notice sudo -u "$SUDO_USER" -- env XDG_RUNTIME_DIR="$xdg_runtime_dir" systemctl --user restart wlr-resize-watcher.service
+  xdg_runtime_dir="/run/user/$(id --user -- "$SUDO_USER")"
+  log_run notice sudo --user="$SUDO_USER" -- env XDG_RUNTIME_DIR="$xdg_runtime_dir" systemctl --user restart wlr-resize-watcher.service
 else
   log notice "The environment variable SUDO_USER is unavailable."
   log warn "To restart wlr-resize-watcher, reboot or run using run under a user account (such as for example account 'user') (not using sudo/root): systemctl --user restart wlr-resize-watcher.service"
