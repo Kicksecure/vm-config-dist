@@ -23,8 +23,11 @@ validate_bool_opt() {
   orig_bool_opt="${1:-}"
   bool_opt_lowercase="${orig_bool_opt,,}"
   case "${bool_opt_lowercase}" in
-    'true'|'false')
-      printf '%s\n' "${bool_opt_lowercase}"
+    'true'|'t'|'y'|'yes'|'on'|'1')
+      printf '%s\n' "true"
+      ;;
+    'false'|'f'|'n'|'no'|'off'|'0')
+      printf '%s\n' "false"
       ;;
     *)
       true
@@ -77,11 +80,12 @@ set_bool_opt() {
   if [ -z "${bool_opt}" ]; then
     printf '%s\n' "ERROR: Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
     printf '%s\n' ""
-    return
+    return 1
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
   log notice "Set option '${config_option_id}' to '${bool_opt}'."
   printf '%s\n' ""
+  return 0
 }
 
 set_resolution_opt() {
@@ -94,18 +98,19 @@ set_resolution_opt() {
   if [ -z "${resolution_opt}" ]; then
     printf '%s\n' "ERROR: Provided option '${orig_resolution_opt}' is not a valid display resolution!"
     printf '%s\n' ""
-    return
+    return 1
   fi
   ## TOML requires strings to be quoted, thus we wrap the resolution opt in
   ## escaped quotes.
   write_config_value "${config_option_id}" "\"${resolution_opt}\""
   log notice "Set option '${config_option_id}' to '${resolution_opt}'."
   printf '%s\n' ""
+  return 0
 }
 
 configure_dynamic_resolution() {
   local config_option_list config_option_id_list config_option \
-    config_option_id config_option_idx selected_idx bool_opt resolution_opt
+    config_option_id config_option_idx selected_idx opt_arg bool_opt resolution_opt did_change
 
   as_root
 
@@ -147,8 +152,8 @@ configure_dynamic_resolution() {
       printf '%s\n' "  ${config_option_idx}: ${config_option}"
     done
     printf '%s\n' ""
-    log question "Enter the number of the desired action:"
-    read -r selected_idx
+    log question "Enter the number of the desired action (optionally with a value, e.g. '1 true' or '3 1920x1080'):"
+    read -r selected_idx opt_arg
 
     if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
       printf '%s\n' 'ERROR: Did not specify an action number!'
@@ -164,29 +169,61 @@ configure_dynamic_resolution() {
     fi
 
     config_option_id="${config_option_id_list[selected_idx - 1]}"
+    did_change=false
     case "${config_option_id}" in
       'enable_dynamic_resolution')
-        log question "Enter 'true' to enable dynamic resolution, 'false' to disable it:"
-        read -r bool_opt
-        set_bool_opt "${config_option_id}" "${bool_opt}"
+        if [ -n "${opt_arg:-}" ]; then
+          bool_opt="${opt_arg}"
+        else
+          log question "Enable dynamic resolution? [Y/n]"
+          read -r bool_opt
+          bool_opt="${bool_opt:-y}"
+        fi
+        if ! set_bool_opt "${config_option_id}" "${bool_opt}"; then
+          continue
+        fi
+        did_change=true
         ;;
       'warn_on_dynamic_resolution_refuse')
-        log question "Enter 'true' to enable dynamic resolution refuse warnings, 'false' to disable them:"
-        read -r bool_opt
-        set_bool_opt "${config_option_id}" "${bool_opt}"
+        if [ -n "${opt_arg:-}" ]; then
+          bool_opt="${opt_arg}"
+        else
+          log question "Enable dynamic resolution refuse warnings? [Y/n]"
+          read -r bool_opt
+          bool_opt="${bool_opt:-y}"
+        fi
+        if ! set_bool_opt "${config_option_id}" "${bool_opt}"; then
+          continue
+        fi
+        did_change=true
         ;;
       'standard_default_resolution')
-        log question "Enter the desired resolution (for example, 1920x1080):"
-        read -r resolution_opt
-        set_resolution_opt "${config_option_id}" "${resolution_opt}"
+        if [ -n "${opt_arg:-}" ]; then
+          resolution_opt="${opt_arg}"
+        else
+          log question "Enter the desired resolution (for example, 1920x1080):"
+          read -r resolution_opt
+        fi
+        if ! set_resolution_opt "${config_option_id}" "${resolution_opt}"; then
+          continue
+        fi
+        did_change=true
         ;;
       'small_default_resolution')
-        log question "Enter the desired resolution (for example, 1920x1080):"
-        read -r resolution_opt
-        set_resolution_opt "${config_option_id}" "${resolution_opt}"
+        if [ -n "${opt_arg:-}" ]; then
+          resolution_opt="${opt_arg}"
+        else
+          log question "Enter the desired resolution (for example, 1920x1080):"
+          read -r resolution_opt
+        fi
+        if ! set_resolution_opt "${config_option_id}" "${resolution_opt}"; then
+          continue
+        fi
+        did_change=true
         ;;
       'exit')
         log notice "Done configuring dynamic resolution settings."
+        log notice "You can always start this configuration tool again to change another option."
         printf '%s\n' ""
         return 0
         ;;
@@ -196,6 +233,12 @@ configure_dynamic_resolution() {
         exit 1
         ;;
     esac
+
+    if [ "${did_change}" = true ]; then
+      log notice "Done. You can always start this configuration tool again to change another option."
+      printf '%s\n' ""
+      return 0
+    fi
   done
 }
 
