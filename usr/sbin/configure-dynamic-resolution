@@ -40,6 +40,15 @@ generated_file_header() {
 ##
 ## If you delete this file, that's OK.
 ## A fresh file will be created the next time you run this tool.
+##
+## For custom configuration, use:
+## /etc/wlr-resize-watcher.d/50_user.conf
+##
+## See also:
+## /etc/wlr-resize-watcher.d/30_default.conf
+##
+## User documentation:
+## https://www.whonix.org/wiki/resize
 EOF
 }
 
