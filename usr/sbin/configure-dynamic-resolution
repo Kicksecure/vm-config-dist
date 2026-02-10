@@ -8,6 +8,9 @@ set -o nounset
 set -o errtrace
 set -o pipefail
 
+# shellcheck source=../libexec/helper-scripts/get_colors.sh
+source /usr/libexec/helper-scripts/get_colors.sh
+
 # shellcheck source=../libexec/helper-scripts/log_run_die.sh
 source /usr/libexec/helper-scripts/log_run_die.sh
 
@@ -115,31 +118,35 @@ set_resolution_opt() {
 }
 
 announce_change() {
-  local config_option_id normalized_value
+  local config_option_id normalized_value on_text off_text res_text
 
   config_option_id="${1:-}"
   normalized_value="${2:-}"
 
+  on_text="${green}${bold}ON${nocolor}"
+  off_text="${red}${bold}OFF${nocolor}"
+  res_text="${cyan}${bold}${normalized_value}${nocolor}"
+
   case "${config_option_id}" in
     'enable_dynamic_resolution')
       if [ "${normalized_value}" = "true" ]; then
-        log notice "Dynamic resolution has been turned ON."
+        log notice "Dynamic resolution has been turned ${on_text}."
       else
-        log notice "Dynamic resolution has been turned OFF."
+        log notice "Dynamic resolution has been turned ${off_text}."
       fi
       ;;
     'warn_on_dynamic_resolution_refuse')
       if [ "${normalized_value}" = "true" ]; then
-        log notice "Warning messages have been turned ON."
+        log notice "Warning messages have been turned ${on_text}."
       else
-        log notice "Warning messages have been turned OFF."
+        log notice "Warning messages have been turned ${off_text}."
       fi
       ;;
     'standard_default_resolution')
-      log notice "The normal default resolution has been set to ${normalized_value}."
+      log notice "The normal default resolution has been set to ${res_text}."
       ;;
     'small_default_resolution')
-      log notice "The small default resolution has been set to ${normalized_value}."
+      log notice "The small default resolution has been set to ${res_text}."
       ;;
     *)
       log notice "Settings have been updated."
