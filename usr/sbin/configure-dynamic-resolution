@@ -16,6 +16,8 @@ source /usr/libexec/helper-scripts/as_root.sh
 
 log_level=info
 
+log info "start"
+
 config_dir='/etc/wlr-resize-watcher.d'
 target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
 
@@ -248,6 +250,9 @@ command -v id >/dev/null
 command -v stcatn >/dev/null
 command -v sed >/dev/null
 command -v overwrite >/dev/null
+
+log info "User documentation:
+https://www.whonix.org/wiki/resize"
 
 configure_dynamic_resolution
 
