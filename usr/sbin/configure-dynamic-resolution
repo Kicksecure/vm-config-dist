@@ -40,7 +40,7 @@ generated_file_header() {
 ##
 ## Want to change something?
 ## Run this tool again:
-##   $my_base_name
+##   sudo $my_base_name
 ##
 ## Deleting this file is OK.
 ## A new clean file will be created the next time you run this tool.
