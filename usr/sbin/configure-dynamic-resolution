@@ -28,6 +28,15 @@ target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
 
 default_resolution="1920x1080"
 
+## Collect user-friendly summary messages here and print them later (near the bottom).
+declare -a summary_notice_messages=()
+
+add_summary_notice() {
+  local msg
+  msg="${1:-}"
+  summary_notice_messages+=("${msg}")
+}
+
 generated_file_header() {
   cat <<EOF
 ## Auto-generated file (do not edit)
@@ -104,7 +113,7 @@ write_config_value() {
     config_file_contents="$(generated_file_header)"$'\n\n'"${config_file_contents}"
   fi
 
-  ## Remove any existing line for this key.
+  ## Remove any existing line for this key (only real config lines, not comments).
   config_file_contents="$(sed "/^${opt_key}=/d" <<< "${config_file_contents}")"
 
   ## Bash strips the file's trailing newline, so we have to put it back, but
@@ -133,7 +142,6 @@ set_bool_opt() {
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
   log info "Saved: ${config_option_id}=${bool_opt}"
-  printf '%s\n' ""
   return 0
 }
 
@@ -161,7 +169,7 @@ set_default_resolution_both() {
 }
 
 announce_change() {
-  local config_option_id normalized_value on_text off_text res_text
+  local config_option_id normalized_value on_text off_text res_text msg
 
   config_option_id="${1:-}"
   normalized_value="${2:-}"
@@ -173,23 +181,25 @@ announce_change() {
   case "${config_option_id}" in
     'enable_dynamic_resolution')
       if [ "${normalized_value}" = "true" ]; then
-        log notice "Dynamic resolution has been turned ${on_text}."
+        msg="Dynamic resolution has been turned ${on_text}."
       else
-        log notice "Dynamic resolution has been turned ${off_text}."
+        msg="Dynamic resolution has been turned ${off_text}."
       fi
+      add_summary_notice "${msg}"
       ;;
     'warn_on_dynamic_resolution_refuse')
       if [ "${normalized_value}" = "true" ]; then
-        log notice "Warning messages have been turned ${on_text}."
+        msg="Warning messages have been turned ${on_text}."
       else
-        log notice "Warning messages have been turned ${off_text}."
+        msg="Warning messages have been turned ${off_text}."
       fi
+      add_summary_notice "${msg}"
       ;;
     'default_resolution')
-      log notice "Your default screen resolution has been set to ${res_text}."
+      add_summary_notice "Your default screen resolution has been set to ${res_text}."
       ;;
     *)
-      log notice "Settings have been updated."
+      add_summary_notice "Settings have been updated."
       ;;
   esac
 }
@@ -331,7 +341,7 @@ configure_dynamic_resolution() {
         ;;
 
       'exit')
-        log notice "Done. You can run this configuration tool again anytime to change another setting."
+        add_summary_notice "Done. You can run this configuration tool again anytime to change another setting."
         printf '%s\n' ""
         return 0
         ;;
@@ -344,7 +354,7 @@ configure_dynamic_resolution() {
     esac
 
     if [ "${did_change}" = true ]; then
-      log notice "All set. If you want to change something else, just start this configuration tool again."
+      add_summary_notice "All set. If you want to change something else, just start this configuration tool again."
       printf '%s\n' ""
       return 0
     fi
@@ -367,6 +377,13 @@ printf '%s\n' "########################################"
 stcatn "${target_config_file}"
 printf '%s\n' "########################################"
 printf '%s\n' ""
+
+## Print the important, user-friendly summary here (near the bottom).
+if (( ${#summary_notice_messages[@]} > 0 )); then
+  for msg in "${summary_notice_messages[@]}"; do
+    log notice "${msg}"
+  done
+fi
 
 if [ -n "${SUDO_USER-}" ]; then
   log info "Restarting 'wlr-resize-watcher.service'..."
