@@ -166,7 +166,6 @@ set_default_resolution_both() {
 
   log info "Saved: standard_default_resolution=${resolution_opt}"
   log info "Saved: small_default_resolution=${resolution_opt}"
-  printf '%s\n' ""
   return 0
 }
 
@@ -343,9 +342,8 @@ configure_dynamic_resolution() {
         ;;
 
       'exit')
-        add_summary_notice "Done. You can run this configuration tool again anytime to change another setting."
-        printf '%s\n' ""
-        return 0
+        log notice "No action taken. Exiting."
+        exit 0
         ;;
 
       *)
