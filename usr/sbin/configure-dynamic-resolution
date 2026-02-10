@@ -78,7 +78,7 @@ set_bool_opt() {
 
   bool_opt="$(validate_bool_opt "${orig_bool_opt}")"
   if [ -z "${bool_opt}" ]; then
-    printf '%s\n' "ERROR: Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
+    log error "Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
     printf '%s\n' ""
     return 1
   fi
@@ -96,7 +96,7 @@ set_resolution_opt() {
 
   resolution_opt="$(validate_resolution_opt "${orig_resolution_opt}")"
   if [ -z "${resolution_opt}" ]; then
-    printf '%s\n' "ERROR: Provided option '${orig_resolution_opt}' is not a valid display resolution!"
+    log error "Provided option '${orig_resolution_opt}' is not a valid display resolution!"
     printf '%s\n' ""
     return 1
   fi
@@ -116,12 +116,12 @@ configure_dynamic_resolution() {
 
   if ! [ -d "${config_dir}" ]; then
     mkdir --parents -- "${config_dir}" || {
-      printf '%s\n' "ERROR: Could not create config directory '${config_dir}'!"
+      log error "Could not create config directory '${config_dir}'!"
       return 1
     }
   fi
   if ! [ -f "${target_config_file}" ] && [ -e "${target_config_file}" ]; then
-    printf '%s\n' "ERROR: '${target_config_file}' exists but is not a file!"
+    log error "'${target_config_file}' exists but is not a file!"
     return 1
   fi
 
