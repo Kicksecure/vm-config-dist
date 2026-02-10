@@ -156,14 +156,14 @@ configure_dynamic_resolution() {
     read -r selected_idx opt_arg
 
     if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
-      printf '%s\n' 'ERROR: Did not specify an action number!'
+      log error "Did not specify an action number!"
       printf '%s\n' ""
-      continue
+      return 1
     fi
     ## selected_idx starts at 1, not 0, so we have to adjust for that
     if (( selected_idx < 1 )) \
       || (( (selected_idx - 1) >= ${#config_option_list[@]} )); then
-      printf '%s\n' 'ERROR: Specified action is out of range!'
+      log error "Specified action is out of range!"
       printf '%s\n' ""
       continue
     fi
@@ -229,7 +229,7 @@ configure_dynamic_resolution() {
         ;;
       *)
         ## This should be unreachable.
-        printf '%s\n' 'ERROR: Unreachable code hit!'
+        log error "Unreachable code hit!"
         exit 1
         ;;
     esac
