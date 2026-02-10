@@ -16,10 +16,12 @@ source /usr/libexec/helper-scripts/as_root.sh
 
 log_level=info
 
-log info "start"
+log info "Start"
 
 config_dir='/etc/wlr-resize-watcher.d'
 target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
+
+default_resolution="1920x1080"
 
 validate_bool_opt() {
   local orig_bool_opt bool_opt_lowercase
@@ -82,12 +84,12 @@ set_bool_opt() {
 
   bool_opt="$(validate_bool_opt "${orig_bool_opt}")"
   if [ -z "${bool_opt}" ]; then
-    log error "Provided option '${orig_bool_opt}' is neither 'true' nor 'false'!"
+    log error "Option '${orig_bool_opt}' is invalid. Please use: yes/no, true/false, on/off, or 1/0."
     printf '%s\n' ""
     return 1
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
-  log notice "Option '${config_option_id}' has been set to '${bool_opt}'."
+  log notice "Saved: ${config_option_id} = ${bool_opt}"
   printf '%s\n' ""
   return 0
 }
@@ -100,14 +102,14 @@ set_resolution_opt() {
 
   resolution_opt="$(validate_resolution_opt "${orig_resolution_opt}")"
   if [ -z "${resolution_opt}" ]; then
-    log error "Provided option '${orig_resolution_opt}' is not a valid display resolution!"
+    log error "'${orig_resolution_opt}' does not look like a screen resolution. Please use something like 1920x1080."
     printf '%s\n' ""
     return 1
   fi
   ## TOML requires strings to be quoted, thus we wrap the resolution opt in
   ## escaped quotes.
   write_config_value "${config_option_id}" "\"${resolution_opt}\""
-  log notice "Set option '${config_option_id}' to '${resolution_opt}'."
+  log notice "Saved: ${config_option_id} = ${resolution_opt}"
   printf '%s\n' ""
   return 0
 }
@@ -120,21 +122,21 @@ configure_dynamic_resolution() {
 
   if ! [ -d "${config_dir}" ]; then
     mkdir --parents -- "${config_dir}" || {
-      log error "Could not create config directory '${config_dir}'!"
+      log error "Could not create the configuration folder '${config_dir}'."
       return 1
     }
   fi
   if ! [ -f "${target_config_file}" ] && [ -e "${target_config_file}" ]; then
-    log error "'${target_config_file}' exists but is not a file!"
+    log error "'${target_config_file}' exists but is not a regular file."
     return 1
   fi
 
   config_option_list=(
-    'Enable or disable dynamic resolution'
-    'Enable or disable dynamic resolution refuse warning'
-    'Set standard default resolution'
-    'Set small default resolution (only applicable with Xen)'
-    'Exit configuration editor'
+    'Turn dynamic resolution on or off'
+    'Turn warning messages on or off (when dynamic resolution is refused)'
+    "Set the normal default resolution"
+    "Set the small default resolution (Xen only)"
+    'Exit'
   )
 
   config_option_id_list=(
@@ -148,7 +150,7 @@ configure_dynamic_resolution() {
   printf '%s\n' ""
 
   while true; do
-    printf '%s\n' 'Available configuration options:'
+    printf '%s\n' 'What do you want to change?'
     printf '%s\n' ""
     config_option_idx=0
     for config_option in "${config_option_list[@]}"; do
@@ -156,30 +158,38 @@ configure_dynamic_resolution() {
       printf '%s\n' "  ${config_option_idx}: ${config_option}"
     done
     printf '%s\n' ""
-    log question "Enter the number of the desired action (optionally with a value, e.g. '1 true' or '3 1920x1080'):"
+    log question "Type a number and press Enter. Tip: just press Enter to turn ON dynamic resolution."
     read -r selected_idx opt_arg
 
-    if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
-      log error "Did not specify an action number!"
-      printf '%s\n' ""
-      return 1
+    ## Default: pressing Enter does the most common thing (enable dynamic resolution).
+    if [ -z "${selected_idx}" ]; then
+      selected_idx="1"
+      opt_arg="true"
     fi
+
+    if ! [[ "${selected_idx}" =~ ^[0-9]+$ ]]; then
+      log error "Please type a number (1 to ${#config_option_list[@]})."
+      printf '%s\n' ""
+      continue
+    fi
+
     ## selected_idx starts at 1, not 0, so we have to adjust for that
     if (( selected_idx < 1 )) \
       || (( (selected_idx - 1) >= ${#config_option_list[@]} )); then
-      log error "Specified action is out of range!"
+      log error "That number is out of range. Please choose 1 to ${#config_option_list[@]}."
       printf '%s\n' ""
       continue
     fi
 
     config_option_id="${config_option_id_list[selected_idx - 1]}"
     did_change=false
+
     case "${config_option_id}" in
       'enable_dynamic_resolution')
         if [ -n "${opt_arg:-}" ]; then
           bool_opt="${opt_arg}"
         else
-          log question "Enable dynamic resolution? [Y/n]"
+          log question "Turn ON dynamic resolution? [Y/n] (Press Enter for Yes)"
           read -r bool_opt
           bool_opt="${bool_opt:-y}"
         fi
@@ -188,58 +198,64 @@ configure_dynamic_resolution() {
         fi
         did_change=true
         ;;
+
       'warn_on_dynamic_resolution_refuse')
         if [ -n "${opt_arg:-}" ]; then
           bool_opt="${opt_arg}"
         else
-          log question "Enable dynamic resolution refuse warnings? [Y/n]"
+          log question "Show warning messages if dynamic resolution is refused? [y/N] (Press Enter for No)"
           read -r bool_opt
-          bool_opt="${bool_opt:-y}"
+          bool_opt="${bool_opt:-n}"
         fi
         if ! set_bool_opt "${config_option_id}" "${bool_opt}"; then
           continue
         fi
         did_change=true
         ;;
+
       'standard_default_resolution')
         if [ -n "${opt_arg:-}" ]; then
           resolution_opt="${opt_arg}"
         else
-          log question "Enter the desired resolution (for example, 1920x1080):"
+          log question "Enter a resolution like 1920x1080. Press Enter to use ${default_resolution}."
           read -r resolution_opt
+          resolution_opt="${resolution_opt:-$default_resolution}"
         fi
         if ! set_resolution_opt "${config_option_id}" "${resolution_opt}"; then
           continue
         fi
         did_change=true
         ;;
+
       'small_default_resolution')
         if [ -n "${opt_arg:-}" ]; then
           resolution_opt="${opt_arg}"
         else
-          log question "Enter the desired resolution (for example, 1920x1080):"
+          log question "Enter a resolution like 1920x1080. Press Enter to use ${default_resolution}."
           read -r resolution_opt
+          resolution_opt="${resolution_opt:-$default_resolution}"
         fi
         if ! set_resolution_opt "${config_option_id}" "${resolution_opt}"; then
           continue
         fi
         did_change=true
         ;;
+
       'exit')
-        log notice "Done configuring dynamic resolution settings."
-        log notice "You can always start this configuration tool again to change another option."
+        log notice "Done. You can run this configuration tool again anytime to change another setting."
         printf '%s\n' ""
         return 0
         ;;
+
       *)
         ## This should be unreachable.
-        log error "Unreachable code hit!"
+        log error "Internal error. Unreachable code hit!"
         exit 1
         ;;
     esac
 
     if [ "${did_change}" = true ]; then
-      log notice "Done. You can always start this configuration tool again to change another option."
+      log notice "All set. If you want to change something else, just start this configuration tool again."
       printf '%s\n' ""
       return 0
     fi
@@ -256,7 +272,7 @@ https://www.whonix.org/wiki/resize"
 
 configure_dynamic_resolution
 
-log info "Generated configuration file '${target_config_file}' contents:"
+log info "Saved settings file '${target_config_file}':"
 printf '%s\n' "########################################"
 stcatn "${target_config_file}"
 printf '%s\n' "########################################"
@@ -267,8 +283,9 @@ if [ -n "${SUDO_USER-}" ]; then
   xdg_runtime_dir="/run/user/$(id --user -- "$SUDO_USER")"
   log_run info sudo --user="$SUDO_USER" -- env XDG_RUNTIME_DIR="$xdg_runtime_dir" systemctl --user restart wlr-resize-watcher.service
 else
-  log notice "The environment variable SUDO_USER is unavailable."
-  log warn "To restart wlr-resize-watcher, reboot or run the following command under a regular user account (such as for example account 'user') (not using sudo/root): systemctl --user restart wlr-resize-watcher.service"
+  log notice "Cannot automatically restart the wlr-resize-watcher.service because the environment variable SUDO_USER is unavailable."
+  log warn "To apply changes: reboot, or run this (without sudo) as your normal user:"
+  log warn "systemctl --user restart wlr-resize-watcher.service"
 fi
 
 log notice "Success."
