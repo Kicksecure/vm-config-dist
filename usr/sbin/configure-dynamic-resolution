@@ -14,6 +14,8 @@ source /usr/libexec/helper-scripts/log_run_die.sh
 # shellcheck source=../libexec/helper-scripts/as_root.sh
 source /usr/libexec/helper-scripts/as_root.sh
 
+log_level=info
+
 config_dir='/etc/wlr-resize-watcher.d'
 target_config_file="${config_dir}/45_configure-dynamic-resolution.conf"
 
@@ -67,7 +69,7 @@ write_config_value() {
   ## Then append the config option and a new trailing newline
   config_file_contents+="${opt_key}=${opt_val}"$'\n'
 
-  overwrite "${target_config_file}" "${config_file_contents}"
+  overwrite "${target_config_file}" "${config_file_contents}" >/dev/null
 }
 
 set_bool_opt() {
@@ -83,7 +85,7 @@ set_bool_opt() {
     return 1
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
-  log notice "Set option '${config_option_id}' to '${bool_opt}'."
+  log notice "Option '${config_option_id}' has been set to '${bool_opt}'."
   printf '%s\n' ""
   return 0
 }
@@ -249,15 +251,16 @@ command -v overwrite >/dev/null
 
 configure_dynamic_resolution
 
-log notice "'${target_config_file}' contents:"
+log info "Generated configuration file '${target_config_file}' contents:"
 printf '%s\n' "########################################"
 stcatn "${target_config_file}"
 printf '%s\n' "########################################"
 printf '%s\n' ""
 
 if [ -n "${SUDO_USER-}" ]; then
+  log info "Restarting 'wlr-resize-watcher.service'..."
   xdg_runtime_dir="/run/user/$(id --user -- "$SUDO_USER")"
-  log_run notice sudo --user="$SUDO_USER" -- env XDG_RUNTIME_DIR="$xdg_runtime_dir" systemctl --user restart wlr-resize-watcher.service
+  log_run info sudo --user="$SUDO_USER" -- env XDG_RUNTIME_DIR="$xdg_runtime_dir" systemctl --user restart wlr-resize-watcher.service
 else
   log notice "The environment variable SUDO_USER is unavailable."
   log warn "To restart wlr-resize-watcher, reboot or run the following command under a regular user account (such as for example account 'user') (not using sudo/root): systemctl --user restart wlr-resize-watcher.service"
