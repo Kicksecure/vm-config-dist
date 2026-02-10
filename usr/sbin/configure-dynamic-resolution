@@ -92,7 +92,7 @@ set_bool_opt() {
     return 1
   fi
   write_config_value "${config_option_id}" "${bool_opt}"
-  log info "Saved: ${config_option_id} = ${bool_opt}"
+  log info "Saved: ${config_option_id}=${bool_opt}"
   printf '%s\n' ""
   return 0
 }
@@ -112,7 +112,7 @@ set_resolution_opt() {
   ## TOML requires strings to be quoted, thus we wrap the resolution opt in
   ## escaped quotes.
   write_config_value "${config_option_id}" "\"${resolution_opt}\""
-  log info "Saved: ${config_option_id} = ${resolution_opt}"
+  log info "Saved: ${config_option_id}=${resolution_opt}"
   printf '%s\n' ""
   return 0
 }
