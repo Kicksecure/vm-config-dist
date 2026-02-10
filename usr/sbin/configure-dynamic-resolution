@@ -52,6 +52,8 @@ generated_file_header() {
 ##   sudo $my_base_name
 ##
 ## Deleting this file is OK.
+##   sudo safe-rm -- /etc/wlr-resize-watcher.d/45_configure-dynamic-resolution.conf
+##
 ## A new clean file will be created the next time you run this tool.
 ##
 ## Want to add your own custom settings?
