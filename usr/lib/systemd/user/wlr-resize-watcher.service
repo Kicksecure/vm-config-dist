@@ -3,6 +3,8 @@
 
 [Unit]
 Description=wlr-resize-watcher dynamic screen resolution adjustment
+StartLimitIntervalSec=10
+StartLimitBurst=3
 
 [Service]
 Type=simple
@@ -11,4 +13,5 @@ ExecStart=/usr/bin/wlr-resize-watcher
 ## 7 hours.
 #WatchdogSec=25200
 #NotifyAccess=all
-#Restart=always
+Restart=on-failure
+RestartSec=2s
