@@ -37,7 +37,7 @@ class GlobalData:
     disp_match_re: Pattern[str] = re.compile(r"^card\d+-.*$")
     whitespace_start_re: Pattern[str] = re.compile(r"^\s+")
     modes_re: Pattern[str] = re.compile(r"\s+Modes:$")
-    current_mode_re: Pattern[str] = re.compile(r".*[( ]current[,)].*")
+    current_mode_re: Pattern[str] = re.compile(r".*[( ]current[ ,)].*")
     virtualizer_str: str | None = ""
     resize_helper_present: bool = False
     in_sysmaint_mode: bool = False
@@ -122,12 +122,11 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
     current resolution.
     """
     try:
+        wlr_randr_env: dict[str, str] = os.environ.copy()
+        wlr_randr_env["LC_ALL"] = "C"
         wlr_randr_lines: list[str] = subprocess.run(
             ["/usr/bin/wlr-randr"],
-            env={
-                "XDG_RUNTIME_DIR": f"{os.environ["XDG_RUNTIME_DIR"]}",
-                "LC_ALL": "C",
-            },
+            env=wlr_randr_env,
             check=True,
             capture_output=True,
             encoding="utf-8",
@@ -148,6 +147,7 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
     out_list: list[DisplayInfo] = []
     disp_name: str | None = None
     disp_mode: str | None = None
+    disp_disconnected: bool = False
     in_modes_zone: bool = False
     modes_zone_indent: int = 0
 
@@ -159,23 +159,37 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
                     "wlr-randr output! wlr-randr output:",
                     file=sys.stderr,
                 )
-                print(f"{"\n".join(wlr_randr_lines)}", file=sys.stderr)
+                print("\n".join(wlr_randr_lines), file=sys.stderr)
                 sys.exit(1)
             disp_name = line.split(" ")[0]
+            disp_disconnected = "disconnected" in line
+            continue
+
+        if line.strip() == "":
             continue
 
         if not GlobalData.whitespace_start_re.match(line):
-            if disp_name is None or disp_mode is None:
+            if disp_name is None:
                 print(
                     "ERROR: Unable to find active display mode for "
                     "a screen in wlr-randr output! wlr-randr output:",
                     file=sys.stderr,
                 )
-                print(f"{"\n".join(wlr_randr_lines)}", file=sys.stderr)
+                print("\n".join(wlr_randr_lines), file=sys.stderr)
                 sys.exit(1)
-            out_list.append(DisplayInfo(disp_name, disp_mode))
+            if disp_mode is None and not disp_disconnected:
+                print(
+                    "ERROR: Unable to find active display mode for "
+                    "a screen in wlr-randr output! wlr-randr output:",
+                    file=sys.stderr,
+                )
+                print("\n".join(wlr_randr_lines), file=sys.stderr)
+                sys.exit(1)
+            if not disp_disconnected:
+                out_list.append(DisplayInfo(disp_name, disp_mode))
             disp_name = line.split(" ")[0]
             disp_mode = None
+            disp_disconnected = "disconnected" in line
             in_modes_zone = False
             continue
 
@@ -198,20 +212,35 @@ def get_compositor_disp_list() -> list[DisplayInfo] | None:
             continue
 
         line_parts: list[str] = line.strip().split(" ", maxsplit=4)
-        if len(line_parts) < 4:
+        if len(line_parts) < 2:
             print(
                 "ERROR: Too few fields in wlr-randr mode "
                 "specification! wlr-randr output:",
                 file=sys.stderr,
             )
-            print(f"{"\n".join(wlr_randr_lines)}", file=sys.stderr)
+            print("\n".join(wlr_randr_lines), file=sys.stderr)
             sys.exit(1)
-        if len(line_parts) == 4:
-            ## This mode specification is not the active one for the
-            ## current display, skip it
+        trailing_fields = " ".join(line_parts[1:])
+        if not GlobalData.current_mode_re.match(trailing_fields):
             continue
-        if GlobalData.current_mode_re.match(line_parts[4]):
-            disp_mode = line_parts[0]
+        disp_mode = line_parts[0]
+
+    if disp_name is None:
+        return out_list
+
+    if disp_disconnected:
+        return out_list
+
+    if disp_mode is None:
+        print(
+            "ERROR: Unable to find active display mode for a screen in "
+            "wlr-randr output! wlr-randr output:",
+            file=sys.stderr,
+        )
+        print("\n".join(wlr_randr_lines), file=sys.stderr)
+        sys.exit(1)
+
+    out_list.append(DisplayInfo(disp_name, disp_mode))
 
     return out_list
 
