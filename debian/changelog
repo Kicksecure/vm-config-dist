@@ -1,3 +1,9 @@
+vm-config-dist (3:16.4-1) unstable; urgency=medium
+
+  * New upstream version (local package).
+
+ -- Patrick Schleizer <adrelanos@whonix.org>  Fri, 05 Jun 2026 21:24:54 +0000
+
 vm-config-dist (3:16.3-1) unstable; urgency=medium
 
   * New upstream version (local package).
