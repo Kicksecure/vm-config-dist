@@ -46,7 +46,13 @@ eglinfo_output_temp="$(eglinfo -B 2>/dev/null)" || true
 
 opengl_core_profile_renderer_temp="$(printf '%s\n' "$eglinfo_output_temp" | grep -- "OpenGL core profile renderer:")" || true
 
-if printf '%s\n' "$opengl_core_profile_renderer_temp" | grep --fixed-strings -e "AMD" -e "NVIDIA" -e "Intel" -e "Apple" -e "Adreno" >/dev/null 2>/dev/null; then
+if printf '%s\n' "$opengl_core_profile_renderer_temp" | grep --fixed-strings \
+   -e "AMD" \
+   -e "NVIDIA" \
+   -e "Intel" \
+   -e "Apple" \
+   -e "Adreno" \
+   >/dev/null 2>/dev/null; then
    true "$0 INFO: real graphic card detected. Stop."
    return 0
    exit 0
