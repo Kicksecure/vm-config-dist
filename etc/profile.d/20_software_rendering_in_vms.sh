@@ -39,7 +39,20 @@ if ! command -v eglinfo >/dev/null 2>/dev/null ; then
    exit 0
 fi
 
-if eglinfo 2>/dev/null | grep -- "OpenGL core profile renderer" | grep -- llvmpipe >/dev/null 2>/dev/null; then
+eglinfo_output_temp="$(eglinfo -B 2>/dev/null)" || true
+
+## Manual test.
+#eglinfo_output_temp="OpenGL core profile renderer: NVIDIA"
+
+opengl_core_profile_renderer_temp="$(printf '%s\n' "$eglinfo_output_temp" | grep -- "OpenGL core profile renderer:")" || true
+
+if printf '%s\n' "$opengl_core_profile_renderer_temp" | grep --fixed-strings -e "AMD" -e "NVIDIA" -e "Intel" -e "Apple" -e "Adreno" >/dev/null 2>/dev/null; then
+   true "$0 INFO: real graphic card detected. Stop."
+   return 0
+   exit 0
+fi
+
+if printf '%s\n' "$opengl_core_profile_renderer_temp" | grep -- "llvmpipe" >/dev/null 2>/dev/null; then
    software_rendering_use=true
 fi
 
