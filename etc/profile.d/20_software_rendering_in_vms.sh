@@ -52,8 +52,21 @@ if printf '%s\n' "$opengl_core_profile_renderer_temp" | grep --fixed-strings \
    -e "Intel" \
    -e "Apple" \
    -e "Adreno" \
+   -e "Radeon" \
+   -e "ATI" \
+   -e "Mali" \
+   -e "Panfrost" \
+   -e "V3D" \
+   -e "VC4" \
+   -e "PowerVR" \
+   -e "Vivante" \
+   -e "etnaviv" \
+   -e "Lima" \
+   -e "virgl" \
+   -e "SVGA3D" \
+   -e "D3D12" \
    >/dev/null 2>/dev/null; then
-   true "$0 INFO: real graphic card detected. Stop."
+   true "$0 INFO: accelerated graphics renderer detected. Stop."
    return 0
    exit 0
 fi
