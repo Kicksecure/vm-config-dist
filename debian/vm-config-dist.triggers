@@ -10,4 +10,5 @@
 #interest-await /usr/share/virtualbox/VBoxGuestAdditions.iso
 
 ## /etc/dracut.conf.d/30-vm-config-dist.conf
+## /etc/modprobe.d/30_vm-config-dist.conf
 activate-noawait update-initramfs

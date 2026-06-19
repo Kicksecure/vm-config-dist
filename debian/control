@@ -21,6 +21,11 @@ Description: usability enhancements inside virtual machines
  Sets environment variable `QMLSCENE_DEVICE=softwarecontext` as a workaround
  for "Automatic fallback to softwarecontext renderer".
  .
+ Audio: Intel HD Audio Workaround.
+ Workaround for "VirtualBox Intel HD Audio and PipeWire Incompatibility /
+ Audio broken after increasing ram to 5 GB / No sound after latest updates."
+ `/etc/modprobe.d/30_vm-config-dist.conf`
+ .
  It is not useful to open a screensaver or to power down the desktop for
  operating systems that are run inside VMs. There is no real display that could
  be saved and no real power that could be conserved. From a usability
