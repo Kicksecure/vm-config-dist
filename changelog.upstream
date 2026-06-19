@@ -1,3 +1,15 @@
+commit 397d479e2d5b8cffe814893aee592da270edb9a1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jun 19 07:44:20 2026 -0400
+
+    https://forums.whonix.org/t/virtualbox-intel-hd-audio-and-pipewire-incompatibility-audio-broken-after-increasing-ram-to-5-gb-no-sound-after-latest-updates-pipewire-bug/18211
+
+commit 2122fc641cc200f6e4720afd6b826aa2ba31ca29
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Jun 6 17:58:11 2026 +0000
+
+    bumped changelog version
+
 commit fb4997fae35232bfb6a7e41aa1645ca8cd4b23c0
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sat Jun 6 13:56:11 2026 -0400
