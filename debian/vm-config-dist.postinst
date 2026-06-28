@@ -12,7 +12,7 @@ set -e
 
 true "
 #####################################################################
-## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
 #####################################################################
 "
 
@@ -48,6 +48,19 @@ vbox_guest_installer() {
    true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true' nor systemd-detect-virt output was 'oracle'."
 }
 
+vbox_guest_installer_maybe() {
+   if [ -f "/var/lib/vm-config-dist/do_once/${FUNCNAME[0]}_version_1" ]; then
+      true "INFO: Upgrade, and vbox_guest_installer has already been run once. Therefore not calling function vbox_guest_installer."
+      return 0
+   fi
+   mkdir --parents "/var/lib/vm-config-dist/do_once"
+
+   true "INFO: Upgrade, and vbox_guest_installer has not yet been run once. Therefore calling function vbox_guest_installer."
+   vbox_guest_installer
+
+   touch "/var/lib/vm-config-dist/do_once/${FUNCNAME[0]}_version_1"
+}
+
 case "$1" in
    configure)
       true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
@@ -61,7 +74,7 @@ case "$1" in
         true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
         vbox_guest_installer
       else
-        true "INFO: Upgrade. Therefore not calling function vbox_guest_installer."
+        vbox_guest_installer_maybe
       fi
 
       true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
@@ -85,7 +98,7 @@ true "INFO: Done with debhelper."
 
 true "
 #####################################################################
-## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $@
+## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
 #####################################################################
 "
 
