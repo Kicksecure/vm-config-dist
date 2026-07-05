@@ -40,14 +40,14 @@ power_savings_disable_in_vms() {
 vbox_guest_installer() {
    true "dist_build_virtualbox: $dist_build_virtualbox"
    if [ "$dist_build_virtualbox" = "true" ] \
-      || [ "$dist_build_iso" = "true" ] \
+      || [ -f '/var/lib/dist-base-files/live_build' ] \
       || [ "$(systemd-detect-virt)" = "oracle" ]; then
       true "INFO: Running vbox-guest-installer..."
       vbox-guest-installer || true
       true "INFO: vbox-guest-installer done."
       return 0
    fi
-   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true' nor systemd-detect-virt output was 'oracle'."
+   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true', nor does '/var/lib/dist-base-files/live_build' exist, nor systemd-detect-virt output was 'oracle'."
 }
 
 vbox_guest_installer_maybe() {
