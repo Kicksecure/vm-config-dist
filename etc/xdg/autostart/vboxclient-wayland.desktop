@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=VirtualBox clipboard sharing for Wayland
+Exec=systemctl --user restart vboxclient-wayland.service
+StartupNotify=false
+NoDisplay=true
+NotShowIn=QUBES;

@@ -6,6 +6,13 @@
 set -e
 set -o pipefail
 
+fail_closed_maybe() {
+   if [ "${dist_build_virtualbox}" = 'true' ]; then
+     $output_command "$0 ERROR: Variable 'dist_build_virtualbox' is set to 'true', therefore failing closed." >&2
+     exit 1
+   fi
+}
+
 output_more_information() {
    $output_command ""
    $output_command "$0 INFO: This is not about security."
@@ -21,6 +28,7 @@ virtualbox_guest_additions_packages_still_installed() {
    $output_command "$0 INFO: This is OK."
    $output_command "$0 INFO: For more information, see:"
    $output_command "https://www.kicksecure.com/wiki/VirtualBox/Guest_Additions#vbox-guest-installer"
+   fail_closed_maybe
    exit 0
 }
 
@@ -74,13 +82,14 @@ error_handler() {
    $output_command "$0 ERROR: BASH_COMMAND: '$BASH_COMMAND' failed with exit code '$?'." >&2
    $output_command "$0 ERROR: Please search Kicksecure forums and report if required." >&2
    output_more_information
+   fail_closed_maybe
    exit 0
 }
 
 if test -o xtrace ; then
-   output_command=true
+   output_command='true'
 else
-   output_command=printf '%s\n'
+   output_command='printf %s\n'
 fi
 
 trap error_handler ERR
@@ -93,10 +102,10 @@ if [ "$(id -u)" != "0" ]; then
    exit 112
 fi
 
-if [ "$dist_build_virtualbox" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
-   true "INFO: dist_build_virtualbox=true or systemd-detect-virt returned oracle, therefore proceed."
+if [ "$dist_build_virtualbox" = "true" ] || [ -f '/var/lib/dist-base-files/live_build' ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
+   true "INFO: dist_build_virtualbox=true, or '/var/lib/dist-base-files/live_build' exists, or systemd-detect-virt returned oracle, therefore proceed."
 else
-   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
+   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set, nor does '/var/lib/dist-base-files/live_build' exist, nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
    exit 0
 fi
 
@@ -134,7 +143,7 @@ if package-installed-check "virtualbox-guest-utils" ; then
 fi
 
 if package-installed-check "virtualbox-guest-additions-iso" ; then
-   $output_command "$0 INFO: VirtualBox guest additions package 'virtualbox-guest-additions-iso' still installed."
+   $output_command "$0 INFO: VirtualBox guest additions package 'virtualbox-guest-additions-iso' installed."
 else
    $output_command "$0 ERROR: package 'virtualbox-guest-additions-iso' not installed! To install, run:" >&2
    $output_command "sudo apt update" >&2
@@ -185,6 +194,7 @@ else
    $output_command "$0 INFO: You could have a look at the installation log file. Run:"
    $output_command "cat /var/log/vboxadd-install.log"
    output_more_information
+   fail_closed_maybe
 fi
 
 popd >/dev/null
