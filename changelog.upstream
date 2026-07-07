@@ -1,3 +1,40 @@
+commit 8d8897aee6d7bf0bdd5d6aa09b416d14dae48e03
+Merge: c5a7abd 8a06d8e
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 7 06:26:21 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 8a06d8e7ad87e2223c9763c446f6da135ae5b55b
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Jul 5 12:39:51 2026 -0400
+
+    Fix ISO build detection part 2
+
+commit 5c9f828737fe5c4a653bbef16660efcc1bb74f95
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Jul 5 11:09:32 2026 -0400
+
+    Fix ISO build detection
+
+commit 1c2d3805bf120ba3e33f2e6e7ec1d373157264e9
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Tue Jun 30 00:06:06 2026 -0400
+
+    Install Guest Additions for ISO builds
+
+commit f29c263befef389d24f151df95028ef62307342d
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Sun Jun 28 15:22:50 2026 -0400
+
+    Use ISO for installing VirtualBox Guest Additions, enable clipboard sharing
+
+commit c5a7abdf0c83dfc766d0dd0f79359655227afaf0
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Fri Jun 19 11:47:14 2026 +0000
+
+    bumped changelog version
+
 commit 397d479e2d5b8cffe814893aee592da270edb9a1
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Fri Jun 19 07:44:20 2026 -0400
