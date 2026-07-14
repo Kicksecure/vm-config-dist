@@ -5,6 +5,7 @@
 Description=VirtualBox clipboard sharing for Wayland
 StartLimitIntervalSec=10
 StartLimitBurst=3
+ConditionVirtualization=oracle
 
 [Service]
 Type=exec
