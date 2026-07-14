@@ -1,3 +1,110 @@
+commit 7d7a28dfa5f43793cd638f4c3058a374c4181d7b
+Merge: 61facb5 8fcb55c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 14 14:51:48 2026 -0400
+
+    Merge remote-tracking branch 'org-ai-assisted/master'
+
+commit 8fcb55c5112a17443c223570d28c8bb0140ca7b2
+Merge: 38f9e87 26b789d
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Tue Jul 14 14:48:47 2026 -0400
+
+    Merge pull request #2 from org-ai-assisted/ai/spice-vdagent-disable-oracle
+
+    Disable SPICE guest agent under VirtualBox
+
+commit 26b789db73657486c455920a98d5be200b1cd81d
+Author: claude (dev81 c68e3fda-e513-40cf-86ae-cfbbc5d1147c) <noreply@anthropic.com>
+Date:   Tue Jul 14 14:34:29 2026 -0400
+
+    spice drop-ins: collapse rationale to one pointer comment + ticket link
+
+    Replace the repeated multi-line explanation in the three SPICE drop-ins
+    with a single comment linking the VirtualBox SPICE feature request
+    (https://www.virtualbox.org/ticket/13042).
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 8b33c1299084d28f198cbafe5429ff78123436f8
+Author: claude (dev81 c68e3fda-e513-40cf-86ae-cfbbc5d1147c) <noreply@anthropic.com>
+Date:   Tue Jul 14 14:29:29 2026 -0400
+
+    Disable SPICE guest agent under VirtualBox
+
+    SPICE is a QEMU/KVM technology; VirtualBox does not implement it (Oracle
+    tracker ticket 13042 is still an open feature request). On an actual
+    VirtualBox guest, spice-vdagentd nonetheless runs: the packaged
+    spice-vdagentd.socket listens on the plain Unix path
+    /run/spice-vdagentd/spice-vdagent-sock (not gated on the SPICE virtio
+    device), socket-activates spice-vdagentd, and the daemon then has no SPICE
+    host to talk to. This is confirmed by systemctl status on an oracle guest.
+
+    Add ConditionVirtualization=!oracle drop-ins so the SPICE agent is skipped
+    under VirtualBox but keeps working under KVM/QEMU:
+
+    - spice-vdagentd.socket   (kills the socket-activation path)
+    - spice-vdagentd.service  (belt-and-suspenders on the daemon)
+    - spice-vdagent.service   (user session agent)
+
+    This mirrors the VirtualBox-only gate already applied to the vboxadd units
+    and the existing per-virtualizer split in wlr_resize_watcher (spice for
+    kvm, VBoxDRMClient for oracle).
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 38f9e875d865a37a3cb45cc4a26a745ac852adb2
+Merge: 97c82de dfdd0c1
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Tue Jul 14 14:02:25 2026 -0400
+
+    Merge pull request #1 from org-ai-assisted/ai/vboxadd-oracle-condition
+
+    Gate VirtualBox Guest Additions units to oracle virtualization
+
+commit dfdd0c1bbd8fdcafcffeb6c6e8abcb629d36c55c
+Author: claude (dev81 c68e3fda-e513-40cf-86ae-cfbbc5d1147c) <noreply@anthropic.com>
+Date:   Tue Jul 14 13:38:00 2026 -0400
+
+    Gate VirtualBox Guest Additions units to oracle virtualization
+
+    VirtualBox Guest Additions installs vboxadd.service and
+    vboxadd-service.service, both generated at install time from LSB init
+    scripts via systemd_wrap_init_script, with no virtualization condition.
+    On a non-VirtualBox host these units still start and log failures.
+
+    Add a systemd drop-in for each that sets ConditionVirtualization=oracle,
+    matching the existing convention in this package (mnt-shared-vbox.service,
+    vboxclient-wayland.service), so they only run under VirtualBox.
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 97c82de4b321829b729f9e7e56f4b3d92c051e4e
+Author: claude (dev80 0d7f8d3e-bffd-4577-9f9d-050b40a5b2ec) <noreply@anthropic.com>
+Date:   Tue Jul 14 12:46:14 2026 -0400
+
+    vboxclient-wayland: skip on non-VirtualBox hosts
+
+    Add ConditionVirtualization=oracle so the unit is cleanly skipped
+    (inactive, not failed) on qemu/kvm/xen and bare metal, where
+    VBoxClient has no VirtualBox guest to talk to and would otherwise
+    fail, hit the start limit, and land in the failed state.
+
+    Without this, on KVM the autostart .desktop still fires (NotShowIn=QUBES
+    does not match a KVM desktop), the service fails, and systemcheck
+    reports the failed unit / degraded state. The Condition (not an Assert)
+    makes systemd skip the start job with exit 0, so nothing fails. On a
+    real VirtualBox guest the condition is met and the service runs as
+    before.
+
+    ## AI-Assisted
+
+commit 61facb54ca7106223cd3568dee4848bc74e50692
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 7 10:43:59 2026 +0000
+
+    bumped changelog version
+
 commit 8d8897aee6d7bf0bdd5d6aa09b416d14dae48e03
 Merge: c5a7abd 8a06d8e
 Author: Patrick Schleizer <adrelanos@whonix.org>
