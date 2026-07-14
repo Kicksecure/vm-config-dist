@@ -1,3 +1,17 @@
+commit 5e70af86d0217a37c75b39881d7a3d9d4a554392
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 14 16:35:55 2026 -0400
+
+    /etc/xdg/autostart/vboxclient.desktop competes with /usr/lib/systemd/user/vboxclient-wayland.service - Therefore deleting it.
+
+    https://forums.whonix.org/t/how-to-enable-shared-clipboard-drag-and-drop-features-inside-virtualbox-with-whonix-lxqt-18-0-8-7/22588/100
+
+commit 2a44b24ccbfff5a112b8780e3d7a96c647c0e7f8
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 14 19:07:20 2026 +0000
+
+    bumped changelog version
+
 commit 7d7a28dfa5f43793cd638f4c3058a374c4181d7b
 Merge: 61facb5 8fcb55c
 Author: Patrick Schleizer <adrelanos@whonix.org>
