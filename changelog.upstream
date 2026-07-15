@@ -1,3 +1,39 @@
+commit 4d98d2819e55f08ecc261e5f4b106d5ef7c3d3f9
+Merge: 8e27f1a 96c6097
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jul 15 08:52:56 2026 -0400
+
+    Merge remote-tracking branch 'org-ai-assisted/ai/fix-vboxclient-autostart-deletion'
+
+commit 96c60974ece20c71a8d8e368bc2ebed3da319079
+Author: claude (dev84 581eef78-fc65-49ff-9742-58d0f278f975) <noreply@anthropic.com>
+Date:   Wed Jul 15 08:51:23 2026 -0400
+
+    vbox-guest-installer: delete Oracle's autostart file, not our own
+
+    Commit 70efaff ("fix") inverted the autostart cleanup: it deleted
+    /etc/xdg/autostart/vboxclient-wayland.desktop (this package's own file,
+    which is what starts vboxclient-wayland.service) and commented out
+    removal of /etc/xdg/autostart/vboxclient.desktop (shipped by the
+    VirtualBox Guest Additions installer, the file that actually competes).
+
+    Deleting our own autostart file disables Wayland clipboard sharing
+    entirely: the service is static, so nothing else starts it.
+
+    Restore the original intent from 5e70af8 - remove Oracle's
+    vboxclient.desktop, keep ours. Comment expanded to spell out which file
+    belongs to whom so the two are not confused again.
+
+    ## AI-Assisted
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+
+commit 8e27f1a6bd8491e08855f5310cda57b74f535a59
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jul 15 12:36:00 2026 +0000
+
+    bumped changelog version
+
 commit 70efaff2f7b178a7df58a20a683e79556039fa61
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Wed Jul 15 08:33:33 2026 -0400
