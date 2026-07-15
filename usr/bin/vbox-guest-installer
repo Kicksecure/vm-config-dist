@@ -186,10 +186,12 @@ printf '%s\n' "$0 INFO: Running '/var/cache/vm-config-dist/vbox-guest-additions-
 
 printf '%s\n' "$0 INFO: /var/cache/vm-config-dist/vbox-guest-additions-extracted-makeself/install.sh exited with exit code '$installer_exit_code'."
 
-## /etc/xdg/autostart/vboxclient.desktop competes with /usr/lib/systemd/user/vboxclient-wayland.service
+## /etc/xdg/autostart/vboxclient-wayland.desktop competes with /usr/lib/systemd/user/vboxclient-wayland.service
 ## Therefore deleting it.
 ## https://forums.whonix.org/t/how-to-enable-shared-clipboard-drag-and-drop-features-inside-virtualbox-with-whonix-lxqt-18-0-8-7/22588/100
-rm -f -- /etc/xdg/autostart/vboxclient.desktop
+rm -f -- /etc/xdg/autostart/vboxclient-wayland.desktop
+## Useful?
+#rm -f -- /etc/xdg/autostart/vboxclient.desktop
 
 if [ "$installer_exit_code" = 0 ] || [ "$installer_exit_code" = 2 ]; then
    $output_command "$0 INFO: Success, installed VirtualBox guest additions from package 'virtualbox-guest-additions-iso'."
