@@ -1,3 +1,28 @@
+commit 956bbb8b5c44ccdfe1c20fe87d24e896659b31fd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 21 05:11:37 2026 -0400
+
+    spice-vdaagent opt-in in both, kvm and qemu
+
+commit c0ee8ab5ebf93851e30617170d1291e858b86e53
+Merge: a6f6bff 2d51ebd
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 21 05:10:36 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 2d51ebd3de51b1ee220f73655851fe5b80b6e2c8
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Jul 17 20:57:16 2026 -0400
+
+    Fix QEMU/KVM hypervisor detection for spice-vdagent
+
+commit a6f6bff454436ff312c40daa8d7bb98abeecd9a7
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Wed Jul 15 12:55:13 2026 +0000
+
+    bumped changelog version
+
 commit 4d98d2819e55f08ecc261e5f4b106d5ef7c3d3f9
 Merge: 8e27f1a 96c6097
 Author: Patrick Schleizer <adrelanos@whonix.org>
