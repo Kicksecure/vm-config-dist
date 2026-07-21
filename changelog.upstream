@@ -1,3 +1,25 @@
+commit a87513bed922b051bf354e3c25b369dc9164078f
+Merge: 41399ac f4e0f1d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 21 07:25:23 2026 -0400
+
+    Merge remote-tracking branch 'org-ai-assisted/master'
+
+commit f4e0f1def2a45e37fcde4e4eb0d4d45933a25ca6
+Merge: a6f6bff da7deb2
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Tue Jul 21 06:48:38 2026 -0400
+
+    Merge pull request #4 from org-ai-assisted/ai-assisted-smbios-grub-reader
+
+    Ship SMBIOS grub cmdline reader (moved from initializer-dist)
+
+commit 41399accddce27bcee47a5d7ebf53a9a128d1c2c
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Jul 21 09:25:35 2026 +0000
+
+    bumped changelog version
+
 commit 956bbb8b5c44ccdfe1c20fe87d24e896659b31fd
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Jul 21 05:11:37 2026 -0400
@@ -10,6 +32,29 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Jul 21 05:10:36 2026 -0400
 
     Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit da7deb21ee7ae9c020ec1ca9c9d4d10f20773ec2
+Author: claude (dev74 3cdbae8e-30ec-412d-8ce2-ba63d1c9b6af) <noreply@anthropic.com>
+Date:   Tue Jul 21 03:24:57 2026 -0400
+
+    add SMBIOS grub cmdline reader (moved from initializer-dist)
+
+    The SMBIOS boot-cmdline injection reader belongs with the VM configuration, not
+    the initializer: it is pure VM/boot config (a grub-mkconfig helper that reads a
+    'dm-cmdline=' sentinel from the SMBIOS Type 1 serial and appends it to the
+    kernel command line), and this package already ships etc/* config plus the
+    maintainer-script machinery. initializer-dist had no etc/ tree at all before the
+    reader was bolted on there.
+
+     - etc/grub.d/01_smbios-reader: emits the SMBIOS reader early in grub.cfg.
+     - etc/default/grub.d/99_smbios-cmdline.cfg: appends the ${dm_smbios_extra}
+       placeholder to GRUB_CMDLINE_LINUX.
+
+    No behaviour change: both are grub.d drop-ins picked up by update-grub
+    regardless of which package ships them; with no SMBIOS string set they are a
+    no-op.
+
+    Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
 
 commit 2d51ebd3de51b1ee220f73655851fe5b80b6e2c8
 Author: Aaron Rainbolt <arraybolt3@gmail.com>
