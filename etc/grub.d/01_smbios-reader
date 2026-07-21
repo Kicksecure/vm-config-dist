@@ -1,0 +1,39 @@
+#!/bin/bash
+
+## Copyright (C) 2025 - 2025 ENCRYPTED SUPPORT LLC <adrelanos@whonix.org>
+## See the file COPYING for copying conditions.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+shopt -s shift_verbose
+
+## Emit a GRUB SMBIOS cmdline reader near the top of the generated grub.cfg (the
+## '01_' prefix runs before the '10_' menuentry generators, so the variable is set
+## before any menuentry body executes). It lets a boot-tester inject extra kernel
+## cmdline through the real firmware -> GRUB -> kernel chain via 'qemu -smbios'
+## ('dm-qemu --smbios-append') with no image edit. The literal '${dm_smbios_extra}'
+## placeholder on each kernel line is added by /etc/default/grub.d/99_smbios-cmdline.cfg.
+##
+## Because this is a grub-mkconfig helper, the reader is regenerated on every
+## 'update-grub' (e.g. on a kernel update), unlike a direct edit of the generated
+## /boot/grub/grub.cfg which 'update-grub' would wipe.
+##
+## Read the SMBIOS Type 1 system serial number (qemu -smbios
+## type=1,serial=dm-cmdline=...; offset 7 is a real string-reference field GRUB can
+## read -- Type 11 OEM strings have no such field, offset 5 is past the 5-byte
+## formatted area and faults) and, if it carries the 'dm-cmdline=' sentinel, expose
+## the rest as ${dm_smbios_extra}. The regexp and smbios modules are in Debian's
+## signed grub, so this works on BIOS and EFI; with no SMBIOS string set the reader
+## is a no-op and ${dm_smbios_extra} stays empty.
+##
+## The heredoc is single-quoted so the shell writes ${dm_smbios_oem} literally for
+## GRUB to expand at boot.
+cat <<'EOF'
+insmod regexp
+insmod smbios
+smbios --type 1 --get-string 7 --set dm_smbios_oem
+regexp --set 1:dm_smbios_extra "^dm-cmdline=(.*)" "${dm_smbios_oem}"
+EOF
