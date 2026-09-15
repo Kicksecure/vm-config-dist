@@ -1,9 +1,65 @@
+commit 120ca987226680fd521c8e6700a29a2ce06aea92
+Merge: fd2adec 4d09cbe
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 10:49:02 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/org-ai-assisted/ai'
+
+commit 4d09cbe76425795f8e6e54aefe626e303caf0040
+Author: claude (dev556 4bdc306f-7204-4d7f-ba68-0c897dcf0291) <noreply@anthropic.com>
+Date:   Tue Sep 15 09:21:25 2026 -0400
+
+    postinst: keep the debhelper token out of the nounset comment
+
+    - the prior comment literally contained the debhelper substitution token;
+      dh_installdeb replaces that token ANYWHERE it appears, so the generated code
+      was spliced into the middle of the comment and the trailing words ran as a
+      command ("so: command not found"), failing the postinst. Reword the comment
+      so only the real substitution line carries the token.
+
+commit 9823f4ad5895c005ea1690a121df266734aff45e
+Author: claude (dev556 4bdc306f-7204-4d7f-ba68-0c897dcf0291) <noreply@anthropic.com>
+Date:   Tue Sep 15 09:05:59 2026 -0400
+
+    postinst: disable nounset around #DEBHELPER# (unbound $2 on install)
+
+    - the house-style 'set -o nounset' preamble leaked into the #DEBHELPER#-generated
+      snippets, which reference $2 (empty on first install) and are not nounset-safe;
+      they aborted with "$2: unbound variable", failing the package's postinst and
+      thus 3500_install-packages in the image build. Disable nounset around
+      #DEBHELPER#, restore after. No behavior change on upgrade.
+
+commit fd2adec38e4dd8c5f8dfae20ddf05c8d184187f1
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 12:07:37 2026 +0000
+
+    bumped changelog version
+
+commit 6319e2f2542729b02e87de7e0caaefd4b79fd556
+Author: claude (dev556 4bdc306f-7204-4d7f-ba68-0c897dcf0291) <noreply@anthropic.com>
+Date:   Mon Sep 14 09:34:33 2026 -0400
+
+    Select vbox path by dist_build_iso env; house-style
+
+    - Replace the /var/lib/dist-base-files/live_build marker-file check with
+      the dist_build_iso environment variable (preserved into the chroot via
+      env_vars_keep_list); the build no longer writes the marker file.
+    - postinst to house style (strict block, braced + nounset-guarded vars);
+      vbox-guest-installer gets export LC_ALL=C and dist_build_virtualbox
+      nounset guards.
+
 commit cc9a1a797d2633b09d33c7a44af06109f4157141
 Merge: 05a14ed e59c740
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Mon Sep 14 02:05:15 2026 -0400
 
     Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit 42cf8c61a14113f028d20eaa8d8788254b55025b
+Author: claude (dev541 abd2cdfa-632f-4eda-bd69-14b67be2017e) <noreply@anthropic.com>
+Date:   Sun Sep 13 05:33:33 2026 -0400
+
+    Python -Bsu shebangs + shell-invocation guard
 
 commit e59c740083da813b7f8c37b53a4792bc1f5d6bb5
 Merge: 05a14ed b4f6b16
