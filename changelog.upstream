@@ -1,3 +1,54 @@
+commit cc9a1a797d2633b09d33c7a44af06109f4157141
+Merge: 05a14ed e59c740
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Mon Sep 14 02:05:15 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit e59c740083da813b7f8c37b53a4792bc1f5d6bb5
+Merge: 05a14ed b4f6b16
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Sep 11 17:07:29 2026 -0400
+
+    Merge branch 'ai' into arraybolt3/trixie
+
+commit b4f6b16925a28479e7cf6b2ae2b5f78c45b2928d
+Merge: cb424c5 775a91b
+Author: claude (dev490 427cd1a1-bb80-4a36-9e14-2b6cec600780) <noreply@anthropic.com>
+Date:   Tue Sep 8 23:42:25 2026 -0400
+
+    Merge branch 'master' into ai
+
+commit 775a91b96bd7833480a163a2d4b59394577ca475
+Merge: 5237614 05a14ed
+Author: claude (dev490 427cd1a1-bb80-4a36-9e14-2b6cec600780) <noreply@anthropic.com>
+Date:   Tue Sep 8 23:41:04 2026 -0400
+
+    Merge remote-tracking branch 'up/master'
+
+commit 05a14edb12df277995defc1351384f61dcc41335
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 8 15:31:55 2026 +0000
+
+    bumped changelog version
+
+commit 52376140d39b1870554be1d7f3b5df42bb6f57cf
+Merge: d15ccdc cb424c5
+Author: assisted-by-ai (Bot Account) (Machine Account) <228987186+assisted-by-ai@users.noreply.github.com>
+Date:   Mon Sep 7 22:13:32 2026 -0400
+
+    Merge pull request #10 from org-ai-assisted/ai
+
+    rename has.sh -> has.bsh (bashism convention)
+
+commit cb424c555eaa63257b2f188a4e8dc9bfa31f0fc6
+Author: claude (dev474 c7439536-fad8-4884-b71a-d2f3c4c23905) <noreply@anthropic.com>
+Date:   Mon Sep 7 11:50:01 2026 -0400
+
+    rename has.sh to has.bsh (bashism convention)
+
+    Sourced helper-scripts lib uses bashisms; .bsh marks it. Scoped to has.sh consumers (repo carries unrelated concurrent WIP).
+
 commit a2c08deda4047a550c7be9cf90304e33fc4ae02f
 Merge: 35b66bb 9d8c339
 Author: Patrick Schleizer <adrelanos@whonix.org>
@@ -41,6 +92,35 @@ Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Sun Aug 30 10:29:22 2026 -0400
 
     Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit e17b233eda02685b0ce15dd15ada304cb899df97
+Author: claude (dev352 385b930f-4313-4883-93d5-e6857c3f7ea7) <noreply@anthropic.com>
+Date:   Thu Aug 27 11:20:09 2026 -0400
+
+    profile.d: POSIX '.' not bash 'source'; drop dead 'exit 0'
+
+    'source' in a #!/bin/sh fragment fails under dash and trips lintian
+    bash-term-in-posix-shell; '.' is the POSIX equivalent. The 'exit 0'
+    after each 'return 0' is unreachable dead code (SC2317) in this
+    sourced-only fragment.
+
+commit 825067e40e370556be5a309d0e0b58ef62d2d116
+Merge: 541e693 d15ccdc
+Author: claude (dev360 af829598-ca19-4edf-a20a-beea79d986e6) <noreply@anthropic.com>
+Date:   Wed Aug 26 04:12:21 2026 -0400
+
+    Merge master into ai
+
+    - absorbs upstream so the PR diff carries only our own work
+
+commit d15ccdc3edc7f59718d720ae52988a4842ef91d7
+Merge: 072a09e 7a1003f
+Author: claude (dev360 af829598-ca19-4edf-a20a-beea79d986e6) <noreply@anthropic.com>
+Date:   Wed Aug 26 04:11:42 2026 -0400
+
+    Merge ArrayBolt3/arraybolt3/trixie into master
+
+    - brings trixie's latest-kernel-detection rewrite + smbios-reader cleanup
 
 commit 7a1003f507c2633b0162502279eab547bada6d32
 Author: Aaron Rainbolt <arraybolt3@gmail.com>
