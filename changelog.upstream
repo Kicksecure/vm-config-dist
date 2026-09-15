@@ -1,9 +1,42 @@
+commit ba2a895c0f9e0ec3a27a250f3cfe8cb367c82e30
+Merge: fce41b2 4237753
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 11:51:17 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/org-ai-assisted/ai'
+
+commit 4237753ff52ebbe381cbb69beae82154523650eb
+Author: claude (dev556 4bdc306f-7204-4d7f-ba68-0c897dcf0291) <noreply@anthropic.com>
+Date:   Tue Sep 15 11:19:43 2026 -0400
+
+    vm-config-dist: shell-invocation guard refuses instead of re-exec
+
+commit 6bd826baebcaed7121a5c34cc2411e914a3f0f01
+Merge: 697fa54 fce41b2
+Author: assisted-by-ai <assisted-by-ai@users.noreply.github.com>
+Date:   Tue Sep 15 11:07:41 2026 -0400
+
+    Merge master into ai (remaster)
+
+commit fce41b2bc1df3d721ec3b666a24c7b890aa79e7d
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 14:54:27 2026 +0000
+
+    bumped changelog version
+
 commit 120ca987226680fd521c8e6700a29a2ce06aea92
 Merge: fd2adec 4d09cbe
 Author: Patrick Schleizer <adrelanos@whonix.org>
 Date:   Tue Sep 15 10:49:02 2026 -0400
 
     Merge remote-tracking branch 'refs/remotes/org-ai-assisted/ai'
+
+commit 697fa545b54d1e51897c84966daf6da99b710450
+Merge: 4d09cbe fd2adec
+Author: assisted-by-ai <assisted-by-ai@users.noreply.github.com>
+Date:   Tue Sep 15 10:46:48 2026 -0400
+
+    Merge master into ai (remaster)
 
 commit 4d09cbe76425795f8e6e54aefe626e303caf0040
 Author: claude (dev556 4bdc306f-7204-4d7f-ba68-0c897dcf0291) <noreply@anthropic.com>
