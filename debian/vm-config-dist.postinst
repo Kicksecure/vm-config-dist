@@ -7,20 +7,28 @@ if [ -f /usr/libexec/helper-scripts/pre.bsh ]; then
    source /usr/libexec/helper-scripts/pre.bsh
 fi
 
-#set -x
-set -e
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o errtrace
+shopt -s inherit_errexit
+shopt -s shift_verbose
+export LC_ALL=C
 
 true "
 #####################################################################
-## INFO: BEGIN: $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
+## INFO: BEGIN: ${DPKG_MAINTSCRIPT_PACKAGE:-} ${DPKG_MAINTSCRIPT_NAME:-} $*
 #####################################################################
 "
 
-true "1: '$1'"
-true "2: '$2'"
+true "1: '${1:-}'"
+true "2: '${2:-}'"
 
+## Kept for the call site currently commented out in the 'configure' case;
+## shellcheck reads the body as unreachable until that call is re-enabled.
+# shellcheck disable=SC2317
 power_savings_disable_in_vms() {
-   if [ "$SUDO_USER" = "" ]; then
+   if [ "${SUDO_USER:-}" = "" ]; then
       return 0
    fi
 
@@ -33,21 +41,21 @@ power_savings_disable_in_vms() {
       ## in case there is no virtualization.
       ## NOTE: Might fail because this packages does not 'Depends:' 'sudo' to simplify dependencies.
       ##       Not important.
-      sudo --non-interactive -u "$SUDO_USER" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
+      sudo --non-interactive -u "${SUDO_USER}" "/etc/profile.d/20_power_savings_disable_in_vms.sh" >/dev/null 2>&1 || true
    fi
 }
 
 vbox_guest_installer() {
-   true "dist_build_virtualbox: $dist_build_virtualbox"
-   if [ "$dist_build_virtualbox" = "true" ] \
-      || [ -f '/var/lib/dist-base-files/live_build' ] \
+   true "dist_build_virtualbox: ${dist_build_virtualbox:-}"
+   if [ "${dist_build_virtualbox:-}" = "true" ] \
+      || [ "${dist_build_iso:-}" = "true" ] \
       || [ "$(systemd-detect-virt)" = "oracle" ]; then
       true "INFO: Running vbox-guest-installer..."
       vbox-guest-installer || true
       true "INFO: vbox-guest-installer done."
       return 0
    fi
-   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true', nor does '/var/lib/dist-base-files/live_build' exist, nor systemd-detect-virt output was 'oracle'."
+   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true', nor is this an ISO/live build (dist_build_iso=true), nor systemd-detect-virt output was 'oracle'."
 }
 
 vbox_guest_installer_maybe() {
@@ -63,29 +71,29 @@ vbox_guest_installer_maybe() {
    touch "/var/lib/vm-config-dist/do_once/${FUNCNAME[0]}_version_1"
 }
 
-case "$1" in
+case "${1:-}" in
    configure)
-      true "INFO: Configuring $DPKG_MAINTSCRIPT_PACKAGE..."
+      true "INFO: Configuring ${DPKG_MAINTSCRIPT_PACKAGE:-}..."
 
       ## Only disables power savings in TTYs now, a logout/login cycle or
       ## reboot is needed to fully disable power savings.
       #power_savings_disable_in_vms
 
       ## https://askubuntu.com/questions/101962/how-to-run-a-script-only-during-first-install-of-a-package-and-during-upgrades
-      if [ "$2" = "" ]; then
+      if [ "${2:-}" = "" ]; then
         true "INFO: Initial installation. Therefore calling function vbox_guest_installer."
         vbox_guest_installer
       else
         vbox_guest_installer_maybe
       fi
 
-      true "INFO: End configuring $DPKG_MAINTSCRIPT_PACKAGE."
+      true "INFO: End configuring ${DPKG_MAINTSCRIPT_PACKAGE:-}."
       ;;
 
     triggered)
-      true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE..."
+      true "INFO: triggered ${DPKG_MAINTSCRIPT_PACKAGE:-}..."
       vbox_guest_installer
-      true "INFO: triggered $DPKG_MAINTSCRIPT_PACKAGE."
+      true "INFO: triggered ${DPKG_MAINTSCRIPT_PACKAGE:-}."
       ;;
 
    *)
@@ -94,13 +102,20 @@ esac
 
 true "INFO: debhelper beginning here."
 
+## debhelper-generated snippets (dpkg-maintscript-helper and friends) reference
+## unset positional args -- $2 is empty on first install -- and are not written
+## to be nounset-safe. Disable nounset around the debhelper block below so they
+## do not abort on an unbound variable, then restore it. (The comment must not
+## contain the literal debhelper token, which dh_installdeb substitutes anywhere.)
+set +o nounset
 #DEBHELPER#
+set -o nounset
 
 true "INFO: Done with debhelper."
 
 true "
 #####################################################################
-## INFO: END  : $DPKG_MAINTSCRIPT_PACKAGE $DPKG_MAINTSCRIPT_NAME $*
+## INFO: END  : ${DPKG_MAINTSCRIPT_PACKAGE:-} ${DPKG_MAINTSCRIPT_NAME:-} $*
 #####################################################################
 "
 

@@ -13,6 +13,7 @@ set -o pipefail
 set -o errtrace
 shopt -s inherit_errexit
 shopt -s shift_verbose
+export LC_ALL=C
 
 # shellcheck source=../../../helper-scripts/usr/libexec/helper-scripts/strings.bsh
 source "${HELPER_SCRIPTS_PATH:-}"/usr/libexec/helper-scripts/strings.bsh
@@ -24,7 +25,7 @@ output_default() {
 default_if_empty output_command "output_default"
 
 fail_closed_maybe() {
-   if [ "${dist_build_virtualbox}" = 'true' ]; then
+   if [ "${dist_build_virtualbox:-}" = 'true' ]; then
      ${output_command} "$0 ERROR: Variable 'dist_build_virtualbox' is set to 'true', therefore failing closed." >&2
      exit 1
    fi
@@ -102,10 +103,10 @@ if [ "$(id -u)" != "0" ]; then
    exit 112
 fi
 
-if [ "${dist_build_virtualbox}" = "true" ] || [ -f '/var/lib/dist-base-files/live_build' ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
-   true "INFO: dist_build_virtualbox=true, or '/var/lib/dist-base-files/live_build' exists, or systemd-detect-virt returned oracle, therefore proceed."
+if [ "${dist_build_virtualbox:-}" = "true" ] || [ "${dist_build_iso:-}" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
+   true "INFO: dist_build_virtualbox=true, or this is an ISO/live build (dist_build_iso=true), or systemd-detect-virt returned oracle, therefore proceed."
 else
-   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set, nor does '/var/lib/dist-base-files/live_build' exist, nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
+   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set, nor is this an ISO/live build (dist_build_iso=true), nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
    exit 0
 fi
 
