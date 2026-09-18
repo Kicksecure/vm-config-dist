@@ -9,6 +9,6 @@ ConditionVirtualization=oracle
 
 [Service]
 Type=exec
-ExecStart=/usr/bin/VBoxClient --foreground --wayland
+ExecStart=/usr/bin/VBoxClient --foreground --session-type wayland --clipboard
 Restart=on-failure
 RestartSec=2s
