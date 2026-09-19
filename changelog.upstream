@@ -1,3 +1,28 @@
+commit 3b8da2568940df221c03ed2f1f8f05633dfa3566
+Merge: 068e23a cd38cfe
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Sat Sep 19 10:00:48 2026 -0400
+
+    Merge remote-tracking branch 'refs/remotes/ArrayBolt3/arraybolt3/trixie'
+
+commit cd38cfe195368dba27bc52271542f2878a21c1ea
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Fri Sep 18 00:20:18 2026 -0400
+
+    Update vboxclient-wayland.service for VirtualBox 7.2.18
+
+commit 2833c3d381cbd6ef3173df0fc8441e3640ccf29d
+Author: Aaron Rainbolt <arraybolt3@gmail.com>
+Date:   Tue Sep 15 21:48:27 2026 -0400
+
+    Polish
+
+commit 068e23a88ca147707b677c935305fdbba769c910
+Author: Patrick Schleizer <adrelanos@whonix.org>
+Date:   Tue Sep 15 15:54:13 2026 +0000
+
+    bumped changelog version
+
 commit ba2a895c0f9e0ec3a27a250f3cfe8cb367c82e30
 Merge: fce41b2 4237753
 Author: Patrick Schleizer <adrelanos@whonix.org>
