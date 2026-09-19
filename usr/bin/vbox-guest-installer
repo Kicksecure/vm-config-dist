@@ -104,9 +104,9 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 if [ "${dist_build_virtualbox:-}" = "true" ] || [ "${dist_build_iso:-}" = "true" ] || [ "$(systemd-detect-virt)" = "oracle" ]; then
-   true "INFO: dist_build_virtualbox=true, or this is an ISO/live build (dist_build_iso=true), or systemd-detect-virt returned oracle, therefore proceed."
+   true "INFO: dist_build_virtualbox=true, or dist_build_iso=true, or systemd-detect-virt returned oracle, therefore proceed."
 else
-   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set, nor is this an ISO/live build (dist_build_iso=true), nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
+   printf '%s\n' "$0 (part of package 'vm-config-dist') INFO: Neither variable 'dist_build_virtualbox=true' is set, nor variable 'dist_build_iso=true' is set, nor 'systemd-detect-virt' returned 'oracle', therefore doing nothing, ok."
    exit 0
 fi
 

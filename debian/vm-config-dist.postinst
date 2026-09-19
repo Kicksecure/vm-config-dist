@@ -24,8 +24,7 @@ true "
 true "1: '${1:-}'"
 true "2: '${2:-}'"
 
-## Kept for the call site currently commented out in the 'configure' case;
-## shellcheck reads the body as unreachable until that call is re-enabled.
+## Call site is currently commented out in the 'configure' case.
 # shellcheck disable=SC2317
 power_savings_disable_in_vms() {
    if [ "${SUDO_USER:-}" = "" ]; then
@@ -55,7 +54,7 @@ vbox_guest_installer() {
       true "INFO: vbox-guest-installer done."
       return 0
    fi
-   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true', nor is this an ISO/live build (dist_build_iso=true), nor systemd-detect-virt output was 'oracle'."
+   true "INFO: Not running vbox-guest-installer because neither dist_build_virtualbox is set to 'true', nor dist_build_iso is set to 'true', nor systemd-detect-virt output was 'oracle'."
 }
 
 vbox_guest_installer_maybe() {
@@ -102,11 +101,7 @@ esac
 
 true "INFO: debhelper beginning here."
 
-## debhelper-generated snippets (dpkg-maintscript-helper and friends) reference
-## unset positional args -- $2 is empty on first install -- and are not written
-## to be nounset-safe. Disable nounset around the debhelper block below so they
-## do not abort on an unbound variable, then restore it. (The comment must not
-## contain the literal debhelper token, which dh_installdeb substitutes anywhere.)
+## debhelper-generated snippets reference unset positional args.
 set +o nounset
 #DEBHELPER#
 set -o nounset
